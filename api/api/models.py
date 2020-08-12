@@ -4,3 +4,4 @@ from django.db import models
 class Disease(models.Model):
     name: models.CharField(max_length=100, unique=True)
     added: models.DateField(auto_now_add=True)
+    
