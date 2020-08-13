@@ -6,8 +6,14 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "leaflet": "^1.6.0",
+    "leaflet-boundary-canvas": "^1.0.0",
+    "leaflet-choropleth": "^1.1.4",
+    "leaflet-dvf": "^0.3.1",
+    "leaflet-markercluster": "^0.2.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-leaflet": "^2.7.0",
     "react-scripts": "3.4.3"
   },
   "scripts": {
