@@ -5,11 +5,9 @@ import './styles.css'
 const OrgLogin =()=>{
     const image=require('../../assets/whiteGhana.png')
     return(
-        <div style={{height:'100vh',backgroundColor:'whitesmoke',display:'flex',justifyContent:'center',alignItems:'center'}}>
-            <div className='formwrap'>
-                
+        <div className='login' style={{height:'100vh',display:'flex',justifyContent:'center',alignItems:'center'}}>
+
                  <OrgForm/>                
-            </div>
 
         </div>
     );

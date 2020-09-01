@@ -43,3 +43,67 @@
   width:100%;
   height: 100vh;
 }
+
+.profilePage{
+  height:100vh;
+  background-image:url('./assets/whiteBG.png');
+  background-size: contain;
+  background-position-x: center;
+  background-repeat:repeat;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+}
+.surveyPage{
+  height:100vh;
+  display:flex;
+  background-image:url('./assets/whitesmokeBG.png');
+  background-size: contain;
+  background-position-x: center;
+  background-repeat:repeat;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+}
+.previewPage{
+
+  width:70%;
+  display:flex;
+/*   background-image:url('./assets/whitesmokeBG.png');
+  background-size: contain;
+  background-position-x: center;
+  background-repeat:repeat; */
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+
+}
+.surveyCard{
+  height:50vh;
+  /* background-image:url('./assets/desktop4.png'); */
+  background-size: 800px;
+  border-radius:35px 0px 0px 35px;
+  background-position-x: center;
+
+  box-shadow: 2px 2px 8px #00000020;
+  background-position-y: -40px;
+  
+
+
+}
+.profileMidSection{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  height:70vh;
+  width:100%;
+  margin-bottom: 60px;
+}
+.profileName{
+   font-size: 30px;
+ 
+}
