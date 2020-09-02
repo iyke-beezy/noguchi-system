@@ -17,9 +17,10 @@ class Disease(models.Model):
 
 class User(AbstractUser):
     TYPE = (
-        ('co', 'contributor'),
+        ('on', 'organization'),
         ('ad', 'admin')
     )
+    username = models.CharField(max_length=100)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     userType = models.CharField(max_length=2, choices=TYPE)
@@ -58,6 +59,9 @@ class Organization(models.Model):
         verbose_name = 'organization'
         verbose_name_plural = 'organizations'
 
-class Contributor(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, unique=True)
-    organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
+# class Contributor(models.Model):
+#     username = models.CharField(max_length=100)
+#     organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
+
+class Template(models.Model):
+    location = models.PointField()
