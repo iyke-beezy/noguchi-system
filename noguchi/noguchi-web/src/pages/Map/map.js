@@ -2,9 +2,12 @@ import React from 'react';
 /* import Legend from './legend' */
 import { Map, Marker,TileLayer,Popup} from 'react-leaflet';
 import Boundary from '../../controls/boundary/boundary';
+import {Paper} from '@material-ui/core'
+import Legend from '../../controls/legend/legend';
 /* import Layers from './newTon'
 import Choro from './choro' */
-
+import custom from '../../controls/boundary/customs.geo.json'
+import Choropleth from 'react-leaflet-choropleth'
 
 
 class Mappings extends React.Component {
@@ -15,7 +18,14 @@ state={
     }
   
   render() {
-    
+    const style = {
+      fillColor: '#F28F3B',
+      weight: 2,
+      opacity: 1,
+      color: 'white',
+      dashArray: '3',
+      fillOpacity: 0.5
+  };
     const data=[
       {
         region:'Greater Accra',
@@ -61,8 +71,19 @@ state={
           {/*
           <Legend></Legend>
           <Layers></Layers> */}
-          <Boundary></Boundary>
-          
+          <Boundary style={{position:'absolute',zIndex:3}}></Boundary>
+{/*           <Choropleth
+            data={custom}
+            valueProperty={(feature) => feature.properties.value}
+            //visible={(feature) => feature.id !== active.id}
+            scale={['white', 'red']}
+            steps={7}
+            mode='q'
+            style={style}
+            onEachFeature={(feature, layer) => layer.bindPopup(feature.properties.name)}
+            ref={(el) => this.choropleth = el.leafletElement}
+          /> */}
+
       </Map>
       
    

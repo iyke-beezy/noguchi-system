@@ -15,6 +15,7 @@ import Header from './components/header';
 import ProfilePage from './pages/Profile/profile';
 import SurveyPage from './pages/survey/survey';
 import Preview from './pages/survey/preview';
+import HomePage from './pages/homePage/homePage';
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/">
-            <Mappings />
+            {/* <Mappings /> */}
+            <HomePage/>
           </Route>
           <Route path="/login">
             <OrgLogin />
