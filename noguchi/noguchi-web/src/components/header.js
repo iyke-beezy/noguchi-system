@@ -8,8 +8,8 @@ const Header=()=>{
     return(
         <div className="headerSection">
             
-                    <div style={{display:'flex',flexDirection:'column',alignItems:'start' }}>
-                    <Avatar size={100} icon={<UserOutlined/>}/>
+                    <div style={{display:'flex',flexDirection:'column',alignItems:'start',margin:10}}>
+                    <Avatar size={90} icon={<UserOutlined/>}/>
                     </div>
                 
         </div>

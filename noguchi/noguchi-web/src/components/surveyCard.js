@@ -23,7 +23,7 @@ const Questions=[
     {
         id:2,
         question:'What is the population of children',
-        type:'boolean',
+        type:'number',
         background:Background
     },
 ]
@@ -51,10 +51,11 @@ const SurveyCard=()=>{
     input=<Input type={current[0].type} size='large' />
   };
     return(
-        <div style={{display:"flex", height:'50vh',width:'65%'}}>
-        <div style={{flex:0.4,backgroundImage:`url(${current[0].background})`}} className='surveyCard'>
+        <div style={{display:"flex", height:'auto',width:'60%',flexDirection:'column',marginBottom:20,minWidth:300}}>
+        <div style={{height:'28vh',backgroundImage:`url(${current[0].background})`}} className='surveyCard'>
         </div>
-    <Card title={<h1>QUESTION {point}</h1>} style={{flex:0.6,borderRadius:'0px 35px 35px 0px',boxShadow: "2px 2px 8px #00000020"}} actions={[
+    <Card bordered title={<h1 style={{fontSize:20}}>QUESTION {point}</h1>} style={{height:'41vh'/* ,boxShadow: "2px 2px 8px #00000020" */}} 
+            actions={[
             <Button type='default' onClick={()=>{
                 point!=1 ? setPoint(point-1):setPoint(point);
             }}>Back</Button>,
@@ -62,8 +63,8 @@ const SurveyCard=()=>{
                 point!=Questions.length ? setPoint(point+1):setPoint(point);
             }} >Next</Button>
         ]}>
-            <div style={{display:'flex',flexDirection:'column',justifyContent:'space-around',alignItems:'center',height:'20vh'}}>
-            <h2>{current[0].question}</h2>
+            <div style={{display:'flex',flexDirection:'column',justifyContent:'space-around',alignItems:'center',height:'15vh'}}>
+            <h3 style={{fontSize:15}}>{current[0].question}</h3>
             {input}
 
                 

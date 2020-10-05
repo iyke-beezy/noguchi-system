@@ -42,25 +42,25 @@ const Preview=()=>{
     const [preview,setPreview]=useState(false);
     const text='SCHISTOSOMIASIS'
     return(
-        <div className='surveyPage'>
+        <div className='surveyPage' style={{backgroundColor:'#f5f5f5'}}>
                 <MiniHeader/>
                 {
                     preview?
                     <>
-                    <Avatar icon={<CloseOutlined style={{color:'grey'}}/>} style={{backgroundColor:'white',boxShadow:'3px 3px 10px #00000030'}} size={60} onClick={()=>{setPreview(false)}} />
-                <Card title={<h3>{text} SURVEY QUESTIONS</h3>} style={{width:'70%',height:'65vh',marginTop:20,/* overflowY:'scroll' */}} >
+                    <Avatar icon={<CloseOutlined style={{color:'grey'}}/>} style={{backgroundColor:'white',boxShadow:'3px 3px 5px #00000030'}} size={40} onClick={()=>{setPreview(false)}} />
+                <Card title={<h3>{text} SURVEY QUESTIONS</h3>} style={{width:'70%',height:'70vh',marginTop:2,/* overflowY:'scroll' */}} >
                 <List
                     size="large"
-                    style={{height:'45vh',overflowY:'scroll'}}
+                    style={{height:'50vh',overflowY:'scroll'}}
                     dataSource={data}
                     renderItem={item => <List.Item>{item}</List.Item>}
                 />
                     </Card>                   
                      </>:
-                    <div className='previewPage'>
+             <div className='previewPage'>
                 <Card
                     hoverable
-                    style={{ flex:0.3}}
+                    style={{ flex:0.3,minWidth:250,margin:20,height:'auto'}}
                     onClick={()=>{setPreview(true)}}
                     cover={<img alt="example" src={require('../../assets/frame2.png')} />}
                     >
@@ -68,7 +68,7 @@ const Preview=()=>{
                 </Card>
                 <Card
                     hoverable
-                    style={{ flex:0.3}}
+                    style={{ flex:0.3,minWidth:250,margin:20,height:'auto'}}
                     onClick={()=>{window.location.href='/survey'}}
                     cover={<img alt="example" src={require('../../assets/Frame3.png')} />}
                     >
@@ -77,7 +77,7 @@ const Preview=()=>{
                     </div>
                 }
 
-            <Button type='link' onClick={()=>{window.location.href='/profile'}} ><span style={{fontSize:17,color:'#02742a',textDecorationLine:'underline',textDecorationStyle:'solid'}}>...Return to Profile</span></Button>
+            <Button type='link' onClick={()=>{window.location.href='/profile'}} ><span style={{fontSize:15,color:'grey',textDecorationLine:'underline',textDecorationStyle:'solid'}}>...Return to Profile</span></Button>
 
         </div>
     );

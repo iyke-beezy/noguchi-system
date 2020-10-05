@@ -18,7 +18,7 @@
 .miniHeaderSection{
     display:flex;
     background-color:transparent;
-    height:10vh;
+    height:15vh;
     width:90%;
     flex-direction:row;
     align-items:center;
@@ -49,8 +49,8 @@
 }
 .headerSection{
     display:flex;
-    background-color:white;
-    height:25vh;
+    background-color:transparent;
+    height:20vh;
     width:80%;
     flex-direction:row;
     align-items:center;

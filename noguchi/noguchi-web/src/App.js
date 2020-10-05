@@ -16,6 +16,7 @@ import ProfilePage from './pages/Profile/profile';
 import SurveyPage from './pages/survey/survey';
 import Preview from './pages/survey/preview';
 import HomePage from './pages/homePage/homePage';
+import Entry from './pages/entry/entry';
 
 function App() {
   return (
@@ -38,6 +39,10 @@ function App() {
           <Route path="/preview">
             <Preview />
           </Route>
+          <Route path="/entry">
+            <Entry />
+          </Route>
+          
         </Switch>
       
     </Router>

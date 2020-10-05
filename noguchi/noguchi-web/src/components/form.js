@@ -15,7 +15,7 @@ const handleSubmit=(e)=>{
     window.location.href='/profile';
 }
 return(
-    <Card style={{ width: 400,border:'1px solid graysmoke',display:'flex',flexDirection:'column',alignItems:'center',borderRadius:15,backgroundColor:'white',justifyContent:'center'}}>
+    <Card style={{ flex: 0.25,minWidth:350,border:'1px solid graysmoke',display:'flex',flexDirection:'column',alignItems:'center',borderRadius:15,backgroundColor:'white',justifyContent:'center'}}>
       
     
     <Space direction='vertical' size={30}>

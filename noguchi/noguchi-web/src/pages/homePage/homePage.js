@@ -1,7 +1,7 @@
 import React ,{useState}from 'react';
 import { makeStyles,useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import {Paper,Chip,Avatar,Badge,ListItemSecondaryAction,Select,MenuItem,FormControl,InputLabel,FormHelperText} from '@material-ui/core';
+import {Paper,Chip,Avatar,Badge,ListItemSecondaryAction,Select,MenuItem,FormControl,InputLabel,FormHelperText, Button} from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -16,7 +16,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import Mappings from '../Map/map';
 import Legend from '../../controls/legend/legend';
 
-const drawerWidth = 300;
+const drawerWidth = 250;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawer: {
     width: drawerWidth,
-    flexShrink: 0,
+    minWidth:150
   },
   drawerPaper: {
     width: drawerWidth,
@@ -110,20 +110,25 @@ export default function HomePage() {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar elevation={0}  position="fixed" className={classes.appBar}>
-        <Toolbar>
+        <Toolbar style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
         <FormControl className={classes.formControl}>
         <InputLabel id="demo-simple-select-helper-label">Disease</InputLabel>
         <Select
           labelId="demo-simple-select-helper-label"
           id="demo-simple-select-helper"
           value={disease}
+          
           onChange={handleChange}
         >
-          <MenuItem value={'schistomiasis'}>Schistomiasis</MenuItem>
+          <MenuItem value={'schistosomiasis'}>Schistosomiasis</MenuItem>
           <MenuItem value={'malaria'}>Malaria</MenuItem>
           <MenuItem value={'cholera'}>Cholera</MenuItem>
         </Select>
       </FormControl>
+      <Button variant="contained" color='primary' disableElevation onClick={
+      ()=>{
+        window.location.href='/login';
+      }}>Login</Button>
         </Toolbar>
       </AppBar>
       <Drawer
