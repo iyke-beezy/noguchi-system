@@ -65,3 +65,42 @@
     background-repeat: repeat;
     background-position-x: center;
 }
+#special:hover{
+ border-color: #7021b0;
+ background-color: white !important;
+ color:#7021b0 ;
+}
+.card-container{
+    height: auto;
+    flex: 0.45;
+    padding: 0;
+    margin: 20px;
+}
+.card-container p {
+    margin: 0;
+    text-align: left;
+  }
+  .card-container > .ant-tabs-card .ant-tabs-content {
+    height: auto;
+    margin-top: -16px;
+  }
+  .card-container > .ant-tabs-card .ant-tabs-content > .ant-tabs-tabpane {
+    background: #fff;
+    padding: 16px;
+  }
+ .ant-tabs-card > .ant-tabs-nav .ant-tabs-tab, .ant-tabs-card > div > .ant-tabs-nav .ant-tabs-tab{
+    background-color: lightsalmon;
+    color: white;
+    font-weight: bold;
+
+  }
+  .card-container > .ant-tabs-card > .ant-tabs-nav::before {
+    display: none;
+  }
+  .ant-tabs-card > .ant-tabs-nav .ant-tabs-tab-active, .ant-tabs-card > div > .ant-tabs-nav .ant-tabs-tab-active{
+    background-color: white;  
+    
+  }
+  .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn{
+      color: lightsteelblue;
+  }

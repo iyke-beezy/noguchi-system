@@ -104,7 +104,10 @@ export default function HomePage() {
     setDisease(event.target.value);
   
 };
+localStorage.setItem('country','all');
+const [continent, setContinent] = React.useState('africa');
 
+const [country, setCountry] = React.useState('all');
 
   return (
     <div className={classes.root}>
@@ -123,6 +126,40 @@ export default function HomePage() {
           <MenuItem value={'schistosomiasis'}>Schistosomiasis</MenuItem>
           <MenuItem value={'malaria'}>Malaria</MenuItem>
           <MenuItem value={'cholera'}>Cholera</MenuItem>
+        </Select>
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <InputLabel id="demo-simple-select-helper-label">Continent</InputLabel>
+        <Select
+          labelId="demo-simple-select-helper-label"
+          id="demo-simple-select-helper"
+          value={continent}
+          
+          onChange={(e)=>setContinent(e.target.value)}
+        >
+          <MenuItem value={'africa'}>Africa</MenuItem>
+          <MenuItem value={'europe'}>Europe</MenuItem>
+          <MenuItem value={'america'}>America</MenuItem>
+        </Select>
+      </FormControl>
+      <FormControl className={classes.formControl} hiddenLabel={true}>
+        <InputLabel id="demo-simple-select-helper-label">Country</InputLabel>
+        <Select
+        
+          labelId="demo-simple-select-helper-label"
+          id="demo-simple-select-helper"
+          value={country}
+          
+          onChange={(e)=>{
+            setCountry(e.target.value)
+            localStorage.setItem('country',e.target.value)
+          
+          }}
+        >
+          <MenuItem value={'all'}>All</MenuItem>
+          <MenuItem value={'ghana'}>Ghana</MenuItem>
+          <MenuItem value={'nigeria'}>Nigeria</MenuItem>
+          <MenuItem value={'togo'}>Togo</MenuItem>
         </Select>
       </FormControl>
       <Button variant="contained" color='primary' disableElevation onClick={

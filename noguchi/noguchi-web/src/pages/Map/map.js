@@ -14,7 +14,7 @@ class Mappings extends React.Component {
 state={
       lat: 7.946527,
       lng: -1.023194,
-      zoom: 7,
+      zoom: 6,
     }
   
   render() {
@@ -26,6 +26,7 @@ state={
       dashArray: '3',
       fillOpacity: 0.5
   };
+  
     const data=[
       {
         region:'Greater Accra',
@@ -71,7 +72,7 @@ state={
           {/*
           <Legend></Legend>
           <Layers></Layers> */}
-          <Boundary style={{position:'absolute',zIndex:3}}></Boundary>
+          <Boundary style={{position:'absolute',zIndex:3}} ></Boundary>
 {/*           <Choropleth
             data={custom}
             valueProperty={(feature) => feature.properties.value}

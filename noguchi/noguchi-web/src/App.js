@@ -17,7 +17,9 @@ import SurveyPage from './pages/survey/survey';
 import Preview from './pages/survey/preview';
 import HomePage from './pages/homePage/homePage';
 import Entry from './pages/entry/entry';
-
+import OtherProfile from './pages/otherProfile/otherProfile'
+import Forum from './pages/forum/forum';
+import OtherForum from './pages/forum/otherForum';
 function App() {
   return (
     <div className="App">
@@ -42,7 +44,15 @@ function App() {
           <Route path="/entry">
             <Entry />
           </Route>
-          
+          <Route path="/other">
+            <OtherProfile/>
+          </Route>
+          <Route path="/forum">
+            <Forum/>
+          </Route>
+          <Route path="/oforum">
+            <OtherForum/>
+          </Route>
         </Switch>
       
     </Router>
