@@ -1,0 +1,106 @@
+.formInput{
+    width:300px;
+    height:50px;
+    border:none;
+    border-bottom:1px solid #adadad;
+}
+.banner{
+    background-color:#6461ff;
+    height:auto;
+    display:flex;
+    padding:30px;
+    flex-direction:column;
+    color:white;
+    justify-content: center;
+    align-items: center;
+    
+}
+.miniHeaderSection{
+    display:flex;
+    background-color:transparent;
+    height:15vh;
+    width:90%;
+    flex-direction:row;
+    align-items:center;
+    justify-content: flex-end;
+}
+
+.banner h1{
+    color:white;
+    font-size:50px;
+    font-weight:bold;
+}
+.bannerButton{
+    color:white;
+    background-color:#ff9633;
+    margin-top: 30px;
+    font-size: 22px;
+    font-weight:bold;
+    height:auto;
+    width:150px;
+    border-radius: 30px;
+    border-width:3px;
+
+}
+.bannerButton:hover{
+    color:#ff9633;
+    background-color:white;
+    border-color: #ff9633;
+}
+.headerSection{
+    display:flex;
+    background-color:transparent;
+    height:20vh;
+    width:80%;
+    flex-direction:row;
+    align-items:center;
+    justify-content: flex-start;
+
+}
+
+
+.login{
+    background-image:url('../assets/whitesmokeBG.png');
+    background-size: contain;
+    background-repeat: repeat;
+    background-position-x: center;
+}
+#special:hover{
+ border-color: #7021b0;
+ background-color: white !important;
+ color:#7021b0 ;
+}
+.card-container{
+    height: auto;
+    flex: 0.45;
+    padding: 0;
+    margin: 20px;
+}
+.card-container p {
+    margin: 0;
+    text-align: left;
+  }
+  .card-container > .ant-tabs-card .ant-tabs-content {
+    height: auto;
+    margin-top: -16px;
+  }
+  .card-container > .ant-tabs-card .ant-tabs-content > .ant-tabs-tabpane {
+    background: #fff;
+    padding: 16px;
+  }
+ .ant-tabs-card > .ant-tabs-nav .ant-tabs-tab, .ant-tabs-card > div > .ant-tabs-nav .ant-tabs-tab{
+    background-color: lightsalmon;
+    color: white;
+    font-weight: bold;
+
+  }
+  .card-container > .ant-tabs-card > .ant-tabs-nav::before {
+    display: none;
+  }
+  .ant-tabs-card > .ant-tabs-nav .ant-tabs-tab-active, .ant-tabs-card > div > .ant-tabs-nav .ant-tabs-tab-active{
+    background-color: white;  
+    
+  }
+  .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn{
+      color: lightsteelblue;
+  }
