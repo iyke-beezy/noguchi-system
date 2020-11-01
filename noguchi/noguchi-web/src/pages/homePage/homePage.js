@@ -246,7 +246,6 @@ const [country, setCountry] = React.useState('all');
             <Legend/>
           </Paper>
       </main>
-
     </div>
   );
 }
