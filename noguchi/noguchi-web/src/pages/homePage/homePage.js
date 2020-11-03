@@ -115,7 +115,7 @@ const [country, setCountry] = React.useState('all');
     <div className={classes.root,"myroot"}>
       <CssBaseline  />
       <AppBar elevation={0}  position="fixed" className={"myNav",classes.appBar}>
-        <Toolbar style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
+        <Toolbar style={{display:'flex',flexDirection:'row',justifyContent:'center'}}>
       <FormControl className={classes.formControl}>
         <InputLabel id="demo-simple-select-helper-label">Disease</InputLabel>
         <Select

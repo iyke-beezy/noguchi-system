@@ -4,6 +4,12 @@
     border:none;
     border-bottom:1px solid #adadad;
 }
+.formInput2{
+    width:280px;
+    height:50px;
+    border:none;
+    border-bottom:1px solid #adadad50;
+}
 .banner{
     background-color:#6461ff;
     height:auto;
