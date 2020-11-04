@@ -1,6 +1,7 @@
 import React from 'react';
+import {Button} from 'antd';
 
-const ForumCard=(props)=>{
+const ForumCard=({onClick,...props})=>{
     const colorCode='#adff2f50';
     return(
         
@@ -11,7 +12,10 @@ const ForumCard=(props)=>{
                 This is the description of the forum,This is the description of the forum,This is the description of the forum,This is the description of the forum
             </p>
             <div style={{display:'flex',flexDirection:'row',justifyContent:'flex-end'}}>
-            <span style={{borderStyle:'solid',borderWidth:'2px',borderColor:'lightblue',borderRadius:5,color:'#0000ff80',fontWeight:'bold',padding:'2px 5px 2px 5px',fontSize:12}}>100 replies</span>
+            <Button onClick={onClick}>
+            <span >100 replies</span>
+            </Button>
+            
             </div>
             
             

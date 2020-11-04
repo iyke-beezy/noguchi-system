@@ -406,4 +406,18 @@ grid-area: map;
   justify-content: space-between;
 
 }
+.accountCard{
+  position: relative;
+}
+.accountContainer{
+  position: absolute;
+  background-color: tomato;
+  height: 50px;
+  width: 50px;
+  border: 1px solid black;
+  
+}
+.accountBox{
+
+}
 

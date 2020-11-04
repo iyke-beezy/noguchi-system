@@ -4,16 +4,21 @@ import { Button, Card, Tabs } from 'antd';
 import  '../../components/components.css';
 import TagBox from '../../components/tagBox';
 import ForumCard from '../../components/forumCard';
+import {MyCard, MyReplies} from '../../components/card';
 const {TabPane}=Tabs;
 const OtherForum =()=>{
+    const [showDetails,setShowDetails] = useState(false);
+    const replies = ['Great article','The best','Love Ya','Piece Of shit article'];
     const image=require('../../assets/whiteGhana.png')
     return(
+        <div>
+            {!showDetails ?
         <div className='login' style={{maxHeight:'100vh',height:'100vh',display:'flex',justifyContent:'center',alignItems:'center'}}>
             <Card  title={<h1 style={{fontSize:20,textAlign:'left',padding:5}}>Forums</h1>} style={{height:'85vh',width:'80%',borderRadius:15}}>
                 <Tabs tabPosition='left' defaultActiveKey='1' size='small' style={{height:'auto'}}>
                     <TabPane tab="All Forums" key="1" >
                         <div style={{display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',overflowY:'scroll',height:'63vh'}}>
-                        <ForumCard/>
+                        <ForumCard onClick={() =>{setShowDetails(!showDetails)}}/>
                         <ForumCard/>
                         <ForumCard/>
                         <ForumCard/>
@@ -53,6 +58,26 @@ const OtherForum =()=>{
             </Card>
                                 
 
+        </div>
+    :
+    <div>
+         <div className='login' style={{maxHeight:'100vh',height:'100vh',display:'flex',justifyContent:'center',alignItems:'center'}}>
+            <Card  title={<Button onClick={()=>{setShowDetails(!showDetails)}} style={{height:50,width:100,fontSize:20}}>&lt;Back</Button>} style={{textAlign:'left',height:'85vh',width:'80%',borderRadius:15}}>
+             
+                        <div style={{display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',overflowY:'scroll',height:'63vh'}}>
+                        <MyCard title="title1" onClick={()=>{setShowDetails(!showDetails)}}/>
+                        <MyReplies title="Replies" replies={replies} />
+                    
+                        </div>
+                        
+                   
+                  
+            </Card>
+                                
+
+        </div>
+    </div>
+    }
         </div>
     );
 }

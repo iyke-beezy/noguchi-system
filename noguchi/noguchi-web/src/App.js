@@ -20,6 +20,7 @@ import Entry from './pages/entry/entry';
 import OtherProfile from './pages/otherProfile/otherProfile'
 import Forum from './pages/forum/forum';
 import OtherForum from './pages/forum/otherForum';
+import OrgAccounts from './pages/orgAccounts/orgAccounts';
 function App() {
   return (
     <div className="App">
@@ -52,6 +53,9 @@ function App() {
           </Route>
           <Route path="/oforum">
             <OtherForum/>
+          </Route>
+          <Route path="/OrgAccounts">
+            <OrgAccounts/>
           </Route>
         </Switch>
       
