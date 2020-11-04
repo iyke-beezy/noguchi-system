@@ -71,6 +71,53 @@ const data = [
   createData('21:00', 2400),
   createData('24:00', undefined),
 ]
+const data2 = [
+  createData('Jan', 0),
+  createData('Feb', 1),
+  createData('Mar', 3),
+  createData('Apr', 4),
+  createData('May', 1),
+  createData('Jun', 0),
+  createData('Jul', 0),
+  createData('Aug', 2),
+  createData('Sep', 3),
+  createData('Oct', 1),
+  createData('Nov', 4),
+  createData('Dec', 7),
+]
+
+export const Plot =()=>{
+  const theme = useTheme();
+  return(
+    <div style={{height:'45vh',paddingBottom:20}}>
+    <ResponsiveContainer>
+              <LineChart
+                data={data2}
+                margin={{
+                  top: 16,
+                  right: 16,
+                  bottom: 0,
+                  left: 16,
+                }}
+              >
+                <XAxis dataKey="time" stroke={theme.palette.text.secondary} />
+                <YAxis stroke={theme.palette.text.secondary}>
+                  <Label
+                    angle={270}
+                    position="left"
+                    style={{ textAnchor: 'middle', fill: theme.palette.text.primary }}
+                  >
+                   No Of Entries
+                  </Label>
+                </YAxis>
+                <Line type="monotone" dataKey="amount" stroke={theme.palette.primary.main} dot={false} />
+              </LineChart>
+      </ResponsiveContainer>  
+
+      </div>
+  );
+
+}
 
 const Legend =()=>{
 

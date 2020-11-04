@@ -4,10 +4,10 @@ const TagBox=(props)=>{
     const colorCode='#adff2f50';
     return(
         
-        <div style={{flex:'25%',maxWidth:250,margin:20,height:'auto',borderWidth:'3px',borderStyle:'solid',borderColor:colorCode,borderRadius:12,padding:25}}>
+        <div style={{flex:'25%',maxWidth:250,margin:20,height:'auto',minHeight:200,borderWidth:'3px',borderStyle:'solid',borderColor:'lightsteelblue',borderRadius:12,padding:25}}>
            {props.disease?
             <>
-            <h4 style={{backgroundColor:colorCode,color:'green',padding:5}}>{props.disease}</h4>
+            <h4 style={{backgroundColor:'#77889990',color:'white',padding:5}}>{props.disease}</h4>
             <p>
                 These are all the forums on {props.disease}
             </p>
@@ -16,7 +16,7 @@ const TagBox=(props)=>{
             </div>
             </>:
             <>
-            <h4 style={{backgroundColor:colorCode,color:'green',padding:5}}>{props.location}</h4>
+            <h4 style={{backgroundColor:'#77889990',color:'white',padding:5}}>{props.location}</h4>
             <p>
                 These are all the forums at {props.location}
             </p>
