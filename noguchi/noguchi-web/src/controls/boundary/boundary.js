@@ -29,7 +29,7 @@ class Boundary extends MapControl{
       console.log(mapBoundary)
         const {map}=this.props.leaflet
             var osm = new L.TileLayer.BoundaryCanvas("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-              boundary: mapBoundary[0].bounds,
+              boundary: custom,
               attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
             }); 
            osm.addTo(map)

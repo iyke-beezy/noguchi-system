@@ -5,6 +5,7 @@ import  '../../components/components.css';
 import TagBox from '../../components/tagBox';
 import ForumCard from '../../components/forumCard';
 import {MyCard, MyReplies} from '../../components/card';
+import ForumList from '../../components/forumList';
 const {TabPane}=Tabs;
 const OtherForum =()=>{
     const [showDetails,setShowDetails] = useState(false);
@@ -18,12 +19,7 @@ const OtherForum =()=>{
                 <Tabs tabPosition='left' defaultActiveKey='1' size='small' style={{height:'auto'}}>
                     <TabPane tab="All Forums" key="1" >
                         <div style={{display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',overflowY:'scroll',height:'63vh'}}>
-                        <ForumCard onClick={() =>{setShowDetails(!showDetails)}}/>
-                        <ForumCard/>
-                        <ForumCard/>
-                        <ForumCard/>
-                        <ForumCard/>
-                        <ForumCard/>
+                        <ForumList/>
 
                         </div>
                         

@@ -10,8 +10,8 @@ const Box=()=>{
     const [modalState,setModalState]=useState(false);
     return(
         <>
-        <div style={{height:160,border:'1px solid #adadad',margin:20}} onClick={() => setModalState(true)}>
-
+        <div style={{height:160,border:'2px solid #adadad',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',margin:20,cursor:'pointer'}} onClick={() => setModalState(true)}>
+          <span style={{fontSize:50,color:'lightslategray'}}>AD</span>
         </div>
         <Modal
         title='Edit Profile'

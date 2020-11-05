@@ -5,7 +5,7 @@ import './components.css'
 import {UserOutlined,LockOutlined,KeyOutlined} from '@ant-design/icons';
 import { Link } from "react-router-dom";
 
-const OrgForm =()=>{
+const OrgForm =({onClick,...props})=>{
 
 const [username,setUsername]=useState('');
 const [password,setPassword]=useState('');
@@ -15,6 +15,11 @@ const handleSubmit=(e)=>{
     e.preventDefault();
     console.log(username+''+password);
     window.location.href='/profile';
+}
+const handleSubmit2=(e)=>{
+  e.preventDefault();
+  console.log(username+''+password);
+  window.location.href='/other';
 }
 return(
     <Card style={{ flex: 0.25,minWidth:350,border:'1px solid graysmoke',display:'flex',flexDirection:'column',alignItems:'center',borderRadius:15,backgroundColor:'white',justifyContent:'center'}}>
@@ -43,7 +48,7 @@ return(
       block
       style={{height:55,backgroundColor:'#247aeb',color:'white',marginTop:20,borderRadius:8}}
       
-      onClick={handleSubmit}
+      onClick={handleSubmit2}
       >
       Sign In
       </Button>
@@ -67,13 +72,6 @@ return(
     placeholder="Enter org password" 
     prefix={<LockOutlined className="site-form-item-icon" />} 
     />
-    <Input 
-    size="large"
-    className='formInput'
-    onChange={(e)=>{setKey(e.target.value)}}
-    placeholder="Enter org key" 
-    prefix={<KeyOutlined className="site-form-item-icon" />} 
-    />
     <Button 
     size='large'
     block
@@ -87,7 +85,7 @@ return(
   
       }
     
-    
+    <Button size={30} onClick={onClick} type='link' style={{color:'lightseagreen',textDecorationStyle:'solid',textDecorationColor:'lightseagreen',textDecorationLine:'underline',textDecorationWidth:1}}>Do Not Have An Account?</Button>
     </Card>
 );
 

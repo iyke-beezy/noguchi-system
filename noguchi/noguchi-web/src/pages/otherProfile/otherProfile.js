@@ -1,9 +1,13 @@
 import React, {useState} from "react";
-import { Input, Card, Space, Button ,Avatar,Tabs} from 'antd';
+import { Input, Card, Space, Button ,Avatar,Tabs, Radio,Checkbox} from 'antd';
 import "antd/dist/antd.css";
 import '../../App.css';
 import Header from "../../components/header";
 import Banner from "../../components/banner";
+import ForumCard from "../../components/forumCard";
+import ForumList from "../../components/forumList";
+
+const {TextArea} =Input;
 
 const { TabPane } = Tabs;
 
@@ -52,19 +56,56 @@ const OtherProfile=()=>{
                 <Card className="card-container">
                     <Tabs type="card">
                     <TabPane tab="Trending Forums" key="1">
-                        <p>Content of Tab Pane 1</p>
-                        <p>Content of Tab Pane 1</p>
-                        <p>Content of Tab Pane 1</p>
+                        <div style={{height:'48vh',overflowY:'scroll'}}>
+                        <ForumList/>
+                        </div>
                     </TabPane>
                     <TabPane tab="Create A Forum" key="2">
-                        <p>Content of Tab Pane 2</p>
-                        <p>Content of Tab Pane 2</p>
-                        <p>Content of Tab Pane 2</p>
+                    <div style={{display:'flex',flexDirection:'column'}}>
+                    <div style={{height:'43vh',overflowY:'scroll'}}>
+                        <div style={{display:'flex',flexDirection:'column',alignItems:'flex-start',justifyContent:'space-around'}}>
+                            <h1 style={{color:'lightslategray',margin:8}}>
+                                NEW FORUM
+                            </h1>
+                            <Input
+                            type='text'
+                            size='large'
+                            placeholder='Enter Forum Title'
+                            style={{width:'60%',margin:8}}
+                            
+                            />
+                             <Input
+                            type='text'
+                            size='large'
+                            placeholder='Enter Forum Description'
+                            style={{width:'75%',margin:8}}
+                            
+                            />
+                            <TextArea rows={4} placeholder='Enter Forum Details' style={{width:'80%',margin:8}}/>
+                            
+                            <div style={{display:'flex',flexDirection:'column',alignItems:'flex-start',justifyContent:'space-around',width:'80%',margin:8}}>
+                                <span style={{fontSize:16,color:'gray'}}>Select Disease Tag</span>
+                                <Radio.Group buttonStyle='solid' defaultValue='schistosomiasis' style={{display:'flex',flexDirection:'row',justifyContent:'flex-start',flexWrap:'wrap'}} size='large' >
+                                    <Radio.Button value='schistosomiasis' style={{margin:2}}>Schistosomiasis</Radio.Button>
+                                    <Radio.Button value='Cholera' style={{margin:2}}>Cholera</Radio.Button>
+                                    <Radio.Button value='malaria' style={{margin:2}}>Malaria</Radio.Button>
+                                    <Radio.Button value='dysentry' style={{margin:2}}>Dysentry</Radio.Button>
+                                </Radio.Group>
+
+                            
+                            </div>
+                            
+                            <Checkbox style={{margin:8}}>Use My Location</Checkbox>
+                            
+                        </div>
+                        </div>
+                        <Button type='primary' size='large' style={{alignSelf:'flex-end',marginTop:25,borderRadius:20,height:'5.5vh'}}>Create</Button>
+                        </div>
                     </TabPane>
                     <TabPane tab="My Forums" key="3">
-                        <p>Content of Tab Pane 3</p>
-                        <p>Content of Tab Pane 3</p>
-                        <p>Content of Tab Pane 3</p>
+                    <div style={{height:'48vh',overflowY:'scroll'}}>
+                        <ForumList/>
+                        </div>
                     </TabPane>
                     </Tabs>
                 </Card>

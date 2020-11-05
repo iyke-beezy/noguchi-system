@@ -7,7 +7,7 @@ const MyCard=({title,description,onClick,...props})=>{
 
     return(
         
-        <div style={{minWidth:'70%',width:'80%',margin:12,height:'auto',borderWidth:'2px',borderStyle:'solid',borderColor:'whitesmoke',borderRadius:5,padding:15}}>
+        <div style={{minWidth:'70%',width:'100%',margin:12,height:'auto',borderWidth:'2px',borderStyle:'solid',borderColor:'whitesmoke',borderRadius:5,padding:15}}>
           
             <h3 style={{textAlign:'left'}}>{title}</h3>
              <p>{description}</p>
@@ -27,11 +27,11 @@ const MyCard=({title,description,onClick,...props})=>{
 const MyReplies=({title,replies,onClick,...props})=>{
     const colorCode='#adff2f50';
     const listItems = replies.map((reply) =>
-    <p>{reply}</p>
+    <p style={{textAlign:'left'}}>{reply}</p>
   );
     return(
         
-        <div style={{minWidth:'70%',width:'80%',margin:12,height:'auto',borderWidth:'2px',borderStyle:'solid',borderColor:'whitesmoke',borderRadius:5,padding:15}}>
+        <div style={{minWidth:'70%',width:'100%',margin:12,height:'auto',borderWidth:'2px',borderStyle:'solid',borderColor:'whitesmoke',borderRadius:5,padding:15}}>
           
             <h3 style={{textAlign:'left'}}>{title}</h3>
             <div>{listItems}</div>
