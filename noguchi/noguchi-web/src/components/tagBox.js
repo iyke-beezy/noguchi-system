@@ -1,10 +1,10 @@
 import React from 'react';
 
-const TagBox=(props)=>{
+const TagBox=({onClick,...props})=>{
     const colorCode='#adff2f50';
     return(
         
-        <div style={{flex:'25%',maxWidth:250,margin:20,height:'auto',minHeight:200,borderWidth:'3px',borderStyle:'solid',borderColor:'lightsteelblue',borderRadius:12,padding:25}}>
+        <div onClick={onClick} style={{flex:'25%',maxWidth:250,margin:20,height:'auto',minHeight:200,borderWidth:'3px',borderStyle:'solid',borderColor:'lightsteelblue',borderRadius:12,padding:25}}>
            {props.disease?
             <>
             <h4 style={{backgroundColor:'#77889990',color:'white',padding:5}}>{props.disease}</h4>

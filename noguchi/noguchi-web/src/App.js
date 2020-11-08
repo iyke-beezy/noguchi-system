@@ -22,6 +22,7 @@ import Forum from './pages/forum/forum';
 import OtherForum from './pages/forum/otherForum';
 import OrgAccounts from './pages/orgAccounts/orgAccounts';
 import OrgAdminPage from './pages/orgAdmin/orgAdmin';
+import OrgAccountss from './pages/orgAccounts/orgAccountss';
 function App() {
   return (
     <div className="App">
@@ -56,7 +57,7 @@ function App() {
             <OtherForum/>
           </Route>
           <Route path="/OrgAccounts">
-            <OrgAccounts/>
+            <OrgAccountss/>
           </Route>
           <Route path="/orgadmin">
             <OrgAdminPage/>

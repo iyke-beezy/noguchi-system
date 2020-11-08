@@ -14,7 +14,7 @@ const [loginType,setLoginType]=useState('other');
 const handleSubmit=(e)=>{
     e.preventDefault();
     console.log(username+''+password);
-    window.location.href='/profile';
+    window.location.href='/orgAccounts';
 }
 const handleSubmit2=(e)=>{
   e.preventDefault();
