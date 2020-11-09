@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { IconButton } from "@material-ui/core";
 
 const {Option}=Select;
-const SignUpCard =()=>{
+const SignUpCard =({onClick,...props})=>{
   const [fullname,setFullname]=useState('');
 const [username,setUsername]=useState('');
 const [password,setPassword]=useState('');
@@ -16,7 +16,12 @@ const [loginType,setLoginType]=useState('other');
 const handleSubmit=(e)=>{
     e.preventDefault();
     console.log(username+''+password);
-    window.location.href='/profile';
+    window.location.href='/orgAccounts';
+}
+const handleSubmit2=(e)=>{
+  e.preventDefault();
+  console.log(username+''+password);
+  window.location.href='/other';
 }
 return(
     <Card style={{ flex: 0.25,minWidth:350,border:'1px solid graysmoke',display:'flex',flexDirection:'column',alignItems:'center',borderRadius:15,backgroundColor:'white',justifyContent:'center'}}>
@@ -65,7 +70,7 @@ return(
       block
       style={{height:55,backgroundColor:'#247aeb',color:'white',marginTop:20,borderRadius:8}}
       
-      onClick={handleSubmit}
+      onClick={handleSubmit2}
       >
       Sign Up
       </Button>
@@ -105,7 +110,7 @@ return(
     className='formInput2'
     onChange={(e)=>{setKey(e.target.value)}}
     placeholder="Confirm Password" 
-    prefix={<KeyOutlined className="site-form-item-icon" />} 
+    prefix={<LockOutlined className="site-form-item-icon" />} 
     />
     <Button 
     size='large'
@@ -114,13 +119,13 @@ return(
     
     onClick={handleSubmit}
     >
-    Sign In
+    Sign Up
     </Button>
   </Space>
   
       }
     
-    <Button size={30} type='link' style={{color:'lightseagreen',textDecorationStyle:'solid',textDecorationColor:'lightseagreen',textDecorationLine:'underline',textDecorationWidth:1}}>Have an Account?</Button>
+    <Button onClick={onClick} size={30} type='link' style={{color:'lightseagreen',textDecorationStyle:'solid',textDecorationColor:'lightseagreen',textDecorationLine:'underline',textDecorationWidth:1}}>Have an Account?</Button>
     </Card>
 
 );

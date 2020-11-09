@@ -21,25 +21,30 @@ const MiniCard=(props)=>{
        ' What is the schistosoma mansoni prevalence ',
         'What is the schistosoma haematobium intensity',
         'What is the schistosoma mansoni intensity',
-        'Are there water bodies near the community',
-        '*What is the quality of the water',
+        'List the water bodies the community',
+        'List the water bodies near the community',
+        'What is the quality of the water for each body',
         'How do the inhabitants of the community access water',
-       ' How is the sanitaion of the community',
-        '*Are there any weeds in the water sites',
-        'how is the climate of the community like',
-        'What snail species are at the water sites',
-        'What approaches are in place to put a check on the disease',
-        'are there any stakeholders',
+        'List the water contact sites in the community',
+        'Indicate the schistosomiasis control activity at each water contact site',
+        'Are there any weeds in the water sites (for each site)',
+        'What snail species are at the water sites (for each site)',
+        'Which schistosomiasis control approaches are in place to put a check on the disease in the community',
         'List the stakeholders',
-        
-        
+        'Indicate the activities that each stakeholder is conducting',
+        ' How is the sanitaion of the community',
+        'Are there sanitation facilities in the community',
+        'Are the sanitation facilities in the community adequate',
+        'Are there indications of climate change in the community',
+        'Indicate the climate change factors important in the community',
+  
       ];
     const [modalState,setModalState]=useState(false);
   
     return(
         <div>
-        <Card style={{height:130,width:230,margin:10,display:'flex',alignItems:'center',justifyContent:'center'}} onClick={() => setModalState(true)}>
-            <h3 style={{fontSize:20}}>{props.text}</h3>
+        <Card style={{height:150,margin:10,display:'flex',alignItems:'center',justifyContent:'center'}} onClick={() => setModalState(true)}>
+            <h3 style={{fontSize:23,color:'lightslategray'}}>{props.text}</h3>
         </Card>
         <Modal
         title={props.text}
@@ -71,21 +76,21 @@ const Entry=()=>{
     return(
         <div className='entry'>
             <div className='entryPoint'>
-                <div className='links'>
+                <div className='links' style={{backgroundColor:'#f5f5f580'}}>
                 <Popover content={content} trigger="click">
                     <Avatar size={70} icon={<UserOutlined/>} style={{marginTop:30,marginBottom:20}}/>
                 </Popover>
-                    <Button block  size='large' style={{height:60,border:'none',borderBottom:'1px solid #00000030',textAlign:'left'}} onClick={()=>{setPreview(true)}}>Preview</Button>
-                    <Button  block size='large' style={{height:60,border:'none',borderBottom:'1px solid #00000030',textAlign:'left'}} onClick={()=>{setPreview(false)}}>Take A Survey</Button>
+                    <Button block  size='large' style={{height:60,border:'none',borderBottom:'1px solid #f5f5f5',textAlign:'left',backgroundColor:'transparent',fontSize:17,color:'lightslategray'}} onClick={()=>{setPreview(true)}}>Preview</Button>
+                    <Button  block size='large' style={{height:60,border:'none',borderBottom:'1px solid #f5f5f5',textAlign:'left',backgroundColor:'transparent',fontSize:17,color:'lightslategray'}} onClick={()=>{setPreview(false)}}>Take A Survey</Button>
                 </div>
                 <div className='entryContent'>
                     {
                         preview?
-                        <div>
-                        <h1 style={{fontSize:30,color:'gray',textAlign:'left',marginBottom:40}}>Click A Disease to Preview</h1>
-                        <div style={{display:'flex',flexDirection:'row',justifyContent:'flex-start',flexWrap:'wrap'}}>
+                        <div style={{padding:35}}>
+                        <h1 style={{fontSize:40,color:'gray',textAlign:'left',marginBottom:40}}>Click A Disease to Preview</h1>
+                        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(250px,1fr))'}}>
                         {
-                            ['Schistosomiasis', 'Malaria','Cholera','Dysentry','Kwashiorkor','Marasmus'].map(
+                            ['SCHISTOSOMIASIS', 'MALARIA','CHOLERA','DYSENTRY','KWASHIORKOR','MARASMUS'].map(
                                 (value,index)=><MiniCard key={index} text={value}/>
                                 
                             )
@@ -97,10 +102,9 @@ const Entry=()=>{
                     </div>
                     :
                     <div style={{alignItems: 'center',display:'flex',flexDirection:'column'}}>
-                        <h1 style={{fontSize:35,/* textShadow:'0 0 2px #000000, 0 0 2px #000000', */ marginBottom:20,color:'#40404080'}}>SCHISTOSOMIASIS</h1>
-                        <SurveyCard/>
-                        <Progress type="circle" percent={75} width={30} style={{padding:20,marginBottom:20,boxShadow:'3px 3px 5px #00000020',borderRadius:'60px',backgroundColor:'#ffffff'}}/>
-            
+                        <h1 style={{fontSize:'7vw',padding:10,/* textShadow:'0 0 2px #000000, 0 0 2px #000000', */ marginBottom:20,color:'lightgray'}}>SCHISTOSOMIASIS</h1>    
+
+                       <SurveyCard/>
                     </div>
                     }
                     

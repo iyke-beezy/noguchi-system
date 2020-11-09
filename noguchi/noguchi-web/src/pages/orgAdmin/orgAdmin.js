@@ -3,15 +3,15 @@ import { useTheme } from '@material-ui/core/styles';
 import { Button, Card, Input, Modal, Select, Tabs ,Avatar} from 'antd';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
 import Legend, { Plot } from '../../controls/legend/legend';
-import {EditFilled ,UserOutlined,ExportOutlined} from '@ant-design/icons';
+import {EditFilled ,UserOutlined,ExportOutlined,UserAddOutlined} from '@ant-design/icons';
 const {TabPane}=Tabs;
 const {Option}=Select;
 const Box=()=>{
     const [modalState,setModalState]=useState(false);
     return(
         <>
-        <div style={{height:160,border:'1px solid #adadad',margin:20}} onClick={() => setModalState(true)}>
-
+        <div style={{height:160,border:'2px solid #adadad',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',margin:20,cursor:'pointer'}} onClick={() => setModalState(true)}>
+          <span style={{fontSize:50,color:'lightslategray'}}>AD</span>
         </div>
         <Modal
         title='Edit Profile'
@@ -127,7 +127,7 @@ const OrgAdminPage =()=>{
                         <h1 style={{fontSize:35,color:'lightslategray'}}>New Profile</h1> 
 
                         
-                        <Avatar shape='square' size={90} icon={<UserOutlined/>} />
+                        <Avatar shape='square' size={90} icon={<UserAddOutlined/>} />
                         <label style={{marginTop:10,color:'lightgray'}}>Profile Name</label>
                         <Input
                         type='text'

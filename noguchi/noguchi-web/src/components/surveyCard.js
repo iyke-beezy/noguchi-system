@@ -12,19 +12,18 @@ const Questions=[
         id:0,
         question:'What is the population of the community',
         type:'number',
-        background:Background2
+     
     },
     {
         id:1,
         question:'How many people are affected in the community',
         type:'number',
-        background:Background3
+       
     },
     {
         id:2,
         question:'What is the population of children',
         type:'number',
-        background:Background
     },
 ]
 
@@ -38,7 +37,7 @@ const SurveyCard=()=>{
  let input;
   if (current[0].type=='boolean') {
       input=
-      <Radio.Group size='large' /* onChange={this.onChange} value={this.state.value} */>
+      <Radio.Group style={{marginBottom:15}} size='large' /* onChange={this.onChange} value={this.state.value} */>
         <Radio.Button value={1}>True</Radio.Button>
         <Radio.Button value={2}>False</Radio.Button>
       </Radio.Group>
@@ -46,33 +45,36 @@ const SurveyCard=()=>{
   } else if(current[0].type=='multiple'){
       
   } else if(current[0].type=='number'){
-      input=<InputNumber size='large'min={0}/>
+      input=<InputNumber style={{marginBottom:15}} size='large'min={0}/>
 }else{
-    input=<Input type={current[0].type} size='large' />
+    input=<Input style={{marginBottom:15}} type={current[0].type} size='large' />
   };
     return(
-        <div style={{display:"flex", height:'auto',width:'60%',flexDirection:'column',marginBottom:20,minWidth:300}}>
-        <div style={{height:'28vh',backgroundImage:`url(${current[0].background})`}} className='surveyCard'>
-        </div>
-    <Card bordered title={<h1 style={{fontSize:20}}>QUESTION {point}</h1>} style={{height:'41vh'/* ,boxShadow: "2px 2px 8px #00000020" */}} 
-            actions={[
-            <Button type='default' onClick={()=>{
-                point!=1 ? setPoint(point-1):setPoint(point);
-            }}>Back</Button>,
-            <Button type='primary'  /* disabled */ onClick={()=>{
-                point!=Questions.length ? setPoint(point+1):setPoint(point);
-            }} >Next</Button>
-        ]}>
-            <div style={{display:'flex',flexDirection:'column',justifyContent:'space-around',alignItems:'center',height:'15vh'}}>
-            <h3 style={{fontSize:15}}>{current[0].question}</h3>
+        
+            <Card style={{height:'auto',width:'50%',minWidth:250}} 
+            >
+                <Space direction='vertical' size='middle'>
+            <h1 style={{fontSize:30,textAlign:'start'}}>QUESTION {point}</h1>
+            <div style={{display:'flex',flexDirection:'column',justifyContent:'space-around',alignItems:'flex-start',height:'15vh',marginBottom:20,}}>
+            <h3 style={{fontSize:20,textAlign:'start'}}>{current[0].question}</h3>
             {input}
 
                 
             </div>
+            <div style={{display:"flex",flexDirection:'row',justifyContent:'space-between'}}>
+            <Button type='default' size='large' onClick={()=>{
+                point!=1 ? setPoint(point-1):setPoint(point);
+            }}>Back</Button>
+            <Button type='primary' size='large'   /* disabled */ onClick={()=>{
+                point!=Questions.length ? setPoint(point+1):setPoint(point);
+            }} >Next</Button>
+
+            </div>
+            </Space>
 
 
         </Card>
-        </div>
+        
     );
 };
 export default SurveyCard;

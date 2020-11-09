@@ -14,7 +14,7 @@ class Mappings extends React.Component {
 state={
       lat: 7.946527,
       lng: -1.023194,
-      zoom: 3,
+      zoom: 6,
     }
   
   render() {
@@ -53,7 +53,7 @@ state={
     const position = [this.state.lat, this.state.lng];
     return (
  
-      <Map center={position} zoom={this.state.zoom} maxBounds={[[11.222,-3.274],[4.456,1.230]]} maxZoom={4}  >
+      <Map center={position} zoom={this.state.zoom} maxBounds={[[11.222,-3.274],[4.456,1.230]]}   >
 {/*          <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url='https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'
