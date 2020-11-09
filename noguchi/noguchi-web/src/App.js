@@ -55,13 +55,11 @@ function App() {
           <Route path="/oforum">
             <OtherForum/>
           </Route>
-<<<<<<< HEAD
           <Route path="/OrgAccounts">
             <OrgAccounts/>
-=======
+            </Route>
           <Route path="/orgadmin">
             <OrgAdminPage/>
->>>>>>> 578c0fd704ebb643f654b63e71ff993ef77aab58
           </Route>
         </Switch>
       
