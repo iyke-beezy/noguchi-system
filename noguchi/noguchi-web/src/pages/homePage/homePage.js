@@ -23,9 +23,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   badge:{
-marginTop:8,
-marginRight:10,
-   
+    display:'initial'
   },
   title: {
       fontweight:'500',
@@ -63,10 +61,10 @@ marginRight:10,
     transform: 'scale(0.8)',
   },
   appBar: {
-    width: `100%`,
+    width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
-    height:'10.5vh',
-    backgroundColor:"white",
+    height:'8vh',
+    backgroundColor:'white',
     borderBottom:'2px solid whitesmoke'
   },
   drawer: {
@@ -112,11 +110,19 @@ const [continent, setContinent] = React.useState('africa');
 const [country, setCountry] = React.useState('all');
 
   return (
+<<<<<<< HEAD
     <div className={classes.root,"myroot"}>
       <CssBaseline  />
       <AppBar elevation={0}  position="fixed" className={"myNav",classes.appBar}>
         <Toolbar style={{display:'flex',flexDirection:'row',justifyContent:'center'}}>
       <FormControl className={classes.formControl}>
+=======
+    <div className={classes.root}>
+      <CssBaseline />
+      <AppBar elevation={0}  position="fixed" className={classes.appBar}>
+        <Toolbar style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
+        <FormControl className={classes.formControl}>
+>>>>>>> parent of ec0cd00... Merge pull request #1 from iyke-beezy/blue
         <InputLabel id="demo-simple-select-helper-label">Disease</InputLabel>
         <Select
           labelId="demo-simple-select-helper-label"
@@ -164,13 +170,14 @@ const [country, setCountry] = React.useState('all');
           <MenuItem value={'togo'}>Togo</MenuItem>
         </Select>
       </FormControl>
-      <Button className="mybutt" variant="contained" color='primary' disableElevation onClick={
+      <Button variant="contained" color='primary' disableElevation onClick={
       ()=>{
         window.location.href='/login';
       }}>Login</Button>
         </Toolbar>
       </AppBar>
-      <Drawer className={ classes.drawer , "leftDrawer"}
+      <Drawer
+        className={classes.drawer}
         variant="permanent"
         classes={{
           paper: classes.drawerPaper,
@@ -179,7 +186,6 @@ const [country, setCountry] = React.useState('all');
       >
         {/* <div className={classes.toolbar} /> */}
         <Paper variant="outlined" className={classes.paper} >
-         
         <Typography className={classes.title} noWrap>
             Total Confirmed Cases
           </Typography>
@@ -189,33 +195,21 @@ const [country, setCountry] = React.useState('all');
           <Typography variant='h3' className={classes.bigText} noWrap>
             6,092
           </Typography>
-       
-          <div className="typoWrapper">
+          <Badge badgeContent={4133} max={9999} color="secondary" className={classes.badge} >
           <Typography className={classes.cases} noWrap>
             Active Cases
           </Typography>
-          <Badge badgeContent={4133} max={9999} color="secondary" className={classes.badge} >
             </Badge>
-              </div>
-              <div className="typoWrapper">
-              <Typography className={classes.cases} noWrap>
+            <Badge badgeContent={1733} max={9999} color="primary" className={classes.badge} >
+          <Typography className={classes.cases} noWrap>
             Recovered Cases
           </Typography>
-          <Badge badgeContent={1733} max={9999} color="primary" className={classes.badge} >
-         
-         </Badge>
-              </div>
-              <div className="typoWrapper">
-              <Typography className={classes.cases} noWrap>
+            </Badge>
+            <Badge badgeContent={31} max={9999} color="secondary" className={classes.badge} >
+            <Typography className={classes.cases} noWrap>
             Fatal Cases
           </Typography>
-          <Badge badgeContent={31} max={9999} color="secondary" className={classes.badge} >
-           
             </Badge>
-              </div>
-         
-           
-            
 
         </Paper>
         
@@ -228,7 +222,7 @@ const [country, setCountry] = React.useState('all');
               <ListItemText primary={text} />
               <ListItemSecondaryAction>
               <Typography className={classes.pos2} noWrap>
-            10891
+            1089
           </Typography>
         </ListItemSecondaryAction>
             </ListItem>
@@ -238,10 +232,11 @@ const [country, setCountry] = React.useState('all');
         </List>
         <Divider />
       </Drawer>
-      <main className={ classes.content,"mainContent"}>
+      <main className={classes.content}>
         <div className={classes.toolbar} />
-              <Mappings className="myMap"/> 
-             <Paper className="myPaper">
+
+            <Mappings/>
+            <Paper style={{position:'absolute',top:60, left:1 ,zIndex:500,margin:'50px',minWidth:'150px', width:'20%', backgroundColor:'white',height:'auto',padding:'10px 6px 24px 6px'}}>
             <h3>Overview</h3>
             <Legend/>
           </Paper>

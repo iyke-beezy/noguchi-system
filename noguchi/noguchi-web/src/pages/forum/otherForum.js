@@ -10,7 +10,7 @@ import TagSet from '../../components/tagSet';
 const {TabPane}=Tabs;
 const OtherForum =()=>{
     const [showDetails,setShowDetails] = useState(false);
-    const replies = ['Great article','The best','Love Ya','Piece Of shit article'];
+    const replies = ['Great article','The best','Love Ya','Not Useful article'];
     const image=require('../../assets/whiteGhana.png')
     return(
         <div>

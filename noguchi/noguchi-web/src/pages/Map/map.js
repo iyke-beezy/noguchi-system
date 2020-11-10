@@ -53,7 +53,11 @@ state={
     const position = [this.state.lat, this.state.lng];
     return (
  
+<<<<<<< HEAD
       <Map center={position} zoom={this.state.zoom} maxBounds={[[11.222,-3.274],[4.456,1.230]]}   >
+=======
+      <Map center={position} zoom={this.state.zoom} maxBounds={[[11.222,-3.274],[4.456,1.230]]} maxZoom={18}  >
+>>>>>>> parent of ec0cd00... Merge pull request #1 from iyke-beezy/blue
 {/*          <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url='https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'
