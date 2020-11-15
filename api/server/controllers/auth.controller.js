@@ -60,6 +60,7 @@ export default {
             createCookieFromToken(org, 200, req, res);
         })(req, res, next);
     },
+    
     userLogin: (req, res, next) => {
         passport.authenticate("login", { session: false }, (err, user, info) => {
             if (err || !user) {
