@@ -7,7 +7,7 @@ import homeRouter from './routes/index'
 import usersRouter from './routes/users'
 import authRouter from './routes/auth.route'
 
-import './db/mongoose';
+
 
 var app = express();
 

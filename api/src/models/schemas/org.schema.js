@@ -58,7 +58,7 @@ orgSchema.methods.comparePassword = async function (password) {
 };
 
 //remove password from user object when requested 
-userSchema.methods.toJSON = function () {
+orgSchema.methods.toJSON = function () {
     const user = this;
 
     const userObj = user.toObject();

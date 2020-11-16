@@ -10,6 +10,7 @@ const DEBUG = debug('dev')
 const authFields = {
     usernameField: 'username',
     passwordField: 'password',
+    passReqToCallback: true
 }
 
 passport.use(
@@ -41,7 +42,7 @@ passport.use(
 
 passport.use(
     'userLogin',
-    new Strategy({passwordField: privateKey}, async (req, password, cb) => {
+    new Strategy({passwordField: 'privateKey'}, async (req, privateKey, cb) => {
         try {
             const user = await User.findOne({
                 $or: [{ name: req.body.name }],
@@ -93,7 +94,6 @@ passport.use(
                 newOrg.username = req.body.username;
                 newOrg.email = req.body.email;
                 newOrg.password = req.body.password;
-                newOrg.role = req.body.role;
 
                     await newOrg.save();
                 return cb(null, newOrg, {statusCode: 200, message: 'success'});
@@ -104,4 +104,31 @@ passport.use(
         }),
     );
 
-    passport.use()
+    passport.use(
+        'userSignup',
+        new Strategy(authFields, async (req, email, password, cb) => {
+            try {
+                const checkUsername = await User.checkExistingField('name', req.body.name);
+                if (checkUsername) {
+                    return cb(null, false, {
+                        statusCode: 409,
+                        message: 'Username exists, please try another',
+                    });
+                }
+
+
+                const newUser = new User();
+                newUser.name = req.body.name;
+                newUser.privateKey = req.body.privateKey;
+                newUser.company = req.body.company;
+                newUser.role = req.body.role;
+
+                    await newUser.save();
+                return cb(null, newUser, {statusCode: 200, message: 'success'});
+            } catch (err) {
+                DEBUG(err)
+                return cb(null, false, { statusCode: 400, message: err.message });
+            }
+        }),
+    );
+
