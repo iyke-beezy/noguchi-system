@@ -6,8 +6,9 @@ import logger from 'morgan';
 import homeRouter from './routes/index'
 import usersRouter from './routes/users'
 import authRouter from './routes/auth.route'
+import { config } from 'dotenv';
 
-
+config ();
 
 var app = express();
 

@@ -5,6 +5,8 @@ import passport from 'passport';
 import Org from '../models/org.model'
 import User from '../models/user.model'
 
+import { addUserToOrg } from '../controllers/org.controller'
+
 const DEBUG = debug('dev')
 
 const authFields = {
@@ -42,16 +44,14 @@ passport.use(
 
 passport.use(
     'userLogin',
-    new Strategy({passwordField: 'privateKey'}, async (req, privateKey, cb) => {
+    new Strategy({ usernameField: 'name', passwordField: 'privateKey', passReqToCallback: true }, async (req, name, privateKey, cb) => {
         try {
-            const user = await User.findOne({
-                $or: [{ name: req.body.name }],
-            });
-            if (!user || !user.password) {
-                return cb(null, false, { message: 'Email is not registered.' });
+            const user = await User.checkExistingField('name', name);
+            if (!user || !user.privateKey) {
+                return cb(null, false, { message: 'name is not registered.' });
             }
 
-            const checkPassword = await user.comparePrivate(req.body.privateKey);
+            const checkPassword = await user.comparePrivate(privateKey);
 
             if (!checkPassword) {
                 return cb(null, false, { message: 'Incorrect password.' });
@@ -67,68 +67,75 @@ passport.use(
     }),
 )
 
-    passport.use(
-        'signup',
-        new Strategy(authFields, async (req, email, password, cb) => {
+passport.use(
+    'signup',
+    new Strategy(authFields, async (req, email, password, cb) => {
+        try {
+            const checkEmail = await Org.checkExistingField('email', req.body.email);
+
+            if (checkEmail) {
+                return cb(null, false, {
+                    statusCode: 409,
+                    message: 'Email already registered, log in instead',
+                });
+            }
+
+            const checkUsername = await Org.checkExistingField('username', req.body.username);
+            if (checkUsername) {
+                return cb(null, false, {
+                    statusCode: 409,
+                    message: 'Username exists, please try another',
+                });
+            }
+
+
+            const newOrg = new Org();
+            newOrg.fullName = req.body.fullName;
+            newOrg.username = req.body.username;
+            newOrg.email = req.body.email;
+            newOrg.password = req.body.password;
+
+            await newOrg.save();
+            return cb(null, newOrg, { statusCode: 200, message: 'success' });
+        } catch (err) {
+            DEBUG(err)
+            return cb(null, false, { statusCode: 400, message: err.message });
+        }
+    }),
+);
+
+passport.use(
+    'userSignup',
+    new Strategy({ usernameField: 'name', passwordField: 'privateKey', passReqToCallback: true }, async (req, name, privateKey, cb) => {
+        // console.log(req.body)
+        try {
+            const checkUsername = await User.checkExistingField('name', req.body.name);
+            if (checkUsername) {
+                return cb(null, false, {
+                    statusCode: 409,
+                    message: 'Username exists, please try another',
+                });
+            }
+
+            const newUser = new User();
+            newUser.name = req.body.name;
+            newUser.privateKey = req.body.privateKey;
+            newUser.company = req.body.company;
+            newUser.role = req.body.role;
+            await newUser.save();
+
             try {
-                const checkEmail = await Org.checkExistingField('email', req.body.email);
-
-                if (checkEmail) {
-                    return cb(null, false, {
-                        statusCode: 409,
-                        message: 'Email already registered, log in instead',
-                    });
-                }
-
-                const checkUsername = await Org.checkExistingField('username', req.body.username);
-                if (checkUsername) {
-                    return cb(null, false, {
-                        statusCode: 409,
-                        message: 'Username exists, please try another',
-                    });
-                }
-
-
-                const newOrg = new Org();
-                newOrg.fullName = req.body.fullName;
-                newOrg.username = req.body.username;
-                newOrg.email = req.body.email;
-                newOrg.password = req.body.password;
-
-                    await newOrg.save();
-                return cb(null, newOrg, {statusCode: 200, message: 'success'});
+                const addUser = await addUserToOrg(req.body.company, newUser._id)
+                return cb(null, newUser, { statusCode: 200, message: 'success' });
             } catch (err) {
                 DEBUG(err)
-                return cb(null, false, { statusCode: 400, message: err.message });
+                return cb(null, false, { statusCode: 400, message: err.message })
             }
-        }),
-    );
 
-    passport.use(
-        'userSignup',
-        new Strategy(authFields, async (req, email, password, cb) => {
-            try {
-                const checkUsername = await User.checkExistingField('name', req.body.name);
-                if (checkUsername) {
-                    return cb(null, false, {
-                        statusCode: 409,
-                        message: 'Username exists, please try another',
-                    });
-                }
-
-
-                const newUser = new User();
-                newUser.name = req.body.name;
-                newUser.privateKey = req.body.privateKey;
-                newUser.company = req.body.company;
-                newUser.role = req.body.role;
-
-                    await newUser.save();
-                return cb(null, newUser, {statusCode: 200, message: 'success'});
-            } catch (err) {
-                DEBUG(err)
-                return cb(null, false, { statusCode: 400, message: err.message });
-            }
-        }),
-    );
+        } catch (err) {
+            DEBUG(err)
+            return cb(null, false, { statusCode: 400, message: err.message });
+        }
+    }),
+);
 

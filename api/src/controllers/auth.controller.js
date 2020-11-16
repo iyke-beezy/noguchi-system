@@ -63,11 +63,12 @@ export default {
 
     userSignup: (req, res, next) => {
         passport.authenticate(
-            "signup",
+            "userSignup",
             { session: false },
-            async (err, org, info) => {
+            async (err, user, info) => {
                 try {
-                    if (err || !org) {
+                    // console.log(req.body)
+                    if (err || !user) {
                         const { statusCode = 400, message } = info;
 
                         return res.status(statusCode).json({
@@ -92,7 +93,7 @@ export default {
     },
 
     userLogin: (req, res, next) => {
-        passport.authenticate("login", { session: false }, (err, user, info) => {
+        passport.authenticate("userLogin", { session: false }, (err, user, info) => {
             if (err || !user) {
                 let message = err;
                 if (info) {
