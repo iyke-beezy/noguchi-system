@@ -60,8 +60,40 @@ export default {
             createCookieFromToken(org, 200, req, res);
         })(req, res, next);
     },
+
+    userSignup: (req, res, next) => {
+        passport.authenticate(
+            "userSignup",
+            { session: false },
+            async (err, user, info) => {
+                try {
+                    // console.log(req.body)
+                    if (err || !user) {
+                        const { statusCode = 400, message } = info;
+
+                        return res.status(statusCode).json({
+                            status: "error",
+                            error: {
+                                message,
+                            },
+                        });
+                    }
+                    res.status(200).json({
+                        status: "success",
+                        data: {
+                            user,
+                        }
+                    })
+                } catch (error) {
+                    DEBUG(error);
+                    throw new ApplicationError(500, error);
+                }
+            }
+        )(req, res, next);
+    },
+
     userLogin: (req, res, next) => {
-        passport.authenticate("login", { session: false }, (err, user, info) => {
+        passport.authenticate("userLogin", { session: false }, (err, user, info) => {
             if (err || !user) {
                 let message = err;
                 if (info) {

@@ -21,10 +21,8 @@ const userSchema = mongoose.Schema({
         required: [true, "User must belong to a company"]
     },
     role: {
-        type: {
-            type: String,
-            required: [true, "User must have a role"]
-        }
+        type: String,
+        required: [true, "User must have a role"]
     },
     lastReset: Date,
     lastLogin: Date,

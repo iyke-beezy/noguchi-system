@@ -5,8 +5,10 @@ import logger from 'morgan';
 
 import homeRouter from './routes/index'
 import usersRouter from './routes/users'
+import authRouter from './routes/auth.route'
+import { config } from 'dotenv';
 
-import './db/mongoose';
+config ();
 
 var app = express();
 
@@ -18,5 +20,6 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 app.use('/', homeRouter);
 app.use('/users', usersRouter);
+app.use('/auth', authRouter)
 
 export default app
