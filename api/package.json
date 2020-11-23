@@ -17,6 +17,7 @@
   "dependencies": {
     "@babel/register": "^7.12.1",
     "@babel/runtime": "^7.12.5",
+    "@types/jsonwebtoken": "^8.5.0",
     "babel-cli": "^6.26.0",
     "bcrypt": "^5.0.0",
     "cookie-parser": "^1.4.5",
@@ -24,6 +25,7 @@
     "debug": "^4.2.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "http": "^0.0.1-security",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.14",
     "morgan": "^1.10.0",

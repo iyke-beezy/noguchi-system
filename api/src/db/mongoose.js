@@ -13,7 +13,7 @@ const options = {
     useFindAndModify: false,
     useUnifiedTopology: true,
 };
-const mongoUrl = process.env.MONGODB_URI || 'mongodb://localhost/noguchi-system'
+const mongoUrl = process.env.MONGODB_URI
 
 mongoose
     .connect(mongoUrl, options)
