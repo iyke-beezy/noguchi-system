@@ -7,10 +7,12 @@ import homeRouter from './routes/index'
 import usersRouter from './routes/users'
 import authRouter from './routes/auth.route'
 import { config } from 'dotenv';
+import cors from 'cors'
 
 config ();
 
 var app = express();
+app.use(cors())
 
 app.use(logger('dev'));
 app.use(express.json());
