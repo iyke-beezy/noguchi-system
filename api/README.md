@@ -22,6 +22,14 @@ ORGANIZATION SIGNUP: http://localhost/5000/auth/signup
 USER LOGIN: http://localhost/5000/auth/userLogin
 USER SIGNUP: http://localhost/5000/auth/userSignup
 
+**COMMANDS**
+On a development environment, run:
+### npm run dev
+
+On a production environment
+### npm run build then
+### npm run start
+
 ### Extras
 Login and Signup authentication is with passport
 
