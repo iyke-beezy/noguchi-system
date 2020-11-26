@@ -7,7 +7,7 @@ import './db/mongoose';
 config();
 
 const DEBUG = debug("dev");
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5002;
 
 const server = http.createServer(app);
 
