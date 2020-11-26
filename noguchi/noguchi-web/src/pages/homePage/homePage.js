@@ -110,19 +110,11 @@ const [continent, setContinent] = React.useState('africa');
 const [country, setCountry] = React.useState('all');
 
   return (
-<<<<<<< HEAD
-    <div className={classes.root,"myroot"}>
-      <CssBaseline  />
-      <AppBar elevation={0}  position="fixed" className={"myNav",classes.appBar}>
-        <Toolbar style={{display:'flex',flexDirection:'row',justifyContent:'center'}}>
-      <FormControl className={classes.formControl}>
-=======
     <div className={classes.root}>
       <CssBaseline />
       <AppBar elevation={0}  position="fixed" className={classes.appBar}>
         <Toolbar style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
         <FormControl className={classes.formControl}>
->>>>>>> parent of ec0cd00... Merge pull request #1 from iyke-beezy/blue
         <InputLabel id="demo-simple-select-helper-label">Disease</InputLabel>
         <Select
           labelId="demo-simple-select-helper-label"

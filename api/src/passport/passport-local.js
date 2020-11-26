@@ -123,7 +123,7 @@ passport.use(
             newUser.company = req.body.company;
             newUser.role = req.body.role;
             await newUser.save();
-
+           if(newUser.company){
             try {
                 const addUser = await addUserToOrg(req.body.company, newUser._id)
                 return cb(null, newUser, { statusCode: 200, message: 'success' });
@@ -131,6 +131,9 @@ passport.use(
                 DEBUG(err)
                 return cb(null, false, { statusCode: 400, message: err.message })
             }
+           }
+           return cb(null, newUser, { statusCode: 200, message: 'success' });
+            
 
         } catch (err) {
             DEBUG(err)

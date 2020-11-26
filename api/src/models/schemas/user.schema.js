@@ -18,11 +18,11 @@ const userSchema = mongoose.Schema({
     company: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Organization',
-        required: [true, "User must belong to a company"]
+        required: [false, "User must belong to a company"]
     },
     role: {
         type: String,
-        required: [true, "User must have a role"]
+        required: [false, "User must have a role"]
     },
     lastReset: Date,
     lastLogin: Date,

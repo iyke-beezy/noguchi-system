@@ -23,6 +23,7 @@ import OtherForum from './pages/forum/otherForum';
 import OrgAccounts from './pages/orgAccounts/orgAccounts';
 import OrgAdminPage from './pages/orgAdmin/orgAdmin';
 import OrgAccountss from './pages/orgAccounts/orgAccountss';
+import Home from './pages/homePage/home';
 function App() {
   return (
     <div className="App">
@@ -31,6 +32,9 @@ function App() {
           <Route exact path="/">
             {/* <Mappings /> */}
             <HomePage/>
+          </Route>
+          <Route  path="/home">
+            <Home/>
           </Route>
           <Route path="/login">
             <OrgLogin />
