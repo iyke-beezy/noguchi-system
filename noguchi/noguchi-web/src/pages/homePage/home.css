@@ -12,7 +12,7 @@
   }
   
   .left-side {
-    background: lightblue;
+    background: white;
     grid-column: 1 / 2;
   }
   
@@ -22,7 +22,7 @@
   }
   
   .right-side {
-    background: yellow;
+    background: white;
     grid-column: 3 / 4;
   }
   
