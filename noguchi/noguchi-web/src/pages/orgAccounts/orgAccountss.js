@@ -19,7 +19,7 @@ const Box=(props)=>{
         {
         props.admin?
         <>
-         <div style={{height:180,border:'4px solid #adadad',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',margin:20,cursor:'pointer'}} onClick={() => setModalState(true)}>
+         <div style={{height:180,border:'4px solid #ff9633',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',margin:20,cursor:'pointer'}} onClick={() => setModalState(true)}>
           
         </div>
         <Modal
@@ -100,9 +100,9 @@ const image=require('../../assets/whiteGhana.png');
 const OrgAccountss=()=> {
     
     return(
-        <div style={{minHeight:'100vh',display:'flex', flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
+        <div style={{minHeight:'100vh',display:'flex',backgroundColor:'#4e54c8', flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
             <div  style={{height:'60vh',width:'85%'}}>
-            <h1 style={{fontSize:'3.5vw',color:'GrayText'}}>ORGANIZATION PROFILES</h1>
+            <h1 style={{fontSize:'4vw',color:'white'}}>ORGANIZATION PROFILES</h1>
             <div style={{padding:10,display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(230px,1fr))',overflowY:'scroll',height:'55vh'}}>
 
                 <Box admin/>

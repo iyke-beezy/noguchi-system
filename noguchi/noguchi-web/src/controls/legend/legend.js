@@ -53,11 +53,11 @@ export default withLeaflet(Legend); */
 import React from 'react';
 import { Card } from 'antd';
 import { Paper,Select,MenuItem,Typography } from '@material-ui/core';
-import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer,Tooltip,BarChart,Bar} from 'recharts';
 import { useTheme } from '@material-ui/core/styles';
 
-function createData(time, amount) {
-  return { time, amount };
+function createData(time, cases) {
+  return { time, cases };
 }
 
 const data = [
@@ -85,8 +85,22 @@ const data2 = [
   createData('Nov', 4),
   createData('Dec', 7),
 ]
+const data3 = [
+  createData('2010', 0),
+  createData('2011', 1),
+  createData('2012', 3),
+  createData('2013', 4),
+  createData('2014', 1),
+  createData('2015', 0),
+  createData('2016', 0),
+  createData('2017', 2),
+  createData('2018', 3),
+  createData('2019', 1),
+  createData('2020', 4),
+  createData('2021', 7),
+]
 
-export const Plot =()=>{
+export const Plot =(props)=>{
   const theme = useTheme();
   return(
     <div style={{height:'45vh',paddingBottom:20}}>
@@ -100,17 +114,18 @@ export const Plot =()=>{
                   left: 16,
                 }}
               >
-                <XAxis dataKey="time" stroke={theme.palette.text.secondary} />
+                <XAxis dataKey="time" stroke={theme.palette.text.secondary} padding={{ left: 30, right: 30 }} />
+                <Tooltip />
                 <YAxis stroke={theme.palette.text.secondary}>
                   <Label
                     angle={270}
                     position="left"
                     style={{ textAnchor: 'middle', fill: theme.palette.text.primary }}
                   >
-                   No Of Entries
+                   {props.yname}
                   </Label>
                 </YAxis>
-                <Line type="monotone" dataKey="amount" stroke={theme.palette.primary.main} dot={false} />
+                <Line type="monotone" dataKey="cases" stroke={theme.palette.primary.main} dot={false} />
               </LineChart>
       </ResponsiveContainer>  
 
@@ -118,7 +133,39 @@ export const Plot =()=>{
   );
 
 }
+export const Plot2 =(props)=>{
+  const theme = useTheme();
+  return(
+    <div style={{height:'45vh',paddingBottom:20}}>
+    <ResponsiveContainer>
+              <BarChart
+                data={data3}
+                margin={{
+                  top: 16,
+                  right: 16,
+                  bottom: 0,
+                  left: 16,
+                }}
+              >
+                <XAxis dataKey="time" stroke={theme.palette.text.secondary} padding={{ left: 30, right: 30 }} />
+                <Tooltip />
+                <YAxis stroke={theme.palette.text.secondary}>
+                  <Label
+                    angle={270}
+                    position="left"
+                    style={{ textAnchor: 'middle', fill: theme.palette.text.primary }}
+                  >
+                   {props.yname}
+                  </Label>
+                </YAxis>
+                <Bar type="monotone" dataKey="cases"  fill="#8884d8" />
+              </BarChart>
+      </ResponsiveContainer>  
 
+      </div>
+  );
+
+}
 const Legend =()=>{
 
 
@@ -182,7 +229,7 @@ const Legend =()=>{
                     Cases (100)
                   </Label>
                 </YAxis>
-                <Line type="monotone" dataKey="amount" stroke={theme.palette.primary.main} dot={false} />
+                <Line type="monotone" dataKey="cases" stroke={theme.palette.primary.main} dot={false} />
               </LineChart>
       </ResponsiveContainer>                 
                 </Paper>

@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawer: {
     width: drawerWidth,
-    minWidth:150
+    minWidth:100
   },
   drawerPaper: {
     width: drawerWidth,
@@ -226,12 +226,14 @@ const [country, setCountry] = React.useState('all');
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-
+            <div style={{display:'flex',flexDirection:'row'}}>
             <Mappings/>
-            <Paper style={{position:'absolute',top:60, left:1 ,zIndex:500,margin:'50px',minWidth:'150px', width:'20%', backgroundColor:'white',height:'auto',padding:'10px 6px 24px 6px'}}>
-            <h3>Overview</h3>
-            <Legend/>
-          </Paper>
+            <div style={{width:'400px',backgroundColor:'white'}}>
+
+            </div>
+            </div>
+            
+           
       </main>
     </div>
   );
