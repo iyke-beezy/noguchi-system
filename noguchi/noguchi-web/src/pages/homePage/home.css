@@ -1,0 +1,43 @@
+.parent {
+    display: grid;
+    width: 100%;
+    height: 100vh;
+    grid-template: auto 1fr auto / auto 1fr auto
+  }
+ 
+  header {
+    background: lightpink;
+    padding: 2rem;
+    grid-column: 1 / 4;
+  }
+  
+  .left-side {
+    background: white;
+    grid-column: 1 / 2;
+  }
+  
+  main {
+    background: coral;
+    grid-column: 2 / 3;
+  }
+  
+  .right-side {
+    background: white;
+    grid-column: 3 / 4;
+  }
+  
+  footer {
+    background: wheat;
+    padding: 2rem;
+    text-align: center;
+    grid-column: 1 / 4;
+  }
+  
+  body {
+    font-family: system-ui, sans-serif;
+  }
+  
+  .left-side,
+  .right-side {
+    padding: 1rem;
+  }

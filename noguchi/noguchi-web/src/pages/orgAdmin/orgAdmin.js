@@ -112,7 +112,7 @@ const OrgAdminPage =()=>{
                            <Option value='man'>Manoo</Option>  
                          </Select>
                          <Card  style={{minHeight:'40vh',marginTop:20,borderRadius:5}}>
-                            <Plot/>
+                            <Plot yname='No of Entries'/>
                          </Card>
                           
                         </div>

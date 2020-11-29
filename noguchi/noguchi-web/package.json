@@ -9,6 +9,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "antd": "^4.5.4",
+    "axios": "^0.21.0",
     "leaflet": "^1.6.0",
     "leaflet-boundary-canvas": "^1.0.0",
     "leaflet-choropleth": "^1.1.4",

@@ -5,7 +5,7 @@ import { Button } from 'antd';
 import {ArrowLeftOutlined} from '@ant-design/icons';
 const ForumList =()=>{
     const [more,setMore]=useState(false);
-    const replies = ['Great article','The best','Love Ya','Piece Of shit article','Great article','The best','Love Ya','Piece Of shit article','Great article','The best','Love Ya','Piece Of shit article'];
+    const replies = ['Great article','The best','Love Ya','Not Useful article','Great article','The best','Love Ya','Not Useful article','Great article','The best','Love Ya','Not Useful article'];
     return(
         <>
         {
