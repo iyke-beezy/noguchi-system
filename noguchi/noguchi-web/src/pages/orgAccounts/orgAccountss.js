@@ -111,10 +111,12 @@ const OrgAccountss=()=> {
                 <Box/>
                 
             
-            </div>
+          
                                 
-            </div>
+           </div>
+        </div> 
         </div>
+      
     );
   
 }
