@@ -59,7 +59,7 @@ const handleSubmit2=(e)=>{
 
 }
 return(
-    <Card style={{ flex: 0.25,minWidth:350,border:'1px solid graysmoke',display:'flex',flexDirection:'column',alignItems:'center',borderRadius:15,backgroundColor:'white',justifyContent:'center'}}>
+    <Card style={{flex: 0.25,width:'min(95vw,350px)',border:'1px solid graysmoke',display:'flex',flexDirection:'column',alignItems:'center',borderRadius:15,backgroundColor:'white',justifyContent:'center'}}>
       {
         loginType==='other'?
         <Form>
@@ -74,7 +74,7 @@ return(
       <Input 
       size="large"
       required
-      className='formInput2'
+      className='formInput'
       onChange={(e)=>{setUsername(e.target.value)}}
       placeholder="Enter your username" 
       prefix={<UserOutlined className="site-form-item-icon" />} 
@@ -82,14 +82,14 @@ return(
       <Input 
       size="large"
       required
-      className='formInput2'
+      className='formInput'
       onChange={(e)=>{setPassword(e.target.value)}}
       placeholder="Enter your password" 
       prefix={<LockOutlined className="site-form-item-icon" />} 
       />
       <Input 
       size="large"
-      className='formInput2'
+      className='formInput'
       onChange={(e)=>{setPassword(e.target.value)}}
       placeholder="Repeat password" 
       prefix={<LockOutlined className="site-form-item-icon" />} 
@@ -116,7 +116,7 @@ return(
     <Input 
     size="large"
   
-    className='formInput2'
+    className='formInput'
     onChange={(e)=>{setFullname(e.target.value)}}
     placeholder="Enter org name" 
     prefix={<UserOutlined className="site-form-item-icon" />} 
@@ -124,21 +124,21 @@ return(
     <Input 
     size="large"
   
-    className='formInput2'
+    className='formInput'
     onChange={(e)=>{setUsername(e.target.value)}}
     placeholder="Enter org username" 
     prefix={<UserOutlined className="site-form-item-icon" />} 
     />
     <Input 
     size="large"
-    className='formInput2'
+    className='formInput'
     onChange={(e)=>{setPassword(e.target.value)}}
     placeholder="Enter org password" 
     prefix={<LockOutlined className="site-form-item-icon" />} 
     />
     <Input 
     size="large"
-    className='formInput2'
+    className='formInput'
     onChange={(e)=>{setKey(e.target.value)}}
     placeholder="Confirm Password" 
     prefix={<LockOutlined className="site-form-item-icon" />} 

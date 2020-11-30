@@ -319,14 +319,21 @@ border-right: 1px solid #f5f5f5;
 
 }
 
+.orgAccountsBox{
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;
+}
+.orgAccountsBox::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
+}
 
-<<<<<<< Updated upstream
-/* 
-.myroot{
-=======
+@media only screen and (max-device-width: 480px) {
+  .proCard {
+    min-width:90vw;
+  }
+}
 
 /* .myroot{
->>>>>>> Stashed changes
   height:100vh;
   display: grid;
   grid-template-rows: 0.12fr 0.88fr;

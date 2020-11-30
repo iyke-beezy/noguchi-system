@@ -100,10 +100,10 @@ const image=require('../../assets/whiteGhana.png');
 const OrgAccountss=()=> {
     
     return(
-        <div style={{minHeight:'100vh',display:'flex',backgroundColor:'#4e54c8', flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
+        <div style={{minHeight:'100vh',height:'auto',width:'100%',display:'flex',backgroundColor:'#4e54c8', flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
             <div  style={{height:'60vh',width:'85%'}}>
-            <h1 style={{fontSize:'4vw',color:'white'}}>ORGANIZATION PROFILES</h1>
-            <div style={{padding:10,display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(230px,1fr))',overflowY:'scroll',height:'55vh'}}>
+            <h1 style={{fontSize:'max(4vw,30px)',color:'white'}}>ORGANIZATION PROFILES</h1>
+            <div className='orgAccountsBox' style={{padding:10,display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(230px,1fr))',overflowY:'scroll',height:'55vh'}}>
 
                 <Box admin/>
                 <Box/>

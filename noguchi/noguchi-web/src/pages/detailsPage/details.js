@@ -5,7 +5,8 @@ import { Plot,Plot2 } from '../../controls/legend/legend';
 
 const DetailsCard=()=>{
     return(
-        <Card style={{height:160,margin:10}}>
+        <Card style={{height:160,margin:10,borderRadius:15
+        }}>
 
         </Card>
     );
@@ -72,7 +73,13 @@ const Details=()=>{
         <div style={{maxWidth:'100vw',width:'auto',padding:80}}>
             <h1 style={{fontSize:50}}>ACCRA</h1>
             <p>Pariatur Lorem aliqua pariatur irure ea occaecat cupidatat. Voluptate labore aliqua consectetur officia ullamco deserunt dolore exercitation magna. Cillum mollit do minim veniam aliqua aute enim incididunt ad.</p>
-            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(150px,1fr))',marginBottom:20}}>
+            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(250px,1fr))',marginBottom:20}}>
+                <DetailsCard/>
+                <DetailsCard/>
+                <DetailsCard/>
+                <DetailsCard/>
+                <DetailsCard/>
+                <DetailsCard/>
                 <DetailsCard/>
                 <DetailsCard/>
                 <DetailsCard/>

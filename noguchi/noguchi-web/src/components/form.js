@@ -55,10 +55,10 @@ const  handleSubmit2=(e)=>{
   
 }
 return(
-    <Card style={{ flex: 0.25,minWidth:350,border:'1px solid graysmoke',display:'flex',flexDirection:'column',alignItems:'center',borderRadius:15,backgroundColor:'white',justifyContent:'center'}}>
+    <Card style={{ flex: 0.25,width:'min(95vw,350px)',border:'1px solid graysmoke',display:'flex',flexDirection:'column',alignItems:'center',borderRadius:15,backgroundColor:'white',justifyContent:'center'}}>
       {
         loginType==='other'?
-        <Form onFinish={handleSubmit2}>
+        <Form layout='vertical' onFinish={handleSubmit2}>
         <Space direction='vertical' size={30}>
       <h1 style={{fontSize:30,fontWeight:'bold',textAlign:'left'}}>Sign In</h1>
       <div style={{display:'flex',flexDirection:'row',justifyContent:'flex-start'}}><h4 style={{fontSize:14,color:'lightblue',textAlign:'left',marginRight:6,cursor:'pointer'}} onClick={()=>setLoginType('org')}>Org Login</h4><span style={{color:'blue'}}>/</span><h4 style={{fontSize:14,textAlign:'left',color:'#8a2be290',marginLeft:6,cursor:'pointer'}} onClick={()=>setLoginType('other')}>Other</h4></div>

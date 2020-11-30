@@ -14,7 +14,7 @@ class Mappings extends React.Component {
 state={
       lat: 7.946527,
       lng: -1.023194,
-      zoom: 7,
+      zoom: 5,
     }
   
   render() {

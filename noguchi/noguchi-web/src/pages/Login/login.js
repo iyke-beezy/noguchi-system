@@ -7,7 +7,7 @@ const OrgLogin =()=>{
     const image=require('../../assets/whiteGhana.png')
     const [login,setLogin]=useState(true);
     return(
-        <div className='login' style={{height:'100vh',display:'flex',justifyContent:'center',alignItems:'center'}}>
+        <div className='login' style={{minHeight:'100vh',height:'auto',display:'flex',justifyContent:'center',alignItems:'center'}}>
                 {
                     login?
                     <OrgForm onClick={() =>{setLogin(false)}}/> 

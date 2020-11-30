@@ -1,11 +1,11 @@
 .formInput{
-    width:300px;
+    width:95%;
     height:50px;
     border:none;
     border-bottom:1px solid #adadad;
 }
 .formInput2{
-    width:280px;
+    width:95%;
     height:50px;
     border:none;
     border-bottom:1px solid #adadad50;
@@ -110,3 +110,5 @@
   .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn{
       color: lightsteelblue;
   }
+
+ 

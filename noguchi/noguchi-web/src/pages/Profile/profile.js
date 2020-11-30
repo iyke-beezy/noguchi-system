@@ -16,7 +16,7 @@ const ProfilePage=()=>{
             <Header/>
             <div className='profileMidSection'>
             
-                    <Card bordered style={{flex:0.3,height:'auto',minWidth:350,backgroundColor:'white',textAlign:'left',display:'flex',flexDirection:'column',justifyContent:'space-between',alignItems:'flex-start',flexShrink:0,margin:20,/* boxShadow:'3px 3px 20px #00000010' */}}>
+                    <Card className='proCard' bordered style={{flex:0.3,height:'auto',backgroundColor:'white',textAlign:'left',display:'flex',flexDirection:'column',justifyContent:'space-between',alignItems:'flex-start',flexShrink:0,margin:20,/* boxShadow:'3px 3px 20px #00000010' */}}>
                         <h1 style={{color:'black',fontSize:30}}>
                          PROFILE
                         </h1>
@@ -36,7 +36,7 @@ const ProfilePage=()=>{
                         <Button type='primary' size='large' onClick={()=>{window.location.href='/';}} danger block>Logout</Button>
 
                     </Card>
-                <Card className='banner' style={{flex:0.5,margin:20,minWidth:350}}>
+                <Card className='banner proCard' style={{flex:0.5,margin:20}}>
                     <h1>Take A Disease Survey</h1>
                     <Button className='bannerButton' onClick={()=>{window.location.href='/entry';}}>Start</Button>
                 </Card>
