@@ -23,11 +23,8 @@ import OtherForum from './pages/forum/otherForum';
 import OrgAccounts from './pages/orgAccounts/orgAccounts';
 import OrgAdminPage from './pages/orgAdmin/orgAdmin';
 import OrgAccountss from './pages/orgAccounts/orgAccountss';
-<<<<<<< Updated upstream
-import Home from './pages/homePage/home';
-=======
 import Details from './pages/detailsPage/details';
->>>>>>> Stashed changes
+import RecordCases from './pages/detailsPage/RecordCases';
 function App() {
   return (
     <div className="App">
@@ -38,7 +35,7 @@ function App() {
             <HomePage/>
           </Route>
           <Route  path="/home">
-            <Home/>
+            <HomePage/>
           </Route>
           <Route path="/login">
             <OrgLogin />
@@ -66,6 +63,9 @@ function App() {
           </Route>
           <Route path="/details">
             <Details/>
+          </Route>
+          <Route path="/cases">
+            <RecordCases/>
           </Route>
           <Route path="/OrgAccounts">
             <OrgAccountss/>

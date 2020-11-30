@@ -320,13 +320,8 @@ border-right: 1px solid #f5f5f5;
 }
 
 
-<<<<<<< Updated upstream
-/* 
-.myroot{
-=======
 
 /* .myroot{
->>>>>>> Stashed changes
   height:100vh;
   display: grid;
   grid-template-rows: 0.12fr 0.88fr;

@@ -11,15 +11,11 @@ import TagSet from '../../components/tagSet';
 const {TabPane}=Tabs;
 const OtherForum =()=>{
     const [showDetails,setShowDetails] = useState(false);
-<<<<<<< HEAD
     const [showModal,setShowModal] = useState(false);
     const [reply,setReply] = useState('');
     const [title,setTitle] = useState("Title");
     const [desc,setDesc] = useState('Descriptions');
-    const replies = ['Great article','The best','Love Ya','Piece Of shit article'];
-=======
-    const replies = ['Great article','The best','Love Ya','Not Useful article'];
->>>>>>> 46dbb62eab326afb94073e1f1c70563164d72804
+    const replies = ['Great article','The best','Love Ya','Not a useful article'];
     const image=require('../../assets/whiteGhana.png')
     return(
         <div>
