@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import { Input, Card, Space, Button ,Avatar,Tabs, Radio,Checkbox} from 'antd';
+import { Input, Card, Space, Button ,Avatar,Tabs, Radio,Checkbox,Layout} from 'antd';
 import "antd/dist/antd.css";
 import '../../App.css';
-import Header from "../../components/header";
+import Headers from "../../components/header";
 import Banner from "../../components/banner";
 import ForumCard from "../../components/forumCard";
 import ForumList from "../../components/forumList";
@@ -16,13 +16,14 @@ const OtherProfile=()=>{
     const [orgname,setOrgname]=useState('Akwasi Mensah')
     const [orgUsername,setOrgUsername]=useState('Akwmensah');
     const [orgPassword,setOrgPassword]=useState('yerspiyooor');
-
+    const{Header}=Layout;
     return(
         <div className='profilePage'>
-            <Header/>
+            <Header style={{backgroundColor:"white",borderBottom:"1px solid whitesmoke",width:'100%'}}>Header</Header>
+            <Headers/>
             <div className='profileMidSection'>
             
-                    <Card bordered style={{flex:0.3,height:'auto',minWidth:350,backgroundColor:'white',textAlign:'left',display:'flex',flexDirection:'column',justifyContent:'space-between',alignItems:'flex-start',flexShrink:0,margin:20,/* boxShadow:'3px 3px 20px #00000010' */}}>
+                    <Card bordered style={{flex:0.3,height:'auto',minWidth:'min(95vw,350px)',backgroundColor:'white',textAlign:'left',display:'flex',flexDirection:'column',justifyContent:'space-between',alignItems:'flex-start',flexShrink:0,margin:20,/* boxShadow:'3px 3px 20px #00000010' */}}>
                         <h1 style={{color:'black',fontSize:30}}>
                          PROFILE
                         </h1>

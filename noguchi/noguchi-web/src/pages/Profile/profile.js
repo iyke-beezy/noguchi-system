@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import { Input, Card, Space, Button ,Avatar} from 'antd';
+import { Input, Card, Space, Button ,Avatar,Layout} from 'antd';
 import "antd/dist/antd.css";
 import '../../App.css';
-import Header from "../../components/header";
+import Headers from "../../components/header";
 import Banner from "../../components/banner";
 
 const ProfilePage=()=>{
@@ -10,13 +10,14 @@ const ProfilePage=()=>{
     const [orgname,setOrgname]=useState('GHANA EDUCATION SERVICE')
     const [orgUsername,setOrgUsername]=useState('GeSNoguchi');
     const [orgPassword,setOrgPassword]=useState('osemigor123');
-
+    const{Header}=Layout;
     return(
         <div className='profilePage'>
-            <Header/>
+            <Header style={{backgroundColor:"white",borderBottom:"1px solid whitesmoke",width:'100%'}}>Header</Header>
+            <Headers/>
             <div className='profileMidSection'>
             
-                    <Card className='proCard' bordered style={{flex:0.3,height:'auto',backgroundColor:'white',textAlign:'left',display:'flex',flexDirection:'column',justifyContent:'space-between',alignItems:'flex-start',flexShrink:0,margin:20,/* boxShadow:'3px 3px 20px #00000010' */}}>
+                    <Card className='proCard' bordered style={{flex:0.3,height:'auto',backgroundColor:'white',textAlign:'left',display:'flex',flexDirection:'column',justifyContent:'space-between',alignItems:'flex-start',flexShrink:0,margin:20,/* boxShadow:'3px 3px 20px #00000010' */minWidth:'min(95vw,350px)'}}>
                         <h1 style={{color:'black',fontSize:30}}>
                          PROFILE
                         </h1>
@@ -36,7 +37,7 @@ const ProfilePage=()=>{
                         <Button type='primary' size='large' onClick={()=>{window.location.href='/';}} danger block>Logout</Button>
 
                     </Card>
-                <Card className='banner proCard' style={{flex:0.5,margin:20}}>
+                <Card className='banner proCard' style={{flex:0.5,margin:20,minWidth:'min(95vw,350px)'}}>
                     <h1>Take A Disease Survey</h1>
                     <Button className='bannerButton' onClick={()=>{window.location.href='/entry';}}>Start</Button>
                 </Card>

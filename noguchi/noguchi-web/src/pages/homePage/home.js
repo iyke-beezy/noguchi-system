@@ -1,5 +1,6 @@
-import { Button, Space,List } from 'antd'
-import React ,{useState} from 'react'
+import { Button, Space,List ,Layout} from 'antd'
+import React ,{useState} from 'react';
+import ContainerDimensions from 'react-container-dimensions';
 import {Paper,Chip,Avatar,Badge,ListItemSecondaryAction,Select,MenuItem,FormControl,InputLabel,FormHelperText,Typography} from '@material-ui/core';
 
 import Mappings from '../Map/map'
@@ -34,10 +35,10 @@ const Home=()=>{
   const [continent, setContinent] = React.useState('africa');
   
   const [country, setCountry] = React.useState('ghana');
-
+  const {Header,Footer}=Layout
     return(
         <div class="parent">
-        <header >Header</header>
+        <Header style={{backgroundColor:"white",borderBottom:"1px solid whitesmoke"}}>Header</Header>
         <div class="left-side" contenteditable>
         <Paper variant="outlined" style={{padding:15}} >
         <Typography style={{fontweight:'500',fontSize: 17,lineHeight:2,textAlign:'left'}} noWrap>
@@ -111,7 +112,16 @@ const Home=()=>{
         </Select>
         </div>
         </div>
-        <main  contenteditable> <Mappings/></main>
+        <main  contenteditable> 
+      <ContainerDimensions>
+      
+                <Mappings/>  
+            
+        
+      </ContainerDimensions>
+        
+        
+        </main>
         <div class="right-side" style={{display:'flex',flexDirection:'column',alignItems:'flex-start'}} contenteditable hidden={hidden} >
             <h1 style={{textAlign:'left'}}>Recorded for Accra</h1>
             <span style={{textAlign:'left'}}>20th Nov 2019</span>

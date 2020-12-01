@@ -4,7 +4,7 @@ import "antd/dist/antd.css";
 import './components.css';
 import {EditFilled ,UserOutlined} from '@ant-design/icons';
 
-const Header=()=>{
+const Headers=()=>{
     return(
         <div className="headerSection">
             
@@ -15,4 +15,4 @@ const Header=()=>{
         </div>
     );
 }
-export default Header;
+export default Headers;

@@ -2,6 +2,7 @@ import React from 'react';
 /* import Legend from './legend' */
 import { Map, Marker,TileLayer,Popup} from 'react-leaflet';
 import Boundary from '../../controls/boundary/boundary';
+import 'leaflet/dist/leaflet.css';
 import {Paper} from '@material-ui/core'
 import Legend from '../../controls/legend/legend';
 /* import Layers from './newTon'
@@ -14,7 +15,7 @@ class Mappings extends React.Component {
 state={
       lat: 7.946527,
       lng: -1.023194,
-      zoom: 5,
+      zoom: 6,
     }
   
   render() {

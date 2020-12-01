@@ -25,7 +25,6 @@ import OrgAdminPage from './pages/orgAdmin/orgAdmin';
 import OrgAccountss from './pages/orgAccounts/orgAccountss';
 import Home from './pages/homePage/home';
 import Details from './pages/detailsPage/details';
-import Details from './pages/detailsPage/details';
 import RecordCases from './pages/detailsPage/RecordCases';
 function App() {
   return (
@@ -37,7 +36,7 @@ function App() {
             <HomePage/>
           </Route>
           <Route  path="/home">
-            <HomePage/>
+            <Home/>
           </Route>
           <Route path="/login">
             <OrgLogin />

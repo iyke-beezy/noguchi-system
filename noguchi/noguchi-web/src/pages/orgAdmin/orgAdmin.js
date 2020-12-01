@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import { useTheme } from '@material-ui/core/styles';
-import { Button, Card, Input, Modal, Select, Tabs ,Avatar} from 'antd';
+import { Button, Card, Input, Modal, Select, Tabs ,Avatar,Layout} from 'antd';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
 import Legend, { Plot } from '../../controls/legend/legend';
 import {EditFilled ,UserOutlined,ExportOutlined,UserAddOutlined} from '@ant-design/icons';
 const {TabPane}=Tabs;
 const {Option}=Select;
+const {Header}=Layout;
 const Box=()=>{
     const [modalState,setModalState]=useState(false);
     return(
@@ -83,6 +84,7 @@ const OrgAdminPage =()=>{
     const theme = useTheme();
     return(
         <div style={{display:'flex',justifyContent:'center',alignItems:'center',minHeight:'100vh',height:'auto'}}>
+          <Header style={{backgroundColor:"white",borderBottom:"1px solid whitesmoke",width:'100%'}}>Header</Header>
         <div style={{width:'80%'}}>
             <Tabs  tabPosition='top' defaultActiveKey='1' size='small' style={{height:'auto'}}>
                     <TabPane tab="Manage Profiles" key="1" >
@@ -102,7 +104,7 @@ const OrgAdminPage =()=>{
                     <TabPane tab="Profile Activities" key="2"  >
                         
                         <div style={{display:'flex',flexDirection:'column',height:'55vh'}}>
-                         <Select defaultValue='kofi' size='large' style={{maxWidth:'20%'}}>
+                         <Select defaultValue='kofi' size='large' style={{maxWidth:'max(20%,100px)'}}>
                            <Option value='kofi'>Kofi</Option> 
                            <Option value='ama'>Ama</Option> 
                            <Option value='tetteh'>Tetteh</Option> 
@@ -124,23 +126,23 @@ const OrgAdminPage =()=>{
                     <TabPane tab="New Profile" key="3" >
                     <div style={{display:'flex',flexDirection:'column',height:'55vh',alignItems:'flex-start'}}>
 
-                        <h1 style={{fontSize:35,color:'lightslategray'}}>New Profile</h1> 
+                        <h1 style={{fontSize:'min(35px,8vw)',color:'lightslategray'}}>New Profile</h1> 
 
                         
-                        <Avatar shape='square' size={90} icon={<UserAddOutlined/>} />
+                        <Avatar shape='square' size='large' icon={<UserAddOutlined/>} />
                         <label style={{marginTop:10,color:'lightgray'}}>Profile Name</label>
                         <Input
                         type='text'
                         placeholder='Enter profile name'
                         size='large'
-                        style={{width:'50%',minWidth:330,margin:5}}
+                        style={{width:'max(50%,55vw)',margin:5}}
                         />  
                         <label style={{marginTop:15,color:'lightgray'}}>Profile Key</label>
                         <Input
                         type='text'
                         placeholder='Enter profile key'
                         size='large'
-                        style={{width:'45%',minWidth:300,margin:5}}
+                        style={{width:'max(45%,50vw)',margin:5}}
                         />  
                        <Button type='primary' style={{alignSelf:'flex-end',height:45,marginTop:30,backgroundColor:'lightslategray',borderColor:'lightslategray'}}>Create Profile</Button>
                     </div>

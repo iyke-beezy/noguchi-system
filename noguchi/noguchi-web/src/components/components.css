@@ -78,9 +78,9 @@
 }
 .card-container{
     height: auto;
-    flex: 0.45;
-    padding: 0;
+    flex: 0.5;
     margin: 20px;
+    min-width:min(95vw,350px);
 }
 .card-container p {
     margin: 0;

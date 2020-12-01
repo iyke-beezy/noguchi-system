@@ -5,8 +5,8 @@
     grid-template: auto 1fr auto / auto 1fr auto
   }
  
-  header {
-    background: lightpink;
+  .head {
+    background: white;
     padding: 2rem;
     grid-column: 1 / 4;
   }
@@ -27,8 +27,8 @@
   }
   
   footer {
-    background: wheat;
-    padding: 2rem;
+    background: whitesmoke;
+    padding: 1rem;
     text-align: center;
     grid-column: 1 / 4;
   }
