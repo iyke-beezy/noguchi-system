@@ -17,10 +17,10 @@ GET your token number via signup and login
 MAKE SURE TO INCLUDE Authorization: BEARER <token> in your request for data for authorization purposes
 
 **ROUTES**
-ORGANIZATION LOGIN: http://localhost/5000/auth/login
-ORGANIZATION SIGNUP: http://localhost/5000/auth/signup
-USER LOGIN: http://localhost/5000/auth/userLogin
-USER SIGNUP: http://localhost/5000/auth/userSignup
+ORGANIZATION LOGIN: http://localhost:5002/auth/login
+ORGANIZATION SIGNUP: http://localhost:5002/auth/signup
+USER LOGIN: http://localhost:5002/auth/userLogin
+USER SIGNUP: http://localhost:5002/auth/userSignup
 
 **COMMANDS**
 On a development environment, run:
