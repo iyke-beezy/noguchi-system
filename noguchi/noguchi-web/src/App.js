@@ -52,7 +52,7 @@ function App() {
             <Preview />
           </Route>
           <Route path="/entry">
-            <Entry /> {/*not responsive*/}
+            <Entry /> 
           </Route>
           <Route path="/other">
             <OtherProfile/>
