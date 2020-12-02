@@ -73,7 +73,7 @@ state={
           {/*
           <Legend></Legend>
           <Layers></Layers> */}
-          <Boundary style={{position:'absolute',zIndex:3}} ></Boundary>
+          <Boundary style={{position:'absolute',zIndex:-10}} ></Boundary>
 {/*           <Choropleth
             data={custom}
             valueProperty={(feature) => feature.properties.value}

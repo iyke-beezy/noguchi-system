@@ -1,8 +1,12 @@
-import {Row, Col,Modal,Popover, Avatar, Button, Card ,List, Progress} from "antd";
+import {Tabs,Row, Col,Modal,Popover, Avatar, Button, Card ,List, Progress} from "antd";
 import React,{useState} from "react";
 import {UserOutlined,ExportOutlined} from '@ant-design/icons';
 import SurveyCard from "../../components/surveyCard";
+
+
+
 const MiniCard=(props)=>{
+
     const data = [
         'What is the name of the community',
         'Where is the community located',
@@ -40,8 +44,10 @@ const MiniCard=(props)=>{
   
       ];
     const [modalState,setModalState]=useState(false);
-  
+   
+ 
     return(
+      
         <div>
         <Card style={{height:150,margin:10,display:'flex',alignItems:'center',justifyContent:'center'}} onClick={() => setModalState(true)}>
             <h3 style={{fontSize:23,color:'lightslategray'}}>{props.text}</h3>
@@ -66,6 +72,7 @@ const MiniCard=(props)=>{
     );
 }
 const Entry=()=>{
+    const {TabPane} = Tabs;
     const content = (
         <div style={{display:'flex',flexDirection:'column'}}>
           <Button type='link' size='large' onClick={()=>{window.location.href='/profile'}}><UserOutlined/>Profile</Button>
@@ -74,7 +81,10 @@ const Entry=()=>{
       );
       const [preview,setPreview]=useState(true);
     return(
-        <div className='entry'>
+        
+        <div >
+            <Row className={"entryDesktop"} xs={0} sm={24}>
+           
             <div className='entryPoint'>
                 <div className='links' style={{backgroundColor:'#f5f5f580'}}>
                 <Popover content={content} trigger="click">
@@ -103,13 +113,48 @@ const Entry=()=>{
                     :
                     <div style={{alignItems: 'center',display:'flex',flexDirection:'column'}}>
                         <h1 style={{fontSize:'7vw',padding:10,/* textShadow:'0 0 2px #000000, 0 0 2px #000000', */ marginBottom:20,color:'lightgray'}}>SCHISTOSOMIASIS</h1>    
-
                        <SurveyCard/>
                     </div>
                     }
                     
                 </div>
             </div>
+                 
+            </Row>
+            {//Code for mobile version
+            }
+            <Row className="entryMobile">
+                <Col style={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center',height:'10vh'}}  xs={24} md={0}>
+                    <h5 style={{width:'50%'}}>Survey And Preview</h5></Col>
+               
+               
+                <Tabs style={{width:'100%'}} centered defaultActiveKey="1" >
+                    <TabPane tab="Preview" key="1">
+                    <div style={{padding:35}}>
+                        <h6 style={{fontSize:15,color:'gray',textAlign:'center',marginBottom:40}}>Click A Disease to Preview</h6>
+                        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(250px,1fr))'}}>
+                        {
+                            ['SCHISTOSOMIASIS', 'MALARIA','CHOLERA','DYSENTRY','KWASHIORKOR','MARASMUS'].map(
+                                (value,index)=><MiniCard key={index} text={value}/>
+                                
+                            )
+                        }
+
+                        </div>
+                        
+                        
+                    </div>
+                    </TabPane>
+                    <TabPane tab="Take Survey" key="2">
+                    <div style={{display:'flex',flexDirection:'column',alignItems:'center'}}>
+                        <h4 style={{fontSize:'15',padding:10,/* textShadow:'0 0 2px #000000, 0 0 2px #000000', */ marginBottom:20,color:'lightgray'}}>SCHISTOSOMIASIS</h4>    
+                       <SurveyCard/>
+                    </div>
+                    </TabPane>
+                   
+                </Tabs>
+             
+            </Row>
         </div>
     );
 };

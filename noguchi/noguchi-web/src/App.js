@@ -33,7 +33,7 @@ function App() {
         <Switch>
           <Route exact path="/">
             {/* <Mappings /> */}
-            <HomePage/>
+            <Home/>
           </Route>
           <Route  path="/home">
             <Home/>
@@ -46,12 +46,13 @@ function App() {
           </Route>
           <Route path="/survey">
             <SurveyPage />
+        
           </Route>
           <Route path="/preview">
             <Preview />
           </Route>
           <Route path="/entry">
-            <Entry />
+            <Entry /> {/*not responsive*/}
           </Route>
           <Route path="/other">
             <OtherProfile/>
