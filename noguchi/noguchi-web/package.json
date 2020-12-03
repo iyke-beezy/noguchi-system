@@ -15,13 +15,14 @@
     "leaflet-choropleth": "^1.1.4",
     "leaflet-dvf": "^0.3.1",
     "leaflet-markercluster": "^0.2.2",
-    "react": "^16.13.1",
+    "react": "^17.0.1",
     "react-container-dimensions": "^1.4.1",
-    "react-dom": "^16.13.1",
+    "react-dom": "^17.0.1",
     "react-leaflet": "^2.7.0",
     "react-leaflet-choropleth": "^2.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.1",
+    "react-sliding-pane": "^6.1.2",
     "recharts": "^1.8.5"
   },
   "scripts": {
