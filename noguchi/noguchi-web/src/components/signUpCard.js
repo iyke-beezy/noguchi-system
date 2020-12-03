@@ -21,7 +21,7 @@ const handleSubmit=(e)=>{
       password: password,
     }
 
-    axios.post('http://localhost:5000/auth/signUp', org)
+    axios.post('http://localhost:5002/auth/signUp', org)
       .then(
         res =>{
           if(res.data){
@@ -44,7 +44,7 @@ const handleSubmit2=(e)=>{
     privateKey: password,
   }
 
-  axios.post('http://localhost:5000/auth/userSignUp', user)
+  axios.post('http://localhost:5002/auth/userSignUp', user)
     .then(
       res =>{
         if(res.data){

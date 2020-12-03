@@ -12,13 +12,12 @@ const [username,setUsername]=useState('');
 const [password,setPassword]=useState('');
 const [key,setKey]=useState('');
 const [loginType,setLoginType]=useState('other');
-async function handleSubmit(e){
-    e.preventDefault();
+const handleSubmit=(e)=>{
     const org={
       username:username,
       password:password
     }
- await axios.post('http://localhost/5000/auth/login',org)
+  axios.post('http://localhost:5002/auth/login',org)
         .then(response => window.location.href='/orgAccounts'
           
         )
@@ -123,7 +122,7 @@ return(
     block
     style={{height:55,backgroundColor:'#247aeb',color:'white',marginTop:20,borderRadius:8}}
     
-        htmlType='submit'
+        onClick={()=>handleSubmit()}
     >
     Sign In
     </Button>

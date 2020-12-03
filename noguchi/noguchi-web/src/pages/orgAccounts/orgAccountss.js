@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { Button, Card, Tabs,Row,Col,Divider,Modal } from 'antd';
+import { Button, Card, Tabs,Row,Col,Divider,Modal ,Layout} from 'antd';
 import FormInput from '../../components/input'
 import  '../../components/components.css';
 import TagBox from '../../components/tagBox';
@@ -98,10 +98,11 @@ const Box=(props)=>{
 }
 const image=require('../../assets/whiteGhana.png');
 const OrgAccountss=()=> {
-    
+    const {Header}=Layout;
     return(
-        <div style={{minHeight:'100vh',height:'auto',width:'100%',display:'flex',backgroundColor:'#4e54c8', flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
-            <div  style={{height:'60vh',width:'85%'}}>
+        <div style={{minHeight:'100vh',height:'auto',width:'100%',display:'flex',backgroundColor:'#4e54c8', flexDirection:'column'/* ,justifyContent:'center' */,alignItems:'center'}}>
+            <Header style={{backgroundColor:"white",borderBottom:"1px solid whitesmoke",width:'100%'}}>Header</Header>
+            <div  style={{height:'60vh',width:'85%',paddingTop:'5vh'}}>
             <h1 style={{fontSize:'max(4vw,30px)',color:'white'}}>ORGANIZATION PROFILES</h1>
             <div className='orgAccountsBox' style={{padding:10,display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(230px,1fr))',overflowY:'scroll',height:'55vh'}}>
 
