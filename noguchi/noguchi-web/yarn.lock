@@ -9292,9 +9292,19 @@ react-scripts@^4.0.1:
 react-sliding-pane@^6.1.2:
   version "6.1.2"
   resolved "https://registry.yarnpkg.com/react-sliding-pane/-/react-sliding-pane-6.1.2.tgz#5414bd834826232eff6f7c804636d4200c39c94e"
+  integrity sha512-Pxr+5uKrxWLJUgQu3rnpbt3OlXwPBksD9eDdi8M2Zjx7KCgPfl7/gxaZ4qt99rOZjwbBQt73NJy1O9JJynftVw==
   dependencies:
     prop-types "^15.7.2"
     react-modal "^3.11.2"
+
+react-sliding-side-panel@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/react-sliding-side-panel/-/react-sliding-side-panel-2.0.3.tgz#c1442ebe3c7e4e8d003f8907c13df430c3648653"
+  integrity sha512-5uujAqwu9XhTPmlvP58TDjHMusFTg3/AE4ROxU8GG+cEUHNq4s43mAiLOZa1gHu39jCLMlSgzHT7fsKQrTutYg==
+  dependencies:
+    react "^17.0.1"
+    react-dom "^17.0.1"
+    react-transition-group "^4.4.1"
 
 react-smooth@^1.0.5:
   version "1.0.5"
@@ -9314,7 +9324,7 @@ react-transition-group@^2.5.0:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
-react-transition-group@^4.4.0:
+react-transition-group@^4.4.0, react-transition-group@^4.4.1:
   version "4.4.1"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.4.1.tgz#63868f9325a38ea5ee9535d828327f85773345c9"
   dependencies:

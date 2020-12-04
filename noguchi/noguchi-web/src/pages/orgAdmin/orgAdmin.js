@@ -83,12 +83,14 @@ const OrgAdminPage =()=>{
     
     const theme = useTheme();
     return(
-        <div style={{display:'flex',justifyContent:'center',alignItems:'center',minHeight:'100vh',height:'auto'}}>
-          <Header style={{backgroundColor:"white",borderBottom:"1px solid whitesmoke",width:'100%'}}>Header</Header>
+      <>
+       <Header style={{backgroundColor:"white",borderBottom:"1px solid whitesmoke",width:'100%'}}>Header</Header>
+        <div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',minHeight:'85vh',height:'auto'}}>
+        <h1 style={{fontSize:'max(3vw,25px)',width:'80%',color:'grey'}}>GES ADMIN DASHBOARD</h1>
         <div style={{width:'80%'}}>
             <Tabs  tabPosition='top' defaultActiveKey='1' size='small' style={{height:'auto'}}>
                     <TabPane tab="Manage Profiles" key="1" >
-                        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(230px,1fr))',height:'55vh'}}>
+                        <div className='adminProfiles' style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(230px,1fr))',height:'55vh'}}>
                             
                             <Box/>
                             <Box/>
@@ -152,6 +154,7 @@ const OrgAdminPage =()=>{
                   
         </div>
         </div>
+        </>
 
     );
 }

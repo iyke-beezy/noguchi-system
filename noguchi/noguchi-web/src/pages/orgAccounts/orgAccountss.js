@@ -19,77 +19,33 @@ const Box=(props)=>{
         {
         props.admin?
         <>
-         <div style={{height:180,border:'4px solid #ff9633',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',margin:20,cursor:'pointer'}} onClick={() => setModalState(true)}>
-          
-        </div>
-        <Modal
-        title='Enter Account Key'
-        style={{ top: 100 }}
-        width={500}
-        visible={modalState}
-        onOk={() => setModalState(false)}
-        onCancel={() => setModalState(false)}
-        footer={[
-            
-            <Button key="submit" type="primary"  onClick={() => {
-                setModalState(false);
+         <div style={{height:180,border:'4px solid #ff9633',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',margin:20,cursor:'pointer'}} onClick={() => setModalState(true)} onDoubleClick={()=>setModalState(false)}>
+          <div hidden={!modalState} style={{display:'flex',flexDirection:'column',alignItems:'flex-start',justifyContent:'space-between',padding:5,height:'50%'}}>
+          <FormInput name="key" type="text" placeholder="Enter Admin Key"  required style={{width:'95%'}} />
+          <Button key="submit" type="primary"  onClick={() => {
                 window.location.href='/orgadmin';
                 
                 }}>
                 Enter
           </Button>
-          ]}
-      >
-                    <FormInput
-                                         
-                     name="key"
-                     type="text"
-                
-                  placeholder="Enter Key"
-                
-                required
-               className="formInput"
-                   />
-
-      </Modal>
+          </div>
+        </div>
         
         </>
     :
        <>
-        <div style={{height:180,border:'2px solid #adadad',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',margin:20,cursor:'pointer'}} onClick={() => setModalState(true)}>
-          
-        </div>
-        <Modal
-        title='Enter Account Key'
-        style={{ top: 100 }}
-        width={500}
-        visible={modalState}
-        onOk={() => setModalState(false)}
-        onCancel={() => setModalState(false)}
-        footer={[
-            
-            <Button key="submit" type="primary"  onClick={() => {
-                setModalState(false);
-                window.location.href='/profile';
+        <div style={{height:180,border:'2px solid #adadad',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',margin:20,cursor:'pointer'}} onClick={() => setModalState(true)}  onDoubleClick={()=>setModalState(false)}>
+        <div hidden={!modalState} style={{display:'flex',flexDirection:'column',alignItems:'flex-start',justifyContent:'space-between',padding:5,height:'50%'}}>
+          <FormInput name="key" type="text" placeholder="Enter Profile Key"  required style={{width:'95%'}} />
+          <Button key="submit" type="primary"  onClick={() => {
+                window.location.href='/other';
                 
                 }}>
                 Enter
           </Button>
-          ]}
-      >
-                    <FormInput
-                                         
-                     name="key"
-                     type="text"
-                
-                  placeholder="Enter Key"
-                
-                required
-               className="formInput"
-                                  />
-
-      </Modal>
-        
+          </div>
+        </div>
+         
        </>     
         }
        

@@ -34,7 +34,9 @@ const Home=()=>{
    const [state, setState] = useState({
     isPaneOpen: false,
     isPaneOpenLeft: false,
-    visible:false
+    visible:false,
+    secondPaneOpen:false,
+    thirdPaneOpen:false
   });
     const [disease, setDisease] = React.useState('schistosomiasis');
     const handleChange = (event) => {
@@ -115,8 +117,35 @@ const Home=()=>{
           </p>
          
         </Modal>
+        <SlidingPane
+        style={{zIndex:100000000,height:'10%'}}
+        closeIcon={<div style={{backgroundColor:'red',padding:'2px 8px 3px 8px',borderRadius:30,color:'white',fontWeight:'bold'}}>Close</div>}
+        isOpen={state.thirdPaneOpen}
+        hideHeader={false}
+        from="right"
+        width="100%"
+        height="10%"
+        onRequestClose={() => setState({ thirdPaneOpen: false })}
+      >
+       <div style={{zIndex:100000000000,display:'flex',flexDirection:'column',alignItems:'flex-start'}} contenteditable >
+            <h1 style={{textAlign:'left'}}>Recorded for Accra</h1>
+            <span style={{textAlign:'left'}}>20th Nov 2019</span>
+            
+            <List
+            size="large"
+            style={{width:'100%'}}
+            dataSource={data}
+            renderItem={dat => <List.Item >
+            <h3 style={{textAlign:'left'}}>{dat.question}:<span style={{textAlign:'left',color:'grey'}}>{dat.answer}</span></h3>
+            </List.Item>}
+          />
+    
+
+        </div>
+        
+      </SlidingPane>
          
-      <Row style={{height:"5vh"}}>
+      <Row style={{height:"5vh",padding:10}}>
       <Col xs={24}><h3>Header</h3></Col>
       </Row>
       <Row style={{padding:"10px 0"}} sm={0}>
@@ -128,7 +157,7 @@ const Home=()=>{
       
       </Col>
       <Col xs={6} md={0}>
-      <Button onClick={()=>setState({visible:true})} style={{fontSize:"12px"}}>
+      <Button onClick={()=>setState({thirdPaneOpen:!state.thirdPaneOpen})} style={{fontSize:"12px"}}>
          View Details 
        </Button>
       </Col>
@@ -136,7 +165,7 @@ const Home=()=>{
         style={{zIndex:100000,height:'10%'}}
         closeIcon={<div>close</div>}
         isOpen={state.isPaneOpenLeft}
-       hideHeader={true}
+        hideHeader={true}
         from="bottom"
         width="100%"
         height="10%"
@@ -144,7 +173,7 @@ const Home=()=>{
       >
        
         <div style={{zIndex:10000000000}}>
-        <div style={{display:'flex',alignSelf:'center',marginTop:15,flexDirection:'column',height:'18vh',justifyContent:'space-between',alignItems:'center'}}>
+        <div style={{display:'flex',alignSelf:'center',marginTop:15,flexDirection:'column',height:'20vh',justifyContent:'space-between',alignItems:'center'}}>
         <Select 
         variant="outlined"
           labelId="demo-simple-select-outlined-label"
@@ -204,7 +233,7 @@ const Home=()=>{
         <Col xs={0} md={6}>
       
      
-        <Paper variant="outlined" style={{padding:15}} >
+        <Paper variant="outlined"  style={{padding:15}} >
         <Typography style={{fontweight:'500',fontSize: 17,lineHeight:2,textAlign:'left'}} noWrap>
             Total Confirmed Cases
           </Typography>
@@ -288,7 +317,7 @@ const Home=()=>{
           <MenuItem value={'togo'}>Togo</MenuItem>
         </Select>
 
-        <Button style={{width:"80%",height:'100%'}} onClick={()=>setHidden(!hidden)}>
+        <Button style={{width:"80%",height:'100%'}} onClick={()=>setState({secondPaneOpen:!state.secondPaneOpen})}>
                 Show Details
             </Button>
         </div>
@@ -297,7 +326,7 @@ const Home=()=>{
 
         </Col>
 
-        <Col xs={hidden?24:12} md={hidden ? 18 : 12}>
+        <Col xs={24} md={18}>
                    <ContainerDimensions>
       
                 <Mappings/>  
@@ -308,23 +337,36 @@ const Home=()=>{
         
    
         </Col>
-
-        <Col xs={hidden?0:12} md={hidden ? 0 : 6 }>
-        <div class="right-side" style={{display:'flex',flexDirection:'column',alignItems:'flex-start'}} contenteditable hidden={hidden} >
+        <SlidingPane
+        style={{zIndex:100000000,height:'10%'}}
+        closeIcon={<div style={{backgroundColor:'red',padding:'2px 8px 3px 8px',borderRadius:30,color:'white',fontWeight:'bold'}}>Close</div>}
+        isOpen={state.secondPaneOpen}
+        hideHeader={false}
+        from="right"
+        width="30%"
+        height="10%"
+        onRequestClose={() => setState({ isPaneOpenLeft: false })}
+      >
+       <div style={{zIndex:100000000000,display:'flex',flexDirection:'column',alignItems:'flex-start'}} contenteditable >
             <h1 style={{textAlign:'left'}}>Recorded for Accra</h1>
             <span style={{textAlign:'left'}}>20th Nov 2019</span>
             
             <List
             size="large"
+            style={{width:'100%'}}
             dataSource={data}
-            renderItem={dat => <List.Item>
+            renderItem={dat => <List.Item >
             <h3 style={{textAlign:'left'}}>{dat.question}:<span style={{textAlign:'left',color:'grey'}}>{dat.answer}</span></h3>
             </List.Item>}
           />
     
 
         </div>
-        </Col>
+        
+      </SlidingPane>
+        {/* <Col xs={hidden?0:12} md={hidden ? 0 : 6 }>
+        
+        </Col> */}
 
         </Row>
 

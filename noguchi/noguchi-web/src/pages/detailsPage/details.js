@@ -5,7 +5,7 @@ import { Plot,Plot2 } from '../../controls/legend/legend';
 
 const DetailsCard=()=>{
     return(
-        <Card style={{height:160,margin:10,borderRadius:15
+        <Card style={{minHeight:'min(10em,150px)',margin:10,borderRadius:15
         }}>
 
         </Card>
