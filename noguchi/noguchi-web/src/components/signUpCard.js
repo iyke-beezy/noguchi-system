@@ -25,7 +25,7 @@ const handleSubmit=(e)=>{
       .then(
         res =>{
           if(res.data){
-          window.location.href='/orgAccounts';
+            console.log(res.data)
         }}
 
       
@@ -48,7 +48,7 @@ const handleSubmit2=(e)=>{
     .then(
       res =>{
         if(res.data){
-        window.location.href='/other';
+          console.log(res.data)
       }}
 
     
@@ -75,6 +75,7 @@ return(
       size="large"
       required
       className='formInput'
+      value={username}
       onChange={(e)=>{setUsername(e.target.value)}}
       placeholder="Enter your username" 
       prefix={<UserOutlined className="site-form-item-icon" />} 
@@ -82,6 +83,7 @@ return(
       <Input 
       size="large"
       required
+      value={password}
       className='formInput'
       onChange={(e)=>{setPassword(e.target.value)}}
       placeholder="Enter your password" 
@@ -90,7 +92,8 @@ return(
       <Input 
       size="large"
       className='formInput'
-      onChange={(e)=>{setPassword(e.target.value)}}
+      value={key}
+      onChange={(e)=>{setKey(e.target.value)}}
       placeholder="Repeat password" 
       prefix={<LockOutlined className="site-form-item-icon" />} 
       />
@@ -123,7 +126,7 @@ return(
     />
     <Input 
     size="large"
-  
+    value={username}
     className='formInput'
     onChange={(e)=>{setUsername(e.target.value)}}
     placeholder="Enter org username" 
@@ -132,6 +135,7 @@ return(
     <Input 
     size="large"
     className='formInput'
+    value={password}
     onChange={(e)=>{setPassword(e.target.value)}}
     placeholder="Enter org password" 
     prefix={<LockOutlined className="site-form-item-icon" />} 
@@ -139,6 +143,7 @@ return(
     <Input 
     size="large"
     className='formInput'
+    value={key}
     onChange={(e)=>{setKey(e.target.value)}}
     placeholder="Confirm Password" 
     prefix={<LockOutlined className="site-form-item-icon" />} 

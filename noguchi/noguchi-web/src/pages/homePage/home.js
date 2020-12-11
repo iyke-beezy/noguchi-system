@@ -1,4 +1,4 @@
-import {Modal, Button, Space,List ,Layout,Row,Col} from 'antd'
+import {Modal, Button, Space,List ,Layout,Row,Col, Card} from 'antd'
 import React ,{useState} from 'react';
 import ContainerDimensions from 'react-container-dimensions';
 import { render } from "react-dom";
@@ -148,8 +148,57 @@ const Home=()=>{
       <Row style={{height:"5vh",padding:10}}>
       <Col xs={24}><h3>Header</h3></Col>
       </Row>
+      <Col xs={24} md={0} style={{marginTop:15}}>
+      <Row  style={{height:'20vh'}} justify='center' gutter={[10,10]} >
+        
+        <Col xs={10} md={0} style={{height:'100%'}} >
+        <Card hoverable style={{height:'100%',display:'flex',justifyContent:'center',alignItems:'center'}}>
+                <b>Total Cases</b>
+                <h1 style={{color:'red',fontWeight:'bold'}}>6093</h1>
+        </Card>
+        </Col>
+        <Col xs={10} md={0} style={{height:'100%'}}>
+          <Row style={{height:'50%'}}>
+              <Col xs={24} md={0} style={{height:'100%'}}>
+                <Card hoverable style={{height:'100%',display:'flex',justifyContent:'center',alignItems:'center'}}>
+                  <span>Active</span>
+                 <h3 style={{color:'red'}}>5093</h3>
+                </Card>
+              </Col>
+          </Row>
+          <Row style={{height:'50%'}}>
+            <Col xs={24} md={0} style={{height:'100%'}}>
+              <Card hoverable style={{height:'100%',display:'flex',justifyContent:'center',alignItems:'center'}}>
+              <span>Recovered</span>
+                <h3 style={{color:'seagreen'}}>1000</h3>
+              </Card>
+            </Col>
+          </Row>
+        </Col>
+       
+      </Row>
+      </Col>
+     {/*  <Row justify='center' style={{margin:5}}>
+        <Col xs={10} md={0}>
+        <Card>
+                <h1 style={{color:'red',fontWeight:'bold'}}>6093</h1>
+        </Card>
+        </Col> 
+      </Row>
+      <Row justify='center' gutter={[10,10]}>
+            <Col xs={10} md={0}>
+            <Card>
+               <h1 style={{color:'red'}}>6093</h1>
+              </Card>
+              </Col>
+              <Col xs={10} md={0}>
+              <Card>
+               <h1 style={{color:'red'}}>6093</h1>
+              </Card>
+              </Col>
+            
+        </Row> */}
       <Row style={{padding:"10px 0"}} sm={0}>
-
       <Col xs={18} md={0} style={{flex:"0 0 64%",paddingRight:"5px"}}>
        <Button onClick={() => setState({ isPaneOpenLeft: !state.isPaneOpenLeft })} style={{fontSize:"12px"}}>
          Change Disease/Location
@@ -225,15 +274,15 @@ const Home=()=>{
        
           </div>
       </SlidingPane>
-    
-    </Row>
+      </Row>
+   
       
      
       <Row style={{height:'90vh'}}>
-        <Col xs={0} md={6}>
+        <Col xs={0} md={6} flex='250px'>
       
      
-        <Paper variant="outlined"  style={{padding:15}} >
+        <Paper variant="outlined"  style={{padding:15,margin:10}} >
         <Typography style={{fontweight:'500',fontSize: 17,lineHeight:2,textAlign:'left'}} noWrap>
             Total Confirmed Cases
           </Typography>
@@ -279,7 +328,7 @@ const Home=()=>{
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
           value={disease}
-          style={{width:'80%',textAlign:'left',margin:2}}
+          style={{width:'90%',textAlign:'left',margin:2}}
           onChange={handleChange}
         >
           <MenuItem value={'schistosomiasis'}>Schistosomiasis</MenuItem>
@@ -291,7 +340,7 @@ const Home=()=>{
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
           value={continent}
-          style={{width:'80%',textAlign:'left',margin:2}}
+          style={{width:'90%',textAlign:'left',margin:2}}
           onChange={(e)=>setContinent(e.target.value)}
         >
           <MenuItem value={'africa'}>Africa</MenuItem>
@@ -304,7 +353,7 @@ const Home=()=>{
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
           value={country}
-          style={{width:'80%',textAlign:'left',margin:2}}
+          style={{width:'90%',textAlign:'left',margin:2}}
           onChange={(e)=>{
             setCountry(e.target.value)
             localStorage.setItem('country',e.target.value)
@@ -326,7 +375,7 @@ const Home=()=>{
 
         </Col>
 
-        <Col xs={24} md={18}>
+        <Col  flex='auto'>
                    <ContainerDimensions>
       
                 <Mappings/>  

@@ -30,7 +30,7 @@ const orgSchema = mongoose.Schema({
     },
     users: [
         {
-            type: mongoose.Schema.Types.ObjectId,
+            type: Object,
             ref: 'User'
         }
     ],

@@ -18,8 +18,10 @@ const handleSubmit=(e)=>{
       password:password
     }
   axios.post('http://localhost:5002/auth/login',org)
-        .then(response => window.location.href='/orgAccounts'
-          
+        .then(response => {
+          console.log(response.data)
+        
+        }
         )
         .catch((error) => {
           console.log(error);

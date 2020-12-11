@@ -125,7 +125,7 @@ passport.use(
             await newUser.save();
            if(newUser.company){
             try {
-                const addUser = await addUserToOrg(req.body.company, newUser._id)
+                const addUser = await addUserToOrg(req.body.company,newUser.role, newUser._id)
                 return cb(null, newUser, { statusCode: 200, message: 'success' });
             } catch (err) {
                 DEBUG(err)
