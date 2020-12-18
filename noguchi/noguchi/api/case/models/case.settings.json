@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cases",
+  "info": {
+    "name": "case"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "disease": {
+      "model": "disease",
+      "via": "cases"
+    },
+    "recorded": {
+      "type": "boolean"
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "fatal": {
+      "type": "boolean"
+    },
+    "country": {
+      "model": "country",
+      "via": "cases"
+    },
+    "continent": {
+      "model": "continent",
+      "via": "cases"
+    },
+    "death": {
+      "type": "boolean"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "questions",
+  "info": {
+    "name": "Question"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "question": {
+      "type": "string"
+    },
+    "surveys": {
+      "via": "the_questions",
+      "collection": "survey",
+      "dominant": true
+    }
+  }
+}

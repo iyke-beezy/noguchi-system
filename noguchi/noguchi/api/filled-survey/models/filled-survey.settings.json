@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "filled_surveys",
+  "info": {
+    "name": "Filled_survey",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "answers": {
+      "collection": "answer"
+    },
+    "surveys": {
+      "collection": "survey"
+    }
+  }
+}

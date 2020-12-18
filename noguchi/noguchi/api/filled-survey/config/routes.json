@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/filled-surveys",
+      "handler": "filled-survey.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/filled-surveys/count",
+      "handler": "filled-survey.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/filled-surveys/:id",
+      "handler": "filled-survey.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/filled-surveys",
+      "handler": "filled-survey.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/filled-surveys/:id",
+      "handler": "filled-survey.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/filled-surveys/:id",
+      "handler": "filled-survey.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

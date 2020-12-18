@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "regions",
+  "info": {
+    "name": "Region"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "region": {
+      "type": "string"
+    },
+    "country": {
+      "model": "country",
+      "via": "regions"
+    },
+    "districts": {
+      "via": "region",
+      "collection": "district"
+    },
+    "forums": {
+      "via": "region",
+      "collection": "forum"
+    }
+  }
+}

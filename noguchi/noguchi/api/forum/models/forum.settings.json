@@ -1,0 +1,52 @@
+{
+  "kind": "collectionType",
+  "collectionName": "forums",
+  "info": {
+    "name": "Forum",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "community",
+        "disease"
+      ]
+    },
+    "author": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "forums"
+    },
+    "reply": {
+      "collection": "reply",
+      "via": "forum"
+    },
+    "content": {
+      "type": "string"
+    },
+    "disease": {
+      "model": "disease",
+      "via": "forums"
+    },
+    "community": {
+      "model": "community",
+      "via": "forums"
+    },
+    "region": {
+      "model": "region",
+      "via": "forums"
+    }
+  }
+}

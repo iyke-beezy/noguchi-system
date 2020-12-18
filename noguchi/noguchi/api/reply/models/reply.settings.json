@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "replies",
+  "info": {
+    "name": "Reply",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "users_permissions_user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "replies"
+    },
+    "forum": {
+      "via": "reply",
+      "model": "forum"
+    },
+    "reply": {
+      "type": "richtext"
+    }
+  }
+}

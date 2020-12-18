@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "diseases",
+  "info": {
+    "name": "disease"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "cases": {
+      "via": "disease",
+      "collection": "case"
+    },
+    "surveys": {
+      "via": "diseases",
+      "collection": "survey"
+    },
+    "forums": {
+      "via": "disease",
+      "collection": "forum"
+    }
+  }
+}

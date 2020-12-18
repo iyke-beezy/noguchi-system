@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "communities",
+  "info": {
+    "name": "Community"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Community": {
+      "type": "string"
+    },
+    "district": {
+      "model": "district",
+      "via": "communities"
+    },
+    "answers": {
+      "via": "community",
+      "collection": "answer"
+    },
+    "forums": {
+      "via": "community",
+      "collection": "forum"
+    }
+  }
+}

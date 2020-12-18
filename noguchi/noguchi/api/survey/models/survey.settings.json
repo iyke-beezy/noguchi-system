@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "surveys",
+  "info": {
+    "name": "survey",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "diseases": {
+      "collection": "disease",
+      "via": "surveys",
+      "dominant": true
+    },
+    "the_questions": {
+      "collection": "question",
+      "via": "surveys"
+    }
+  }
+}
