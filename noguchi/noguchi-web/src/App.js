@@ -27,6 +27,9 @@ import Home from './pages/homePage/home';
 import Details from './pages/detailsPage/details';
 import RecordCases from './pages/detailsPage/RecordCases';
 function App() {
+require('react-dom');
+window.React2 = require('react');
+console.log(window.React1 === window.React2);
   return (
     <div className="App">
       <Router>

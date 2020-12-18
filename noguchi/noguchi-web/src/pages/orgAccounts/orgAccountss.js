@@ -5,6 +5,7 @@ import  '../../components/components.css';
 import TagBox from '../../components/tagBox';
 import ForumCard from '../../components/forumCard';
 import axios from 'axios'
+import MainHeader from '../../components/mainHeader';
 const {TabPane}=Tabs;
 const style = { background: '#0092ff', padding: '8px 0',height:'180px', marginBottom:'10px',
 color:'white',display:'flex',flexDirection:'Column',alignItems:'flex-start',fontSize:'15px' };
@@ -88,8 +89,8 @@ const OrgAccountss=()=> {
 
     return(
         <div style={{minHeight:'100vh',height:'auto',width:'100%',display:'flex',backgroundColor:'#4e54c8', flexDirection:'column'/* ,justifyContent:'center' */,alignItems:'center'}}>
-            <Header style={{backgroundColor:"white",borderBottom:"1px solid whitesmoke",width:'100%'}}>Header</Header>
-            <div  style={{height:'80vh',width:'85%',paddingTop:'5vh'}}>
+            <MainHeader/>
+            <div  style={{height:'80vh',width:'85%',marginTop:'8vh'}}>
                 {
                     !noUsers?
                     <h1 style={{fontSize:'max(4vw,30px)',color:'white'}}>ORGANIZATION PROFILES</h1>
@@ -99,8 +100,8 @@ const OrgAccountss=()=> {
                 
                 {noUsers?
                 
-                <div className='orgAccountsBox' style={{padding:10,display:'flex',flexDirection:'column',alignItems:'center',overflowY:'scroll',height:'70vh'}}>
-                        <h1 style={{fontSize:'max(4vw,50px)',color:'white',textAlign:'left',fontFamily: "'Poppins', sans-serif"}}>Create Admin Account</h1>
+                <div className='orgAccountsBox' style={{padding:10,display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',overflowY:'scroll',height:'70vh'}}>
+                        <h1 style={{fontSize:'max(4vw,30px)',color:'white',textAlign:'left',fontFamily: "'Poppins', sans-serif"}}>Create Admin Account</h1>
                         <Card style={{width:'min(500px,80vw)',height:'auto',borderRadius:30}}>
                         <Form layout='vertical' onFinish={addAdmin}>
                             <Space direction='vertical' size={5}>

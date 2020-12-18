@@ -5,7 +5,7 @@ const ForumCard=({onClick,...props})=>{
     const colorCode='#adff2f50';
     return(
         
-        <div onClick={onClick} style={{minWidth:'70%',cursor:'pointer',margin:12,height:'auto',borderWidth:'2px',borderStyle:'solid',borderColor:'whitesmoke',borderRadius:5,padding:15}}>
+        <div onClick={onClick} style={{width:'90%',cursor:'pointer',margin:12,height:'auto',borderWidth:'2px',borderStyle:'solid',borderColor:'whitesmoke',borderRadius:5,padding:15}}>
           
             <h3 style={{textAlign:'left'}}>Title</h3>
             <p style={{textAlign:'left'}}>

@@ -6,6 +6,7 @@ import Headers from "../../components/header";
 import Banner from "../../components/banner";
 import ForumCard from "../../components/forumCard";
 import ForumList from "../../components/forumList";
+import MainHeader from "../../components/mainHeader";
 
 const {TextArea} =Input;
 
@@ -19,7 +20,7 @@ const OtherProfile=()=>{
     const{Header}=Layout;
     return(
         <div className='profilePage'>
-            <Header style={{backgroundColor:"white",borderBottom:"1px solid whitesmoke",width:'100%'}}>Header</Header>
+            <MainHeader/>
             <Headers/>
             <div className='profileMidSection'>
             

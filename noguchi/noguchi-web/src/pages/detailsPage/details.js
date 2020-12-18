@@ -1,6 +1,7 @@
 import { Layout,Card,Table, Tag, Space } from 'antd';
 import React,{useState} from 'react';
 import ForumList from '../../components/forumList';
+import MainHeader from '../../components/mainHeader';
 import { Plot,Plot2 } from '../../controls/legend/legend';
 
 const DetailsCard=()=>{
@@ -72,9 +73,7 @@ const Details=()=>{
   const {Header}=Layout;
     return(
       <div style={{maxWidth:'100vw',width:'100%'}}>
-        <Header style={{backgroundColor:"white",borderBottom:"1px solid black",marginBottom:"20px"}}>
-            Header
-         </Header>
+        <MainHeader/>
         <div style={{padding:'0px 80px 80px 80px'}}>
            
             <h1 style={{fontSize:50}}>ACCRA</h1>
@@ -96,10 +95,10 @@ const Details=()=>{
             </Card>
 
             <Table bordered columns={columns} dataSource={data} size='middle'/>
-            <div style={{height:'40vh',overflowY:'scroll',marginTop:35}}>
-            <div style={{display:'flex',justifyContent:'center'}}>
+            <div className='adminProfiles' style={{height:'40vh',width:'100%',overflowY:'scroll',marginTop:35}}>
+           
                 <ForumList/>
-            </div>
+           
             </div>
         </div>
         </div>

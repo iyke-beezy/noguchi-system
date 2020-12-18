@@ -4,6 +4,7 @@ import "antd/dist/antd.css";
 import '../../App.css';
 import Headers from "../../components/header";
 import Banner from "../../components/banner";
+import MainHeader from "../../components/mainHeader";
 
 const ProfilePage=()=>{
     const [disability,setDisability]=useState(true);
@@ -13,7 +14,7 @@ const ProfilePage=()=>{
     const{Header}=Layout;
     return(
         <div className='profilePage'>
-            <Header style={{backgroundColor:"white",borderBottom:"1px solid whitesmoke",width:'100%'}}>Header</Header>
+            <MainHeader/>
             <Headers/>
             <div className='profileMidSection'>
             

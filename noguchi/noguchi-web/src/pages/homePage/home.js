@@ -1,13 +1,12 @@
-import {Modal, Button, Space,List ,Layout,Row,Col, Card} from 'antd'
+import {Modal, Button, Space,List ,Layout,Row,Col, Card,Slider} from 'antd'
 import React ,{useState} from 'react';
-import ContainerDimensions from 'react-container-dimensions';
-import { render } from "react-dom";
 import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
-import {Paper,Chip,Avatar,Badge,ListItemSecondaryAction,Select,MenuItem,FormControl,InputLabel,FormHelperText,Typography} from '@material-ui/core';
+import {Paper,Badge,Select,MenuItem,Typography} from '@material-ui/core';
 
 import Mappings from '../Map/map'
 import './home.css'
+import MainHeader from '../../components/mainHeader';
 
 const data=[
     {
@@ -29,8 +28,6 @@ const data=[
 
 const Home=()=>{
     const [hidden,setHidden]=useState(true);
-  //  const [map,setMap]=useState(24);
-   // const [right,setRight]=useState(0);
    const [state, setState] = useState({
     isPaneOpen: false,
     isPaneOpenLeft: false,
@@ -49,7 +46,16 @@ const Home=()=>{
   const [country, setCountry] = React.useState('ghana');
   const {Header,Footer}=Layout;
   
- 
+  const marks = {
+    2015: '2015',
+    2016: '2016',
+    2017: '2017',
+    2018:'2018',
+    2019:'2019',
+    2020:'2020',
+    2021:'2021'
+
+  };
 
     return(
       <div>
@@ -145,11 +151,11 @@ const Home=()=>{
         
       </SlidingPane>
          
-      <Row style={{height:"5vh",padding:10}}>
-      <Col xs={24}><h3>Header</h3></Col>
+      <Row style={{height:"5vh"}}>
+      <Col xs={24}><MainHeader/></Col>
       </Row>
-      <Col xs={24} md={0} style={{marginTop:15}}>
-      <Row  style={{height:'20vh'}} justify='center' gutter={[10,10]} >
+      <Col xs={24} md={0} style={{marginTop:35}}>
+      <Row  style={{height:'20vh'}} justify='center'  >
         
         <Col xs={10} md={0} style={{height:'100%'}} >
         <Card hoverable style={{height:'100%',display:'flex',justifyContent:'center',alignItems:'center'}}>
@@ -366,28 +372,28 @@ const Home=()=>{
           <MenuItem value={'togo'}>Togo</MenuItem>
         </Select>
 
-        <Button style={{width:"80%",height:'100%'}} onClick={()=>setState({secondPaneOpen:!state.secondPaneOpen})}>
+        <Button style={{width:"80%"}} onClick={()=>setState({secondPaneOpen:!state.secondPaneOpen})}>
                 Show Details
             </Button>
+
         </div>
        
        
 
         </Col>
 
-        <Col  flex='auto'>
-                   <ContainerDimensions>
-      
+        <Col  flex='auto' style={{position:'relative'}}>       
+               
                 <Mappings/>  
-            
-        
-      </ContainerDimensions>
-        
-        
-   
+                <div style={{position:'absolute',bottom:'0.2%',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center', left:1 ,margin:'50px', width:'min(300px,70vw)', backgroundColor:'white',padding:10,borderRadius:15}}>
+                  <h4 style={{textAlign:'left',width:'100%'}}>Year</h4>
+                  <Slider min={2015} max={2021} tooltipPlacement='bottom'  /* tooltipVisible={true} */ style={{width:'100%',color:'wheat'}} defaultValue={2020}/>
+                </div>
+                
+               
         </Col>
         <SlidingPane
-        style={{zIndex:100000000,height:'10%'}}
+        style={{zIndex:100000000,height:'10%',position:'absolute'}}
         closeIcon={<div style={{backgroundColor:'red',padding:'2px 8px 3px 8px',borderRadius:30,color:'white',fontWeight:'bold'}}>Close</div>}
         isOpen={state.secondPaneOpen}
         hideHeader={false}

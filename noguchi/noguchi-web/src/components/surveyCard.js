@@ -51,25 +51,25 @@ const SurveyCard=()=>{
   };
     return(
         
-            <Card style={{height:'auto',width:'50%',minWidth:250}} 
-            >
-                <Space direction='vertical' size='middle'>
-            <h1 style={{fontSize:30,textAlign:'start'}}>QUESTION {point}</h1>
-            <div style={{display:'flex',flexDirection:'column',justifyContent:'space-around',alignItems:'flex-start',height:'15vh',marginBottom:20,}}>
-            <h3 style={{fontSize:20,textAlign:'start'}}>{current[0].question}</h3>
+            <Card style={{width:'auto',minWidth:250,padding:20}} >
+                <Space direction='vertical' size='large'>
+            
+            
+            <h3 style={{fontSize:20,textTransform:'uppercase',textAlign:'start'}}>{current[0].question}</h3>
             {input}
 
                 
-            </div>
-            <div style={{display:"flex",flexDirection:'row',justifyContent:'space-between'}}>
-            <Button type='default' size='large' onClick={()=>{
+            
+            <div style={{display:"flex",flexDirection:'row',justifyContent:'space-between',width:'100%'}}>
+            <Button type='default' size='large' style={{borderRadius:15}} onClick={()=>{
                 point!=1 ? setPoint(point-1):setPoint(point);
             }}>Back</Button>
-            <Button type='primary' size='large'   /* disabled */ onClick={()=>{
+            <Button type='primary' size='large'   /* disabled */ style={{borderRadius:15}} onClick={()=>{
                 point!=Questions.length ? setPoint(point+1):setPoint(point);
             }} >Next</Button>
 
             </div>
+           
             </Space>
 
 

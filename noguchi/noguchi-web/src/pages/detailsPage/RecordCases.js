@@ -1,6 +1,7 @@
 import { Layout,Card,Table, Tag, Space,Col,Row,Input,Select } from 'antd';
 import React,{useState} from 'react';
 import ForumList from '../../components/forumList';
+import MainHeader from '../../components/mainHeader';
 import { Plot,Plot2 } from '../../controls/legend/legend';
 
 const RecordCard=()=>{
@@ -77,16 +78,15 @@ const RecordCases=()=>{
   const{Header} = Layout;
 
     return(
-        <div style={{maxWidth:'100vw',width:'auto'}}>
-         <Header style={{backgroundColor:"white",borderBottom:"1px solid black",marginBottom:"20px"}}>
-            Header
-         </Header>
-           <Row>
+        <div className='profilePage' style={{maxWidth:'100vw',backgroundColor:'white',width:'auto'}}>
+          <MainHeader/>
+          <div style={{marginTop:'10vh',width:'100%'}}>
+           <Row style={{position:'fixed',zIndex:1,width:'100%'}}>
            <Col xs={24} style={{display:"flex",justifyContent:"center"}}>
-           <Search placeholder="Search communities" onSearch={onSearch} style={{ width: '50%' }} />
+           <Search placeholder="Search communities" onSearch={onSearch} style={{ width: 'min(500px,90vw)' }} />
            </Col>
            </Row>
-           <Row style={{padding:"20px 25% 20px "}}>
+           <Row style={{padding:"20px 25% 20px ",marginTop:'2vh'}}>
            <Col style={{padding:"10px 0px"}} xs={24} md={8}>
            <Select defaultValue="Diseases" style={{ width: 120 }} onChange={handleChange}>
           
@@ -140,7 +140,7 @@ const RecordCases=()=>{
                />
              </Col>
            </Row>
-           
+           </div>
         </div>
     );
 }

@@ -4,6 +4,7 @@ import { Button, Card, Input, Modal, Select, Tabs ,Avatar,Layout} from 'antd';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
 import Legend, { Plot } from '../../controls/legend/legend';
 import {EditFilled ,UserOutlined,ExportOutlined,UserAddOutlined} from '@ant-design/icons';
+import MainHeader from '../../components/mainHeader';
 const {TabPane}=Tabs;
 const {Option}=Select;
 const {Header}=Layout;
@@ -83,9 +84,9 @@ const OrgAdminPage =()=>{
     
     const theme = useTheme();
     return(
-      <>
-       <Header style={{backgroundColor:"white",borderBottom:"1px solid whitesmoke",width:'100%'}}>Header</Header>
-        <div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',minHeight:'85vh',height:'auto'}}>
+      <div className='profilePage' style={{backgroundColor:'white'}}>
+       <MainHeader/>
+        <div style={{display:'flex',marginTop:'8vh',width:'100%',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
         <h1 style={{fontSize:'max(3vw,25px)',width:'80%',color:'grey'}}>GES ADMIN DASHBOARD</h1>
         <div style={{width:'80%'}}>
             <Tabs  tabPosition='top' defaultActiveKey='1' size='small' style={{height:'auto'}}>
@@ -154,7 +155,7 @@ const OrgAdminPage =()=>{
                   
         </div>
         </div>
-        </>
+        </div>
 
     );
 }
