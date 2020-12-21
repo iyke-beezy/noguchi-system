@@ -1,50 +1,32 @@
-import {Tabs,Row, Col,Modal,Popover, Avatar, Button, Card ,List, Progress} from "antd";
-import React,{useState} from "react";
+import {Tabs,Row, Col,Modal,Popover, Avatar, Button, Card ,List, Progress, Empty} from "antd";
+import React,{useState,useEffect} from "react";
 import {UserOutlined,ExportOutlined} from '@ant-design/icons';
 import SurveyCard from "../../components/surveyCard";
 import MainHeader from '../../components/mainHeader';
-
+import axios from 'axios';
 
 const MiniCard=(props)=>{
 
-    const data = [
-        'What is the name of the community',
-        'Where is the community located',
-       ' What is the population of the community',
-        'What is the population of men',
-        'What is the population of women',
-        'what is the population of children',
-        'What is the main occupation of the people in the community',
-       ' what is the age distribution of the community',
-       ' What is the general schistosomiasis prevalence',
-        'What is the urinary schistosomiasis prevalence',
-        'What is the Intestinal schistosomiasis prevalence',
-        'What is the female genital schistosomiasis prevalence', 
-        'What is the male genital schistosomiasis prevalence' ,
-        'What is the schistosoma haematobium prevalence' ,
-       ' What is the schistosoma mansoni prevalence ',
-        'What is the schistosoma haematobium intensity',
-        'What is the schistosoma mansoni intensity',
-        'List the water bodies the community',
-        'List the water bodies near the community',
-        'What is the quality of the water for each body',
-        'How do the inhabitants of the community access water',
-        'List the water contact sites in the community',
-        'Indicate the schistosomiasis control activity at each water contact site',
-        'Are there any weeds in the water sites (for each site)',
-        'What snail species are at the water sites (for each site)',
-        'Which schistosomiasis control approaches are in place to put a check on the disease in the community',
-        'List the stakeholders',
-        'Indicate the activities that each stakeholder is conducting',
-        ' How is the sanitaion of the community',
-        'Are there sanitation facilities in the community',
-        'Are the sanitation facilities in the community adequate',
-        'Are there indications of climate change in the community',
-        'Indicate the climate change factors important in the community',
-  
-      ];
     const [modalState,setModalState]=useState(false);
-   
+    const [questions,setQuestions]=useState([])
+    
+        useEffect(() => {
+            axios.get('http://localhost:1337/questions')
+            .then(
+              res =>{
+                if(res.data){
+                  console.log(res.data)
+                  setQuestions(res.data)
+              }} )
+            .catch((error) => {
+              console.log(error);
+            })
+        },[]);
+    
+    
+
+      let filtered=questions.filter(question=>question.disease.name===props.text)
+      
  
     return(
       
@@ -60,19 +42,40 @@ const MiniCard=(props)=>{
         onOk={() => setModalState(false)}
         onCancel={() => setModalState(false)}
       >
-       <List
+        {
+            filtered?
+            <List
+            className='adminProfiles'
                     size='medium'
                     style={{height:'50vh',overflowY:'scroll'}}
-                    dataSource={data}
-                    renderItem={item => <List.Item>{item}</List.Item>}
+                    dataSource={filtered}
+                    renderItem={item => <List.Item>{item.question}</List.Item>}
                 />
+                :
+                <List/>
 
+        }
+       
       </Modal>
       </>
     );
 }
 const Entry=()=>{
     const {TabPane} = Tabs;
+    const [diseases,setDiseases]=useState([])
+    useEffect(() => {
+        axios.get('http://localhost:1337/diseases')
+        .then(
+          res =>{
+            if(res.data){
+              console.log(res.data)
+              setDiseases(res.data)
+          }} )
+        .catch((error) => {
+          console.log(error);
+        })
+    },[]);
+
     const content = (
         <div style={{display:'flex',flexDirection:'column'}}>
           <Button type='link' size='large' onClick={()=>{window.location.href='/profile'}}><UserOutlined/>Profile</Button>
@@ -101,8 +104,8 @@ const Entry=()=>{
                         <h1 style={{fontSize:40,color:'white',textAlign:'left',marginBottom:40}}>Click A Disease to Preview</h1>
                         <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(150px,1fr))'}}>
                         {
-                            ['Schistosomiasis', 'Malaria','Cholera','Dysentry','Kwashiorkor','Marasmus'].map(
-                                (value,index)=><MiniCard key={index} text={value}/>
+                            diseases.map(
+                                (disease)=><MiniCard key={disease.id} text={disease.name}/>
                                 
                             )
                         }

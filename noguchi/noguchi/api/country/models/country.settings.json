@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "countries",
   "info": {
-    "name": "Country"
+    "name": "Country",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -13,13 +14,11 @@
     "name": {
       "type": "string"
     },
-    "cases": {
-      "via": "country",
-      "collection": "case"
-    },
     "regions": {
-      "via": "country",
       "collection": "region"
+    },
+    "continent": {
+      "model": "continent"
     }
   }
 }

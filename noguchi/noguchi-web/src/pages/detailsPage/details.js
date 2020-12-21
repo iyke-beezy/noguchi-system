@@ -70,6 +70,10 @@ const columns = [
   ];
 
 const Details=()=>{
+
+
+
+  
   const {Header}=Layout;
     return(
       <div style={{maxWidth:'100vw',width:'100%'}}>

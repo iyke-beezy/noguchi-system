@@ -11,8 +11,8 @@
   },
   "attributes": {
     "disease": {
-      "model": "disease",
-      "via": "cases"
+      "via": "cases",
+      "model": "disease"
     },
     "recorded": {
       "type": "boolean"
@@ -22,14 +22,6 @@
     },
     "fatal": {
       "type": "boolean"
-    },
-    "country": {
-      "model": "country",
-      "via": "cases"
-    },
-    "continent": {
-      "model": "continent",
-      "via": "cases"
     },
     "death": {
       "type": "boolean"

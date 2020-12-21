@@ -31,14 +31,20 @@ const handleSubmit=(e)=>{
 const  handleSubmit2=(e)=>{
   const user={
     name:username,
-    privateKey:password
+    password:password
   }
-   axios.post('http://localhost:5002/auth/userLogin',user)
+  axios.post('http://localhost:1337/user',)
       .then(response =>window.location.href='/other')
       .catch((error) => {
         console.log(error);
         
       })
+   /* axios.post('http://localhost:5002/auth/userLogin',user)
+      .then(response =>window.location.href='/other')
+      .catch((error) => {
+        console.log(error);
+        
+      }) */
     /*   const response = await fetch('http://localhost/5000/auth/userLogin', {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin

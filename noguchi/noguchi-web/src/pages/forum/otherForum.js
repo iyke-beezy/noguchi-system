@@ -26,7 +26,7 @@ const OtherForum =()=>{
             <Card  title={<h1 style={{fontSize:20,textAlign:'left',padding:5}}>Forums</h1>} style={{height:'85vh',width:'85%',borderRadius:15}}>
                 <Tabs tabPosition='left' defaultActiveKey='1' size='small' style={{height:'auto'}}>
                     <TabPane tab="All Forums" key="1" >
-                        <div style={{display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',overflowY:'scroll',height:'63vh'}}>
+                        <div className='adminProfiles' style={{height:'63vh'}}>
                         <ForumList/>
 
                         </div>
@@ -34,7 +34,7 @@ const OtherForum =()=>{
                     </TabPane>
                     
                     <TabPane tab="Community Tags" key="2"  >
-                        <div style={{height:'63vh',overflowY:'scroll'}}>
+                        <div className='adminProfiles'  style={{height:'63vh'}}>
                             <TagSet/> 
                         </div>
                         
@@ -42,7 +42,7 @@ const OtherForum =()=>{
                         
                     </TabPane>
                     <TabPane tab="Disease Tags" key="3" >
-                    <div style={{height:'63vh',overflowY:'scroll'}}>
+                    <div className='adminProfiles' style={{height:'63vh'}}>
                             <TagSet disease/> 
                         </div>
                         
