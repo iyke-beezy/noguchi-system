@@ -30,15 +30,11 @@
       "type": "string"
     },
     "disease": {
-      "model": "disease",
-      "via": "forums"
+      "via": "forums",
+      "model": "disease"
     },
     "community": {
       "model": "community",
-      "via": "forums"
-    },
-    "region": {
-      "model": "region",
       "via": "forums"
     }
   }

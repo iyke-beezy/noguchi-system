@@ -3,9 +3,9 @@ import React from 'react';
 import L from "leaflet";
 import 'leaflet-choropleth'
 import 'leaflet-boundary-canvas'
-import custom from './customs.geo.json'
+import custom from './ghanaGeo.json'
 import africa from './africa.geo.json'
-
+import asia from './asiaGeo.json'
 const lists=[
   {
     name:'ghana',
@@ -29,7 +29,7 @@ class Boundary extends MapControl{
       console.log(mapBoundary)
         const {map}=this.props.leaflet
             var osm = new L.TileLayer.BoundaryCanvas("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-              boundary: custom,
+              boundary: asia,
               attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
             }); 
            osm.addTo(map)

@@ -1,7 +1,8 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 import { Input, Card, Space, Button ,Avatar,Tabs, Radio,Checkbox,Layout} from 'antd';
 import "antd/dist/antd.css";
 import '../../App.css';
+import axios from 'axios'
 import Headers from "../../components/header";
 import Banner from "../../components/banner";
 import ForumCard from "../../components/forumCard";
@@ -13,6 +14,34 @@ const {TextArea} =Input;
 const { TabPane } = Tabs;
 
 const OtherProfile=()=>{
+    const [forums,setForums]=useState([])
+    useEffect(() => {
+          axios.get('http://localhost:1337/forums')
+          .then(
+            res =>{
+              if(res.data){
+                setForums(res.data)
+            }} )
+          .catch((error) => {
+            console.log(error);
+          })
+      },[]);
+
+      const createForum=()=>{
+        axios.post('http://localhost:1337/forums'/* ,{ username: username,  email:email, password: password } */)
+          .then(
+            res =>{
+              if(res.data){
+                console.log(res.data)
+            }}
+      
+          
+          )
+          .catch((error) => {
+            console.log(error);
+          })
+      }
+
     const [disability,setDisability]=useState(true);
     const [orgname,setOrgname]=useState('Akwasi Mensah')
     const [orgUsername,setOrgUsername]=useState('Akwmensah');
@@ -57,6 +86,11 @@ const OtherProfile=()=>{
                 </div> */}
                 <Card className="card-container">
                     <Tabs type="card">
+                    <TabPane tab="Explore Cases" key="4">
+                        <div className='cardSvgee' style={{height:'48vh'}}>
+                            <Button onClick={()=>window.location.href='/cases'}>Explore Cases</Button>
+                        </div>
+                    </TabPane>
                     <TabPane tab="Trending Forums" key="1">
                         <div style={{height:'48vh',overflowY:'scroll'}}>
                         <ForumList/>

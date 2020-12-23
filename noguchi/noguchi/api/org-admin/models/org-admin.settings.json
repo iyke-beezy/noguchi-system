@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "org_admins",
+  "info": {
+    "name": "Org Admin",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "username": {
+      "type": "string",
+      "required": true
+    },
+    "password": {
+      "type": "password",
+      "required": true
+    },
+    "organization": {
+      "model": "organization",
+      "via": "org_admin"
+    }
+  }
+}

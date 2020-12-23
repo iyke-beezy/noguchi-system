@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { Input, Card, Space, Button ,Avatar,Select, Form} from 'antd';
 import "antd/dist/antd.css";
 import './components.css'
-import {UserOutlined,LockOutlined,KeyOutlined} from '@ant-design/icons';
+import {UserOutlined,LockOutlined,KeyOutlined,MailOutlined} from '@ant-design/icons';
 import { Link } from "react-router-dom";
 import { IconButton } from "@material-ui/core";
 import axios from 'axios'
@@ -10,9 +10,11 @@ const {Option}=Select;
 const SignUpCard =({onClick,...props})=>{
   const [fullname,setFullname]=useState('');
 const [username,setUsername]=useState('');
+const [email,setEmail]=useState('');
 const [password,setPassword]=useState('');
 const [key,setKey]=useState('');
 const [loginType,setLoginType]=useState('other');
+
 const handleSubmit=(e)=>{
     e.preventDefault();
     const org = {
@@ -38,13 +40,15 @@ const handleSubmit=(e)=>{
     
 }
 const handleSubmit2=(e)=>{
-  e.preventDefault();
-  const user = {
-    name: username,
-    privateKey: password,
-  }
+ /* console.log([username,password,email]) */
 
-  axios.post('http://localhost:5002/auth/userSignUp', user)
+  axios.post('http://localhost:1337/users', 
+  {
+    username: username,
+    email:email,
+    password: password
+  }
+  )
     .then(
       res =>{
         if(res.data){
@@ -83,6 +87,15 @@ return(
       <Input 
       size="large"
       required
+      className='formInput'
+      value={email}
+      onChange={(e)=>{setEmail(e.target.value)}}
+      placeholder="Enter your email" 
+      prefix={<MailOutlined className="site-form-item-icon" />} 
+      />
+      <Input 
+      size="large"
+      required
       value={password}
       className='formInput'
       onChange={(e)=>{setPassword(e.target.value)}}
@@ -101,7 +114,6 @@ return(
       size='large'
       block
       style={{height:55,backgroundColor:'#247aeb',color:'white',marginTop:20,borderRadius:8}}
-      
       onClick={handleSubmit2}
       >
       Sign Up

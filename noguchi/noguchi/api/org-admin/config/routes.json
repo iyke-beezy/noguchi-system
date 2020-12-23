@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/org-admins",
+      "handler": "org-admin.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/org-admins/count",
+      "handler": "org-admin.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/org-admins/:id",
+      "handler": "org-admin.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/org-admins",
+      "handler": "org-admin.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/org-admins/:id",
+      "handler": "org-admin.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/org-admins/:id",
+      "handler": "org-admin.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

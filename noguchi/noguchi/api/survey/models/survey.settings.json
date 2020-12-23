@@ -12,13 +12,13 @@
   },
   "attributes": {
     "diseases": {
-      "collection": "disease",
       "via": "surveys",
+      "collection": "disease",
       "dominant": true
     },
     "the_questions": {
-      "collection": "question",
-      "via": "surveys"
+      "via": "survey",
+      "collection": "question"
     }
   }
 }

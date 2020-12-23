@@ -12,7 +12,7 @@ const TagBox=({onClick,...props})=>{
                 These are all the forums on {props.disease}
             </p>
             <div style={{display:'flex',flexDirection:'row',justifyContent:'flex-end',marginTop:30}}>
-            <span style={{borderStyle:'solid',borderWidth:'2px',borderColor:'lightblue',borderRadius:5,color:'#0000ff80',fontWeight:'bold',padding:'2px 5px 2px 5px',fontSize:12}}>100 forums</span>
+            <span style={{borderStyle:'solid',borderWidth:'2px',borderColor:'lightblue',borderRadius:5,color:'#0000ff80',fontWeight:'bold',padding:'2px 5px 2px 5px',fontSize:12}}>{props.numberOfForums} forums</span>
             </div>
             </>:
             <>

@@ -1,9 +1,9 @@
 import {Modal, Button, Space,List ,Layout,Row,Col, Card,Slider} from 'antd'
-import React ,{useState} from 'react';
+import React ,{useState,useEffect} from 'react';
 import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
 import {Paper,Badge,Select,MenuItem,Typography} from '@material-ui/core';
-
+import axios from 'axios';
 import Mappings from '../Map/map'
 import './home.css'
 import MainHeader from '../../components/mainHeader';
@@ -27,6 +27,44 @@ const data=[
 
 
 const Home=()=>{
+
+  const [diseases,setDiseases]=useState([])
+    useEffect(() => {
+        axios.get('http://localhost:1337/diseases')
+        .then(
+          res =>{
+            if(res.data){
+              setDiseases(res.data)
+          }} )
+        .catch((error) => {
+          console.log(error);
+        })
+    },[]);
+    const [continents, setContinents] =useState([]);
+    useEffect(() => {
+      axios.get('http://localhost:1337/continents')
+      .then(
+        res =>{
+          if(res.data){
+            setContinents(res.data)
+        }} )
+      .catch((error) => {
+        console.log(error);
+      })
+  },[]);
+  
+    const [countries, setCountries] =useState([]);
+    useEffect(() => {
+      axios.get('http://localhost:1337/countries')
+      .then(
+        res =>{
+          if(res.data){
+            setCountries(res.data)
+        }} )
+      .catch((error) => {
+        console.log(error);
+      })
+  },[]);
     const [hidden,setHidden]=useState(true);
    const [state, setState] = useState({
     isPaneOpen: false,
@@ -35,15 +73,15 @@ const Home=()=>{
     secondPaneOpen:false,
     thirdPaneOpen:false
   });
-    const [disease, setDisease] = React.useState('schistosomiasis');
+    const [disease, setDisease] =useState('Schistosomiasis');
     const handleChange = (event) => {
       setDisease(event.target.value);
     
   };
-  localStorage.setItem('country','all');
-  const [continent, setContinent] = React.useState('africa');
   
-  const [country, setCountry] = React.useState('ghana');
+  const [continent, setContinent] =useState('AFRICA');
+  
+  const [country, setCountry] = useState('GHANA');
   const {Header,Footer}=Layout;
   
   const marks = {
@@ -229,6 +267,7 @@ const Home=()=>{
        
         <div style={{zIndex:10000000000}}>
         <div style={{display:'flex',alignSelf:'center',marginTop:15,flexDirection:'column',height:'20vh',justifyContent:'space-between',alignItems:'center'}}>
+        {diseases?
         <Select 
         variant="outlined"
           labelId="demo-simple-select-outlined-label"
@@ -237,11 +276,46 @@ const Home=()=>{
           style={{width:'80%',textAlign:'left',margin:2}}
           onChange={handleChange}
         >
-          <MenuItem value={'schistosomiasis'}>Schistosomiasis</MenuItem>
-          <MenuItem value={'malaria'}>Malaria</MenuItem>
-          <MenuItem value={'cholera'}>Cholera</MenuItem>
+          {
+            diseases.map(disease=><MenuItem value={disease.name}>{disease.name}</MenuItem>)
+          }
         </Select>
+          :
+          <Select/>
+        }
+        {continents?
         <Select 
+        variant="outlined"
+          labelId="demo-simple-select-outlined-label"
+          id="demo-simple-select-outlined"
+          value={continent}
+          style={{width:'80%',textAlign:'left',margin:2}}
+          onChange={(e)=>setContinent(e.target.value)}
+        >
+          {
+            continents.map(continent=><MenuItem value={continent.name}>{continent.name}</MenuItem>)
+          }
+        </Select>
+          :
+          <Select/>
+        }
+        {countries?
+        <Select 
+        variant="outlined"
+          labelId="demo-simple-select-outlined-label"
+          id="demo-simple-select-outlined"
+          value={country}
+          style={{width:'80%',textAlign:'left',margin:2}}
+          onChange={(e)=>setCountry(e.target.value)}
+        >
+          {
+            countries.map(country=><MenuItem value={country.name}>{country.name}</MenuItem>)
+          }
+        </Select>
+          :
+          <Select/>
+        }
+        {/* <Select 
         variant="outlined"
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
@@ -271,7 +345,7 @@ const Home=()=>{
           <MenuItem value={'nigeria'}>Nigeria</MenuItem>
           <MenuItem value={'togo'}>Togo</MenuItem>
         </Select>
-
+ */}
        <Button style={{marginTop:"10px"}} onClick={() => setState({ isPaneOpenLeft: !state.isPaneOpenLeft })}>
          Done
        </Button>
@@ -329,6 +403,7 @@ const Home=()=>{
       
        
         <div style={{display:'flex',alignSelf:'center',marginTop:15,flexDirection:'column',height:'18vh',justifyContent:'space-between',alignItems:'center'}}>
+        {diseases?
         <Select 
         variant="outlined"
           labelId="demo-simple-select-outlined-label"
@@ -337,10 +412,14 @@ const Home=()=>{
           style={{width:'90%',textAlign:'left',margin:2}}
           onChange={handleChange}
         >
-          <MenuItem value={'schistosomiasis'}>Schistosomiasis</MenuItem>
-          <MenuItem value={'malaria'}>Malaria</MenuItem>
-          <MenuItem value={'cholera'}>Cholera</MenuItem>
+          {
+            diseases.map(disease=><MenuItem value={disease.name}>{disease.name}</MenuItem>)
+          }
         </Select>
+          :
+          <Select/>
+        }
+        {continents?
         <Select 
         variant="outlined"
           labelId="demo-simple-select-outlined-label"
@@ -349,28 +428,29 @@ const Home=()=>{
           style={{width:'90%',textAlign:'left',margin:2}}
           onChange={(e)=>setContinent(e.target.value)}
         >
-          <MenuItem value={'africa'}>Africa</MenuItem>
-          <MenuItem value={'europe'}>Europe</MenuItem>
-          <MenuItem value={'america'}>America</MenuItem>
+          {
+            continents.map(continent=><MenuItem value={continent.name}>{continent.name}</MenuItem>)
+          }
         </Select>
+          :
+          <Select/>
+        }
+        {countries?
         <Select 
         variant="outlined"
-        
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
           value={country}
           style={{width:'90%',textAlign:'left',margin:2}}
-          onChange={(e)=>{
-            setCountry(e.target.value)
-            localStorage.setItem('country',e.target.value)
-          
-          }}
+          onChange={(e)=>setCountry(e.target.value)}
         >
-          <MenuItem value={'all'}>All</MenuItem>
-          <MenuItem value={'ghana'}>Ghana</MenuItem>
-          <MenuItem value={'nigeria'}>Nigeria</MenuItem>
-          <MenuItem value={'togo'}>Togo</MenuItem>
+          {
+            countries.map(country=><MenuItem value={country.name}>{country.name}</MenuItem>)
+          }
         </Select>
+          :
+          <Select/>
+        }
 
         <Button style={{width:"80%"}} onClick={()=>setState({secondPaneOpen:!state.secondPaneOpen})}>
                 Show Details

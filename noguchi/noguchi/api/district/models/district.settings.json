@@ -14,8 +14,8 @@
       "type": "string"
     },
     "region": {
-      "model": "region",
-      "via": "districts"
+      "via": "districts",
+      "model": "region"
     },
     "communities": {
       "via": "district",

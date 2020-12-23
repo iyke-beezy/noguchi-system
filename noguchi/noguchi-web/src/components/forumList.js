@@ -1,35 +1,69 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import ForumCard from './forumCard';
 import {MyCard, MyReplies} from './card';
-import { Button } from 'antd';
+import { Button, Empty } from 'antd';
 import {ArrowLeftOutlined} from '@ant-design/icons';
-const ForumList =()=>{
+import axios from 'axios';
+const ForumList =(props)=>{
+    const [forums,setForums]=useState([])
+    useEffect(() => {
+          axios.get('http://localhost:1337/forums')
+          .then(
+            res =>{
+              if(res.data){
+                setForums(res.data)
+            }} )
+          .catch((error) => {
+            console.log(error);
+          })
+      },[]);
+    
+      useEffect(()=>{
+       async function filterData(){
+          const filteredForum=await forums.filter(forum=>forum.disease.name===props.filter)
+          setForums(filteredForum);
+        }
+        if(props.filter){
+          filterData();
+        }
+      },[props.filter,forums])
+      
+      
     const [more,setMore]=useState(false);
-    const replies = ['Great article','The best','Love Ya','Not Useful article','Great article','The best','Love Ya','Not Useful article','Great article','The best','Love Ya','Not Useful article'];
-    return(
+    const clicked=localStorage.getItem('clicked');
+    let selectedForum=forums.filter(forum=>forum.id===parseInt(clicked))
+   /*  console.log(selectedForum[0])   */
+       return(
         <>
         {
             !more?
-            <div style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'space-around'}}>
-                <ForumCard onClick={()=>setMore(true)}/>
-                <ForumCard onClick={()=>setMore(true)}/>
-                <ForumCard onClick={()=>setMore(true)}/>
-                <ForumCard onClick={()=>setMore(true)}/>
-                <ForumCard onClick={()=>setMore(true)}/>
-                <ForumCard onClick={()=>setMore(true)}/>
-                <ForumCard onClick={()=>setMore(true)}/>
+            <div  style={{display:'flex',flexDirection:'column',alignItems:'flex-start',width:'100%',padding:'0% 5% 0% 5%'}}>
+                {
+                  
+                    forums?
+                    forums.map((forum)=><ForumCard id={forum.id} data={forum}  onClick={()=>setMore(true)}/>)
+                    :
+                   <Empty description='No Forums'/>
+                }
+                
             </div>:
-            <div style={{display:'flex',flexDirection:'column',alignItems:'flex-start',width:'100%',padding:'0% 5% 0% 5%'}}>
+            <>
+            {
+                selectedForum?
+                <div style={{display:'flex',flexDirection:'column',alignItems:'flex-start',width:'100%',padding:'0% 5% 0% 5%'}}>
                 <Button size='small' style={{borderRadius:40,fontWeight:'bold',border:'1px solid lightslategrey',color:'lightslategrey'}}  onClick={()=>setMore(false)}><ArrowLeftOutlined/></Button>
-                <div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',width:'100%'}}>
-                        <MyCard title="title1" /* onClick={()=>{setShowDetails(!showDetails)}} *//>
-                        <MyReplies title="Replies" replies={replies} />
+                <div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'flex-start',width:'100%'}}>
+                        <MyCard data={selectedForum[0]} /* onClick={()=>{setShowDetails(!showDetails)}} *//>
+                        <MyReplies title="Replies" replies={selectedForum[0].reply} />
                     
                  </div>
-
-            </div>
-
-        
+                </div>
+            :
+            <Empty/>
+            }
+                
+           </>    
+           
         }
         </>
     );
