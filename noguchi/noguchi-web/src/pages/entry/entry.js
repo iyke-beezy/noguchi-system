@@ -62,6 +62,7 @@ const MiniCard=(props)=>{
 }
 const Entry=()=>{
     const {TabPane} = Tabs;
+    const [start,setStart]=useState(false)
     const [diseases,setDiseases]=useState([])
     useEffect(() => {
         axios.get('http://localhost:1337/diseases')
@@ -117,13 +118,57 @@ const Entry=()=>{
                     :
                     
                     <div className='selectDisease'>
-                         <div style={{padding:35,display:'flex',flexDirection:'row',flexWrap:'wrap',height:'70%'}} >
-                        <div style={{flex:0.5,display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center',minWidth:'min(95vw,280px)'}}>
-                         <h1 style={{fontSize:'min(100px,7vw)',lineHeight:1.4,color:'lightgrey',opacity:0.6,fontWeight:'bolder',textAlign:'left'}}>Select A Disease to Start </h1>
+                        <Row style={{width:'100%',height:'100%'}}>
+                            <Col md={12} className='svgee' >
+
+
+                            </Col>
+                            <Col md={12} flex='auto' style={{backgroundColor:'#4e54c8'}}>
+
+                                {
+                                    start?
+                                    <div style={{alignItems: 'center',display:'flex',flexDirection:'column'}}>
+                                    <h1 style={{width:'100%',fontSize:'20px',textAlign:'left',padding:10, marginBottom:20,color:'lightgray'}}>Schistosomiasis</h1>    
+                                    
+                                    <Row style={{width:'100%'}}>
+                                        <Col style={{width:'100%',height:'60vh',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
+                                        <h1 style={{fontSize:'14em',lineHeight:0.4,color:'lightgrey',opacity:0.2,fontWeight:'bolder'}}>
+                                            01
+                                        </h1>
+                                        <SurveyCard/>
+                                        </Col>
+                                    </Row>          
+                                    
+                                </div> 
+                                    :
+                                <div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',height:'100%'}}>
+                                <h1 style={{color:'white',textTransform:'uppercase',fontSize:'max(20px,2.5vw)'}}>Select A Disease to Start</h1>
+                                <div style={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center',flexWrap:'wrap',}} >
+                                {
+                                    diseases.map(
+                                        (disease)=><Button onClick={()=>setStart(true)} className='diseaseButton' style={{height:'8vh',fontSize:18,width:'auto',fontWeight:'500',margin:6,borderRadius:20}}  key={disease.id} >{disease.name}</Button>
+                                        
+                                    )
+                                }
+                                </div>
+                                </div>
+                                }
+                                
+                                
+
+                            </Col>
+                        </Row>
+
+                         {/* <div style={{display:'flex',flexDirection:'row',flexWrap:'wrap',height:'100%'}} >
+                        <div className='svgee'  style={{flex:0.5,display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center',minWidth:'min(95vw,280px)'}}>
+                         {/* <h1 style={{fontSize:'min(100px,7vw)',lineHeight:1.4,color:'lightgrey',opacity:0.6,fontWeight:'bolder',textAlign:'left'}}>Select A Disease to Start </h1> 
+
+                         
+                         
                          </div>
                         
-                        <div style={{flex:0.5,display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-                        <div style={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center',flexWrap:'wrap',minWidth:'min(95vw,280px)'}} >
+                        <div style={{flex:0.5,display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center',minWidth:'min(95vw,280px)'}}>
+                        <div style={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center',flexWrap:'wrap',}} >
                         {
                             ['Schistosomiasis', 'Malaria','Cholera','Dysentry','Kwashiorkor','Marasmus'].map(
                                 (value,index)=><Button className='diseaseButton' style={{height:'8vh',fontSize:18,width:'auto',fontWeight:'500',margin:6,borderRadius:20}}  key={index} >{value}</Button>
@@ -134,7 +179,7 @@ const Entry=()=>{
                         </div>
                         
                         
-                    </div>
+                    </div> */}
                     </div>
                     }
                     

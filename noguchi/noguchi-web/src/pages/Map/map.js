@@ -4,7 +4,6 @@ import { Map, Marker,TileLayer,Popup} from 'react-leaflet';
 import Boundary from '../../controls/boundary/boundary';
 import 'leaflet/dist/leaflet.css';
 import {Paper} from '@material-ui/core'
-import Legend from '../../controls/legend/legend';
 /* import Layers from './newTon'
 import Choro from './choro' */
 import custom from '../../controls/boundary/customs.geo.json'

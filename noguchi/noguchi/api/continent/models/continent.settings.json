@@ -16,6 +16,12 @@
     },
     "countries": {
       "collection": "country"
+    },
+    "geoJSON": {
+      "type": "json"
+    },
+    "center": {
+      "type": "json"
     }
   }
 }

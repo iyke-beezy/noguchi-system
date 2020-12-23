@@ -4,14 +4,13 @@ import {MyCard, MyReplies} from './card';
 import { Button, Empty } from 'antd';
 import {ArrowLeftOutlined} from '@ant-design/icons';
 import axios from 'axios';
-const ForumList =()=>{
+const ForumList =(props)=>{
     const [forums,setForums]=useState([])
     useEffect(() => {
           axios.get('http://localhost:1337/forums')
           .then(
             res =>{
               if(res.data){
-               // console.log(res.data)
                 setForums(res.data)
             }} )
           .catch((error) => {
@@ -19,19 +18,28 @@ const ForumList =()=>{
           })
       },[]);
     
-
+      useEffect(()=>{
+       async function filterData(){
+          const filteredForum=await forums.filter(forum=>forum.disease.name===props.filter)
+          setForums(filteredForum);
+        }
+        if(props.filter){
+          filterData();
+        }
+      },[props.filter,forums])
+      
+      
     const [more,setMore]=useState(false);
     const clicked=localStorage.getItem('clicked');
-    console.log(clicked) 
     let selectedForum=forums.filter(forum=>forum.id===parseInt(clicked))
-    console.log(selectedForum[0])  
-    const replies = ['Great article','The best','Love Ya','Not Useful article','Great article','The best','Love Ya','Not Useful article','Great article','The best','Love Ya','Not Useful article'];
-    return(
+   /*  console.log(selectedForum[0])   */
+       return(
         <>
         {
             !more?
             <div  style={{display:'flex',flexDirection:'column',alignItems:'flex-start',width:'100%',padding:'0% 5% 0% 5%'}}>
                 {
+                  
                     forums?
                     forums.map((forum)=><ForumCard id={forum.id} data={forum}  onClick={()=>setMore(true)}/>)
                     :

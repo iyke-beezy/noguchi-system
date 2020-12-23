@@ -19,6 +19,12 @@
     },
     "continent": {
       "model": "continent"
+    },
+    "geoJSON": {
+      "type": "json"
+    },
+    "center": {
+      "type": "json"
     }
   }
 }

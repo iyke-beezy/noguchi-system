@@ -5,69 +5,19 @@ import MainHeader from '../../components/mainHeader';
 import { Plot,Plot2 } from '../../controls/legend/legend';
 import axios from 'axios'
 
-const RecordCard=()=>{
+const RecordCard=(props)=>{
     return(
         <Card style={{height:160,margin:10}}>
+            <h3>{props.name}</h3>
+            <>
             <hr/>
+            <span>1000 cases</span>
+            </>
+
         </Card>
     );
 }
 
-const columns = [
-    {
-      title: 'Year',
-      dataIndex: 'year',
-      key: 'year',
-    
-    },
-    {
-      title: 'New Cases',
-      dataIndex: 'new',
-      key: 'new',
-    },
-    {
-      title: 'Active Cases',
-      dataIndex: 'active',
-      key: 'active',
-    },
-    {
-      title: 'Recovered',
-      key: 'recover',
-      dataIndex: 'recover',
-    },
-    {
-      title: 'Deaths',
-      key: 'deaths',
-      dataIndex: 'deaths',
-    },
-  ];
-  
-  const data = [
-    {
-      key: '1',
-      year: '2020',
-      new: 32,
-      active: 100,
-      recover: 60,
-      deaths: 0,
-    },
-    {
-        key: '2',
-        year: '2019',
-        new: 32,
-        active: 120,
-        recover: 30,
-        deaths: 7,
-      },
-      {
-        key: '3',
-        year: '2018',
-        new: 32,
-        active: 150,
-        recover: 0,
-        deaths: 13,
-      },
-  ];
 
 const RecordCases=()=>{
 
@@ -122,6 +72,32 @@ const [communities, setCommunities] =useState([]);
     })
 },[]);
 
+const [regions, setRegions] =useState([]);
+useEffect(() => {
+  axios.get('http://localhost:1337/regions')
+  .then(
+    res =>{
+      if(res.data){
+        console.log(res.data)
+        setRegions(res.data)
+    }} )
+  .catch((error) => {
+    console.log(error);
+  })
+},[]);
+const [districts, setDistricts] =useState([]);
+useEffect(() => {
+  axios.get('http://localhost:1337/districts')
+  .then(
+    res =>{
+      if(res.data){
+        console.log(res.data)
+        setDistricts(res.data)
+    }} )
+  .catch((error) => {
+    console.log(error);
+  })
+},[]);
 
 
   const { Search } = Input;

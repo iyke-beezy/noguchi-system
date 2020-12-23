@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 import { Input, Radio,Card, Space, Button ,Avatar, InputNumber} from 'antd';
 import "antd/dist/antd.css";
 import './components.css'
 import {UserOutlined,LockOutlined } from '@ant-design/icons';
-
+import axios from 'axios';
 import Background from '../assets/desktop4.png';
 import Background2 from '../assets/desktop7.png';
 import Background3 from '../assets/desktop3.png';
@@ -29,29 +29,41 @@ const Questions=[
 
 const SurveyCard=()=>{
  //const type='email';
+ const [questions,setQuestions]=useState([]);
+ useEffect(() => {
+    axios.get('http://localhost:1337/questions')
+    .then(
+      res =>{
+        if(res.data){
+          setQuestions(res.data)
+      }} )
+    .catch((error) => {
+      console.log(error);
+    })
+},[]);
  const [point,setPoint]=useState(1);
  const current =Questions.filter(function(question){
-            return question.id==point-1;
+            return question.id===point-1;
  })
  console.log(current)
  let input;
-  if (current[0].type=='boolean') {
+  if (current[0].type==='boolean') {
       input=
       <Radio.Group style={{marginBottom:15}} size='large' /* onChange={this.onChange} value={this.state.value} */>
         <Radio.Button value={1}>True</Radio.Button>
         <Radio.Button value={2}>False</Radio.Button>
       </Radio.Group>
       
-  } else if(current[0].type=='multiple'){
+  } else if(current[0].type==='multiple'){
       
-  } else if(current[0].type=='number'){
+  } else if(current[0].type==='number'){
       input=<InputNumber style={{marginBottom:15}} size='large'min={0}/>
 }else{
     input=<Input style={{marginBottom:15}} type={current[0].type} size='large' />
   };
     return(
         
-            <Card style={{width:'auto',minWidth:250,padding:20}} >
+            <Card style={{width:'100%'}} >
                 <Space direction='vertical' size='large'>
             
             
@@ -62,10 +74,10 @@ const SurveyCard=()=>{
             
             <div style={{display:"flex",flexDirection:'row',justifyContent:'space-between',width:'100%'}}>
             <Button type='default' size='large' style={{borderRadius:15}} onClick={()=>{
-                point!=1 ? setPoint(point-1):setPoint(point);
+                point!==1 ? setPoint(point-1):setPoint(point);
             }}>Back</Button>
             <Button type='primary' size='large'   /* disabled */ style={{borderRadius:15}} onClick={()=>{
-                point!=Questions.length ? setPoint(point+1):setPoint(point);
+                point!==Questions.length ? setPoint(point+1):setPoint(point);
             }} >Next</Button>
 
             </div>

@@ -7,20 +7,13 @@ import {
   Link
 } from "react-router-dom";
 import './App.css';
-import Mappings from './pages/Map/map';
 import OrgForm from './components/form';
 import OrgLogin from './pages/Login/login';
-import Banner from './components/banner';
-import Header from './components/header';
 import ProfilePage from './pages/Profile/profile';
-import SurveyPage from './pages/survey/survey';
-import Preview from './pages/survey/preview';
-import HomePage from './pages/homePage/homePage';
 import Entry from './pages/entry/entry';
 import OtherProfile from './pages/otherProfile/otherProfile'
 import Forum from './pages/forum/forum';
 import OtherForum from './pages/forum/otherForum';
-import OrgAccounts from './pages/orgAccounts/orgAccounts';
 import OrgAdminPage from './pages/orgAdmin/orgAdmin';
 import OrgAccountss from './pages/orgAccounts/orgAccountss';
 import Home from './pages/homePage/home';
@@ -38,7 +31,7 @@ console.log(window.React1 === window.React2);
             {/* <Mappings /> */}
             <Home/>
           </Route>
-          <Route  path="/home">
+          <Route path="/home">
             <Home/>
           </Route>
           <Route path="/login">
@@ -46,13 +39,6 @@ console.log(window.React1 === window.React2);
           </Route>
           <Route path="/profile">
             <ProfilePage />
-          </Route>
-          <Route path="/survey">
-            <SurveyPage />
-        
-          </Route>
-          <Route path="/preview">
-            <Preview />
           </Route>
           <Route path="/entry">
             <Entry /> 
