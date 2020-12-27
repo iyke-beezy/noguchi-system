@@ -11,14 +11,27 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "diseases": {
-      "via": "surveys",
-      "collection": "disease",
-      "dominant": true
+    "ActualSurveyDate": {
+      "type": "date"
     },
-    "the_questions": {
-      "via": "survey",
-      "collection": "question"
+    "org_user": {
+      "model": "org-user",
+      "via": "surveys"
+    },
+    "surveyUID": {
+      "type": "uid"
+    },
+    "answers": {
+      "collection": "answer",
+      "via": "survey"
+    },
+    "community": {
+      "model": "community",
+      "via": "surveys"
+    },
+    "disease": {
+      "via": "surveys",
+      "model": "disease"
     }
   }
 }

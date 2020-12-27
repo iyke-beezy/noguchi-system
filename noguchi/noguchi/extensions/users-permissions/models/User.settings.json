@@ -66,14 +66,6 @@
     "replies": {
       "via": "users_permissions_user",
       "collection": "reply"
-    },
-    "answers": {
-      "via": "users_permissions_user",
-      "collection": "answer"
-    },
-    "organization": {
-      "via": "users_permissions_users",
-      "model": "organization"
     }
   }
 }

@@ -5,6 +5,7 @@ import './components.css'
 import {UserOutlined,LockOutlined,KeyOutlined} from '@ant-design/icons';
 import { Link } from "react-router-dom";
 import axios from 'axios'
+import qs from 'qs';
 
 const OrgForm =({onClick,...props})=>{
 
@@ -17,9 +18,20 @@ const handleSubmit=(e)=>{
       username:username,
       password:password
     }
-  axios.post('http://localhost:5002/auth/login',org)
+    console.log(org)
+  axios.get('http://localhost:1337/organizations',
+    {
+      params:{
+        username:username,
+        key:password
+      },
+      paramsSerializer:(params)=>qs.stringify(params,{arrayFormat:'repeat'})
+    }
+  )
         .then(response => {
+          localStorage.setItem('selectedOrg',JSON.stringify(response.data))
           console.log(response.data)
+          window.location.href='/orgAccounts'
         
         }
         )
@@ -29,16 +41,28 @@ const handleSubmit=(e)=>{
     
 }
 const  handleSubmit2=(e)=>{
-  const user={
-    name:username,
-    password:password
-  }
-  axios.post('http://localhost:1337/user',)
+  axios
+  .post('http://localhost:1337/auth/local', {
+    identifier: 'Habib Dangote',
+    password: 'habiiib',
+  })
+  .then(response => {
+    // Handle success.
+    console.log('Well done!');
+    console.log('User profile', response.data.user);
+    console.log('User token', response.data.jwt);
+    window.location.href='/other'
+  })
+  .catch(error => {
+    // Handle error.
+    console.log('An error occurred:', error.response);
+  });
+  /* axios.post('http://localhost:1337/user',)
       .then(response =>window.location.href='/other')
       .catch((error) => {
         console.log(error);
         
-      })
+      }) */
    /* axios.post('http://localhost:5002/auth/userLogin',user)
       .then(response =>window.location.href='/other')
       .catch((error) => {

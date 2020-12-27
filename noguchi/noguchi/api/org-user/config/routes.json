@@ -2,53 +2,51 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/org-admins",
-      "handler": "org-admin.find",
+      "path": "/org-users",
+      "handler": "org-user.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/org-admins/count",
-      "handler": "org-admin.count",
+      "path": "/org-users/count",
+      "handler": "org-user.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/org-admins/:id",
-      "handler": "org-admin.findOne",
+      "path": "/org-users/:id",
+      "handler": "org-user.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/org-admins",
-      "handler": "org-admin.create",
+      "path": "/org-users",
+      "handler": "org-user.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/org-admins/:id",
-      "handler": "org-admin.update",
+      "path": "/org-users/:id",
+      "handler": "org-user.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/org-admins/:id",
-      "handler": "org-admin.delete",
+      "path": "/org-users/:id",
+      "handler": "org-user.delete",
       "config": {
         "policies": []
       }
     }
-    
-    
   ]
 }

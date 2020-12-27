@@ -4,12 +4,13 @@
 
      
 const { parseMultipartData, sanitizeEntity } = require('strapi-utils');
+const { find } = require('../../org-admin/controllers/org-admin');
 module.exports = {
          /**
           * Create a record.
           *
           * @return {Object}
-          */
+          */  
          async create(ctx) {
            console.log(ctx.request.body);
            let entity;

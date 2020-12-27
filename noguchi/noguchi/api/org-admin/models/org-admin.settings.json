@@ -15,13 +15,12 @@
       "type": "string",
       "required": true
     },
-    "password": {
-      "type": "password",
-      "required": true
-    },
     "organization": {
-      "model": "organization",
-      "via": "org_admin"
+      "via": "org_admin",
+      "model": "organization"
+    },
+    "key": {
+      "type": "string"
     }
   }
 }

@@ -21,15 +21,15 @@ class Boundary extends MapControl{
     createLeafletElement(props) {};
     
     componentDidMount() {
-
+      console.log(this.props.jason)
       var selected=localStorage.getItem('country')
       var mapBoundary=  lists.filter(function(list){
-        return list.name==selected
+        return list.name===selected
       });
       console.log(mapBoundary)
         const {map}=this.props.leaflet
             var osm = new L.TileLayer.BoundaryCanvas("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-              boundary: asia,
+              boundary: this.props.jason,
               attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
             }); 
            osm.addTo(map)

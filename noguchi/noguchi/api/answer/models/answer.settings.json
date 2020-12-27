@@ -14,14 +14,15 @@
     "answer": {
       "type": "string"
     },
-    "users_permissions_user": {
-      "plugin": "users-permissions",
-      "model": "user",
-      "via": "answers"
+    "org_user": {
+      "model": "org-user"
     },
-    "community": {
-      "model": "community",
-      "via": "answers"
+    "question": {
+      "model": "question"
+    },
+    "survey": {
+      "via": "answers",
+      "model": "survey"
     }
   }
 }

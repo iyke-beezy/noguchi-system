@@ -18,16 +18,17 @@
       "collection": "case",
       "via": "disease"
     },
-    "surveys": {
-      "collection": "survey",
-      "via": "diseases"
-    },
     "forums": {
       "collection": "forum",
       "via": "disease"
     },
     "questions": {
-      "collection": "question"
+      "collection": "question",
+      "via": "disease"
+    },
+    "surveys": {
+      "collection": "survey",
+      "via": "disease"
     }
   }
 }

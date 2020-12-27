@@ -1,10 +1,11 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import { Button, Card, Tabs,Row,Col,Divider,Modal ,Layout,Form,Space,Input} from 'antd';
 import FormInput from '../../components/input'
 import  '../../components/components.css';
 import TagBox from '../../components/tagBox';
 import ForumCard from '../../components/forumCard';
 import axios from 'axios'
+import qs from 'qs';
 import MainHeader from '../../components/mainHeader';
 const {TabPane}=Tabs;
 const style = { background: '#0092ff', padding: '8px 0',height:'180px', marginBottom:'10px',
@@ -17,17 +18,39 @@ const loginStyle={
 
 const Box=(props)=>{
     const [modalState,setModalState]=useState(false);
-    
+    const [key,setKey]=useState('')
     return(
         <>
         {
         props.admin?
         <>
          <div style={{height:180,border:'4px solid #ff9633',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',margin:20,cursor:'pointer'}} onClick={() => setModalState(true)} onDoubleClick={()=>setModalState(false)}>
+          <div hidden={modalState}>
+                <h3>Admin</h3>
+                <span>Click to Login</span>
+          </div>
           <div hidden={!modalState} style={{display:'flex',flexDirection:'column',alignItems:'flex-start',justifyContent:'space-between',padding:5,height:'50%'}}>
-          <FormInput name="key" type="text" placeholder="Enter Admin Key"  required style={{width:'95%'}} />
+          <FormInput value={key} onChange={(e)=>setKey(e.target.value)} name="key" type="text" placeholder="Enter Admin Key"  required style={{width:'95%'}} />
           <Button key="submit" type="primary"  onClick={() => {
-                window.location.href='/orgadmin';
+                axios.get('http://localhost:1337/org-admins',
+                {
+                  params:{
+                    username:props.data.username,
+                    key:key
+                  },
+                  paramsSerializer:(params)=>qs.stringify(params,{arrayFormat:'repeat'})
+                }
+              )
+                    .then(response => {
+                        localStorage.setItem('current_user',JSON.stringify(response.data))
+                        window.location.href='/orgAdmin'
+                    }
+                    )
+                    .catch((error) => {
+                      console.log(error);
+                    })
+                
+            
                 
                 }}>
                 Enter
@@ -39,10 +62,32 @@ const Box=(props)=>{
     :
        <>
         <div style={{height:180,border:'2px solid #adadad',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',margin:20,cursor:'pointer'}} onClick={() => setModalState(true)}  onDoubleClick={()=>setModalState(false)}>
+        <div hidden={modalState}>
+                <h3>{props.data.username}</h3>
+                <span>Click to Login</span>
+          </div>
         <div hidden={!modalState} style={{display:'flex',flexDirection:'column',alignItems:'flex-start',justifyContent:'space-between',padding:5,height:'50%'}}>
-          <FormInput name="key" type="text" placeholder="Enter Profile Key"  required style={{width:'95%'}} />
+          <FormInput value={key} onChange={(e)=>setKey(e.target.value)} name="key" type="text" placeholder="Enter Profile Key"  required style={{width:'95%'}} />
           <Button key="submit" type="primary"  onClick={() => {
-                window.location.href='/other';
+              axios.get('http://localhost:1337/org-users',
+              {
+                params:{
+                  username:props.data.username,
+                  key:key
+                },
+                paramsSerializer:(params)=>qs.stringify(params,{arrayFormat:'repeat'})
+              }
+            )
+                  .then(response => {
+                      localStorage.setItem('current_user',JSON.stringify(response.data))
+                      window.location.href='/other'
+                  }
+                  )
+                  .catch((error) => {
+                    console.log(error);
+                  })
+              
+               
                 
                 }}>
                 Enter
@@ -63,9 +108,38 @@ const OrgAccountss=()=> {
     const [password,setPassword]=useState('')
     const {Header}=Layout;
 
+    const selectedOrg=JSON.parse(localStorage.getItem('selectedOrg'))[0];
+    let selectedAdmin=selectedOrg.org_admin;
+    let selectedAccounts
+    let accounts=[]
+    if(selectedAdmin){
+        selectedAccounts=selectedOrg.org_users
+        accounts=[selectedAdmin,...selectedAccounts]
+    }
+    
+    console.log(accounts)
     const addAdmin=(e)=>{
         
-        const user = {
+        axios.post('http://localhost:1337/org-admins', {
+            username:username,
+            key:password,
+            organization:selectedOrg.id
+        })
+          .then(
+            res =>{
+              if(res.data){
+                console.log(res.data)
+                localStorage.setItem('current_user',JSON.stringify(res.data))
+                window.location.href='/orgAdmin'
+            }}
+      
+          
+          )
+          .catch((error) => {
+            console.log(error);
+          })
+
+        /* const user = {
           name: username,
           privateKey: password,
           company:"5fbcf73e612071290c2a3046",
@@ -84,21 +158,21 @@ const OrgAccountss=()=> {
           .catch((error) => {
             console.log(error);
           })
-      
+       */
     }
 
     return(
         <div style={{minHeight:'100vh',height:'auto',width:'100%',display:'flex',backgroundColor:'#4e54c8', flexDirection:'column'/* ,justifyContent:'center' */,alignItems:'center'}}>
             <MainHeader/>
-            <div  style={{height:'80vh',width:'85%',marginTop:'8vh'}}>
+            <div  style={{height:'80vh',width:'85%',marginTop:'10vh'}}>
                 {
-                    !noUsers?
+                    selectedAdmin?
                     <h1 style={{fontSize:'max(4vw,30px)',color:'white'}}>ORGANIZATION PROFILES</h1>
                     :
                     null
                 }
                 
-                {noUsers?
+                {!selectedAdmin?
                 
                 <div className='orgAccountsBox' style={{padding:10,display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',overflowY:'scroll',height:'70vh'}}>
                         <h1 style={{fontSize:'max(4vw,30px)',color:'white',textAlign:'left',fontFamily: "'Poppins', sans-serif"}}>Create Admin Account</h1>
@@ -146,11 +220,12 @@ const OrgAccountss=()=> {
                                               
                 </div>
                     :
-                    <div className='orgAccountsBox' style={{padding:10,display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(230px,1fr))',overflowY:'scroll',height:'55vh'}}>
-                            <Box admin/> 
-                            <Box/>
-                            <Box/>
-                            <Box/>             
+                    <div className='orgAccountsBox' style={{padding:10,display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(230px,1fr))',overflowY:'scroll',height:'55vh'}}>
+                            
+                            {
+                                accounts.map((account,index)=><Box admin={index===0}  key={account} data={account}/>)
+                            }
+                                     
                     </div>
                 }
                 
