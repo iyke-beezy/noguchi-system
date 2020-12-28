@@ -102,7 +102,7 @@ const Home=()=>{
     getContinent();
     
    
-  },[continent,continentJson])
+  },[continent])
     const [disease, setDisease] =useState('Schistosomiasis');
     const handleChange = (event) => {
       setDisease(event.target.value);

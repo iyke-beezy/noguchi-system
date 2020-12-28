@@ -6,7 +6,7 @@ import 'leaflet/dist/leaflet.css';
 import {Paper} from '@material-ui/core'
 import Choropleth from 'react-leaflet-choropleth'
 import africa from './../../controls/boundary/africa.geo.json'
-
+import axios from 'axios'
 class Mappings extends React.Component {
 state={
       lat: 7.946527,
@@ -19,7 +19,7 @@ state={
     .then(
       res =>{
         if(res.data){
-          setDiseases(res.data)
+          /* setDiseases(res.data) */
       }} )
     .catch((error) => {
       console.log(error);
