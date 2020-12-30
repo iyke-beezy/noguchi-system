@@ -87,28 +87,21 @@ const Home=()=>{
     secondPaneOpen:false,
     thirdPaneOpen:false
   });
-  const [continent, setContinent] =useState('AFRICA');
-  const [country, setCountry] = useState('GHANA');
+  const [continent, setContinent] =useState('');
+  const [country, setCountry] = useState('');
   const [continentJson,setContinentJson]=useState({})
-  useEffect(()=>{
-    async function getContinent(){
-        const conArray=await continents
-        const conti=continent
-        setContinentJson(continents.filter(continent=>continent.name==conti))
-        
-        /* continentJson=await continents.filter(cont=>cont.name==continent)
-       */
-    }
-    getContinent();
-    
-   
-  },[continent])
+  
     const [disease, setDisease] =useState('Schistosomiasis');
     const handleChange = (event) => {
       setDisease(event.target.value);
     
   };
-  
+  const handleContinent = (event) => {
+    setContinent(event.target.value);
+    localStorage.removeItem('currentContinent')
+    localStorage.setItem('currentContinent',JSON.stringify(continents.filter(continent=>continent.name==event.target.value)))
+};
+  console.log(continentJson)
  
   const {Header,Footer}=Layout;
 
@@ -465,7 +458,7 @@ const Home=()=>{
         variant="outlined"
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
-          value={disease}
+          defaultValue='Select Disease'
           style={{width:'90%',textAlign:'left',margin:2}}
           onChange={handleChange}
         >
@@ -481,9 +474,9 @@ const Home=()=>{
         variant="outlined"
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
-          value={continent}
+          defaultValue='Select Continent'
           style={{width:'90%',textAlign:'left',margin:2}}
-          onChange={(e)=>setContinent(e.target.value)}
+          onChange={handleContinent}
         >
           {
             continents.map(continent=><MenuItem value={continent.name}>{continent.name}</MenuItem>)
@@ -495,9 +488,10 @@ const Home=()=>{
         {countries?
         <Select 
         variant="outlined"
+        defaultValue='Select Country'
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
-          value={country}
+          
           style={{width:'90%',textAlign:'left',margin:2}}
           onChange={(e)=>setCountry(e.target.value)}
         >
@@ -520,7 +514,7 @@ const Home=()=>{
         </Col>
 
         <Col  flex='auto' style={{position:'relative'}}>       
-                   <Mappings continentJson={continentJson} country={country}/>  
+                   <Mappings  country={country}/>  
                   <div style={{position:'absolute',bottom:'0.2%',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center', left:1 ,margin:'50px', width:'min(300px,70vw)', backgroundColor:'white',padding:10,borderRadius:15}}>
                     <h4 style={{textAlign:'left',width:'100%'}}>Year</h4>
                     <Slider min={2015} max={2021} tooltipPlacement='bottom'  /* tooltipVisible={true} */ style={{width:'100%',color:'wheat'}} defaultValue={2020}/>

@@ -7,26 +7,90 @@ import axios from 'axios';
 const ForumList =(props)=>{
     const [forums,setForums]=useState([])
     useEffect(() => {
-          axios.get('http://localhost:1337/forums')
-          .then(
-            res =>{
-              if(res.data){
-                setForums(res.data)
-            }} )
-          .catch((error) => {
-            console.log(error);
-          })
+      async function getForums(){
+      if(props.filter){
+
+       await axios.get('http://localhost:1337/forums',
+       {
+         params:{
+           disease:props.filter
+         }
+       }
+      
+       )
+        .then(
+          res =>{
+            if(res.data){
+              setForums(res.data)
+          }} )
+        .catch((error) => {
+          console.log(error);
+        })
+      }else if(props.location){
+
+        await axios.get('http://localhost:1337/forums',
+       {
+         params:{
+           community:props.location
+         }
+       }
+      
+       )
+        .then(
+          res =>{
+            if(res.data){
+              setForums(res.data)
+          }} )
+        .catch((error) => {
+          console.log(error);
+        })
+      }else if(props.user){
+        console.log(props.user)
+        await axios.get('http://localhost:1337/forums',
+        {
+          params:{
+            author:props.user
+          }
+        }
+       
+        )
+         .then(
+           res =>{
+             if(res.data){
+               setForums(res.data)
+           }} )
+         .catch((error) => {
+           console.log(error);
+         })
+      }
+      
+      else{
+        await axios.get('http://localhost:1337/forums')
+         .then(
+           res =>{
+             if(res.data){
+               setForums(res.data)
+           }} )
+         .catch((error) => {
+           console.log(error);
+         })
+      }
+      }
+      getForums()
+          
       },[]);
     
       useEffect(()=>{
-       async function filterData(){
-          const filteredForum=await forums.filter(forum=>forum.disease.name===props.filter)
-          setForums(filteredForum);
-        }
-        if(props.filter){
-          filterData();
-        }
-      },[props.filter,forums])
+       async function filterData(filter){
+          
+        await setForums(forums.filter(forum=>forum.disease.name===filter))  
+       
+      }
+        
+        filterData(props.filter);
+       
+        
+      },[props.filter])
       
       
     const [more,setMore]=useState(false);

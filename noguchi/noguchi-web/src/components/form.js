@@ -43,14 +43,15 @@ const handleSubmit=(e)=>{
 const  handleSubmit2=(e)=>{
   axios
   .post('http://localhost:1337/auth/local', {
-    identifier: 'Habib Dangote',
-    password: 'habiiib',
+    identifier: username,
+    password: password,
   })
   .then(response => {
     // Handle success.
     console.log('Well done!');
     console.log('User profile', response.data.user);
     console.log('User token', response.data.jwt);
+    localStorage.setItem('currentUser',JSON.stringify(response.data.user))
     window.location.href='/other'
   })
   .catch(error => {

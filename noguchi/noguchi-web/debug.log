@@ -11,3 +11,61 @@
 [1207/231422.269:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
 [1226/144009.692:ERROR:crash_report_database_win.cc(455)] unexpected header
 [1226/203308.435:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1229/211518.157:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1229/212518.195:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1229/212518.208:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\admin\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\32041157-cb52-472f-a034-8d5d74a10957: The system cannot find the path specified. (0x3)
+[1229/212518.227:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\admin\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\5a2ecbf8-5b18-4895-9ddc-0ecb724c0bd7: The system cannot find the path specified. (0x3)
+[1229/212518.227:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\admin\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\66c777ca-a9d1-4ace-97c3-f8b06e3e0889: The system cannot find the path specified. (0x3)
+[1229/212518.235:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\admin\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\6a2fea33-27fe-4e61-aee7-2c976d1b76b3: The system cannot find the path specified. (0x3)
+[1229/212518.236:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\admin\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\6ea9a427-4127-4a37-b9f3-a548d3f15948: The system cannot find the path specified. (0x3)
+[1229/212518.252:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\admin\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\79b85b76-16d7-4aea-994b-7da45ea5135a: The system cannot find the path specified. (0x3)
+[1229/212518.267:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\admin\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\801b1df0-27ca-4d3b-979f-c28ca69f924c: The system cannot find the path specified. (0x3)
+[1229/212518.279:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\admin\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\858a2cdb-4e10-4bfa-b2fc-7c11a5e9b81e: The system cannot find the path specified. (0x3)
+[1229/212518.280:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\admin\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\9d3b0019-221c-4007-94a6-e610feeb73d1: The system cannot find the path specified. (0x3)
+[1229/212518.281:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\admin\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\ba0274b1-4a54-48af-a017-1620a2f4677d: The system cannot find the path specified. (0x3)
+[1229/212518.299:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\admin\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\c822612f-d386-401b-afa4-012dcbf4d7c8: The system cannot find the path specified. (0x3)
+[1229/212518.316:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\admin\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\e7c038bc-3159-493b-9ffe-493708f9cfe7: The system cannot find the path specified. (0x3)
+[1229/212518.329:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\admin\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\ea3aefe4-1d65-4c21-bc1f-ef9246fb15d5: The system cannot find the path specified. (0x3)
+[1229/212518.329:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\admin\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\fd32c76d-a620-4c36-ac57-2e86ad0a8e59: The system cannot find the path specified. (0x3)
+[1229/212518.330:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1229/212518.330:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1229/212518.330:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1229/213018.158:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1229/214518.160:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1229/220018.161:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/085249.966:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/090250.003:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/090250.040:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1230/090250.040:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/090250.040:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/090749.996:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/092250.024:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/093750.066:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/095250.086:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/100750.087:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/102250.087:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/103750.088:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/105250.088:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/110750.089:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/112250.090:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/113750.136:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/115250.169:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/120750.216:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/122250.218:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/123750.220:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/125250.244:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/130750.385:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/132252.228:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/133753.111:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/135253.987:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/140754.141:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/142254.164:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/143754.164:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/145254.166:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/150754.168:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/152254.170:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/153754.170:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/155254.171:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/160754.172:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/162254.257:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1230/163754.981:ERROR:crash_report_database_win.cc(455)] unexpected header

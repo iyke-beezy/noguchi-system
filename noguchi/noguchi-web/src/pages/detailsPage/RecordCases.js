@@ -30,7 +30,7 @@ const RecordCard=(props)=>{
 
 
 const RecordCases=()=>{
-  const [selectedCountry,setSelectedCountry]=useState('GHANA');
+  const [selectedCountry,setSelectedCountry]=useState('');
   const [selectedContinent,setSelectedContinent]=useState('');
   const [selectedDisease,setSelectedDisease]=useState('');
   const [diseases,setDiseases]=useState([])
@@ -118,7 +118,26 @@ useEffect(() => {
   function handleChange(value) {
     console.log(`selected ${value}`);
   }
-  const{Header} = Layout;
+  const handleDisease=(value)=>{
+    setSelectedDisease(value)
+  }
+  const handleCountry=(value)=>{
+    setSelectedCountry(value)
+  }
+  const onContinentChange=(value)=>{
+    console.log(value)
+    setSelectedContinent(value)
+    const results=countries.filter(country=>country.continent.name===value);
+    console.log(results);
+    if (results.length>0){
+      const nouveau=results.map(result=>({name:result.name}));
+      setCountries(nouveau);
+    }else{
+      setCountries([]);
+    }
+  }
+ 
+    const{Header} = Layout;
 
     return(
         <div className='profilePage' style={{maxWidth:'100vw',backgroundColor:'white',width:'auto'}}>
@@ -153,7 +172,7 @@ useEffect(() => {
            <Col style={{padding:"10px 0px"}} xs={24} md={8}>
           {
             diseases?
-            <Select defaultValue="Schistosomiasis" style={{ width: 120 }} onChange={(e)=>setSelectedDisease(e.target.value)}>
+            <Select defaultValue="Select Disease" style={{ width: 120 }} onChange={handleDisease}>
               {
                 diseases.map(disease=><Option value={disease.name}>{disease.name}</Option>)
               }
@@ -166,7 +185,7 @@ useEffect(() => {
             
            {
             continents?
-            <Select defaultValue="AFRICA" style={{ width: 120 }} onChange={(e)=>setSelectedContinent(e.target.value)}> 
+            <Select defaultValue="Select Continent" style={{ width: 120 }} onChange={onContinentChange}> 
                {
             continents.map(continent=><Option value={continent.name}>{continent.name}</Option>)
           }
@@ -179,13 +198,13 @@ useEffect(() => {
            <Col style={{padding:"10px 0px"}} xs={24} md={8}>
            {
             countries?
-            <Select defaultValue="GHANA" style={{ width: 120 }} onChange={(e)=>setSelectedCountry(e.target.value)}>
+            <Select defaultValue="Select Country" style={{ width: 120 }} onChange={handleCountry}>
                {
                   countries.map(country=><Option value={country.name}>{country.name}</Option>)
                 }
           </Select>
             :
-            <Select/>
+            <Select defaultValue="No Data" />
           }
            
            </Col>

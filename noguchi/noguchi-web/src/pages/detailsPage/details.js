@@ -5,14 +5,7 @@ import MainHeader from '../../components/mainHeader';
 import { Plot,Plot2 } from '../../controls/legend/legend';
 import axios from 'axios';
 import qs from 'qs'
-const DetailsCard=(properties)=>{
-    return(
-        <Card style={{minHeight:'min(10em,150px)',margin:10,borderRadius:15 }}>
-            <h1></h1>
-            <span></span>
-        </Card>
-    );
-}
+
 const column2=[
   {
     title: 'Keyword',
@@ -140,22 +133,10 @@ console.log(data2)
     return(
       <div className='profilePage' style={{maxWidth:'100vw',backgroundColor:'white',width:'100%'}}>
         <MainHeader/>
-        <div style={{marginTop:'10vh',padding:'0px 50px 50px 50px'}}>
+        <div style={{width:'100%',marginTop:'10vh',padding:'0px 50px 50px 50px'}}>
            
-            <h1 style={{fontSize:50}}>{data2[0].data}</h1>
-            <p>Pariatur Lorem aliqua pariatur irure ea occaecat cupidatat. Voluptate labore aliqua consectetur officia ullamco deserunt dolore exercitation magna. Cillum mollit do minim veniam aliqua aute enim incididunt ad.</p>
-           {/*  <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(250px,1fr))',marginBottom:20}}>
-                <DetailsCard/>
-                <DetailsCard/>
-                <DetailsCard/>
-                <DetailsCard/>
-                <DetailsCard/>
-                <DetailsCard/>
-                <DetailsCard/>
-                <DetailsCard/>
-                <DetailsCard/>
-                <DetailsCard/>
-            </div> */}
+            <h1 style={{fontSize:50}}>{data2?data2[0].data:null}</h1>
+              
              <Table bordered columns={column2} dataSource={data2} size='middle'/>
             <Card  style={{minHeight:'40vh',marginTop:20,borderRadius:5,marginBottom:40}}>
              <Plot2 yname='No of Cases'/>

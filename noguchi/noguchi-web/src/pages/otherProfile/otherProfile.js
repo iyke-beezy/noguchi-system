@@ -14,19 +14,7 @@ const {TextArea} =Input;
 const { TabPane } = Tabs;
 
 const OtherProfile=()=>{
-    const [forums,setForums]=useState([])
-    useEffect(() => {
-          axios.get('http://localhost:1337/forums')
-          .then(
-            res =>{
-              if(res.data){
-                setForums(res.data)
-            }} )
-          .catch((error) => {
-            console.log(error);
-          })
-      },[]);
-
+    let me=JSON.parse(localStorage.getItem('currentUser'))
       const createForum=()=>{
         axios.post('http://localhost:1337/forums'/* ,{ username: username,  email:email, password: password } */)
           .then(
@@ -58,17 +46,17 @@ const OtherProfile=()=>{
                          PROFILE
                         </h1>
                         <h3 style={{color:'#40404090'}}>
-                            Name
-                        </h3>
-                        <Input type='text' value={orgname} onChange={(e)=>{setOrgname(e.target.value)}} disabled={disability} size='large' style={{marginBottom:15,fontSize:17,backgroundColor:'transparent',borderWidth:3}}/>
-                        <h3 style={{color:'#40404090'}}>
                             Username
                         </h3>
-                        <Input type='text' value={orgUsername} disabled={disability} onChange={(e)=>{setOrgUsername(e.target.value)}} size='large' style={{marginBottom:15,fontSize:17,backgroundColor:'transparent',borderWidth:3}}/>
+                        <Input type='text' value={me.username} onChange={(e)=>{setOrgname(e.target.value)}} disabled={disability} size='large' style={{marginBottom:15,fontSize:17,backgroundColor:'transparent',borderWidth:3}}/>
+                        <h3 style={{color:'#40404090'}}>
+                            Email
+                        </h3>
+                        <Input type='text' value={me.email} disabled={disability} onChange={(e)=>{setOrgUsername(e.target.value)}} size='large' style={{marginBottom:15,fontSize:17,backgroundColor:'transparent',borderWidth:3}}/>
                         <h3 style={{color:'#40404090'}}>
                             Password
                         </h3>
-                        <Input type='password' value={orgPassword} disabled={disability} size='large' onChange={(e)=>{setOrgPassword(e.target.value)}} style={{marginBottom:15,fontSize:17,backgroundColor:'transparent',borderWidth:3}}/>
+                        <Input type='password' value={me.password} disabled={disability} size='large' onChange={(e)=>{setOrgPassword(e.target.value)}} style={{marginBottom:15,fontSize:17,backgroundColor:'transparent',borderWidth:3}}/>
                         <Button type='primary' size='large' onClick={()=>{setDisability(!disability)}}  block style={{marginBottom:30,backgroundColor:'#6461ff'}}>{disability?'Edit Profile':'Save'}</Button>
                         <Button type='primary' size='large' onClick={()=>{window.location.href='/';}} danger block>Logout</Button>
 
@@ -140,7 +128,7 @@ const OtherProfile=()=>{
                     </TabPane>
                     <TabPane tab="My Forums" key="3">
                     <div style={{height:'48vh',overflowY:'scroll'}}>
-                        <ForumList/>
+                        <ForumList user={me.id}/>
                         </div>
                     </TabPane>
                     </Tabs>

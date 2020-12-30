@@ -16,27 +16,41 @@ const lists=[
     bounds:africa
   }
 ]
+var osm;
 
 class Boundary extends MapControl{
-    createLeafletElement(props) {};
-    
+    createLeafletElement(props) {
+
+      
+    };
+   
     componentDidMount() {
-      console.log(this.props.jason)
-      var selected=localStorage.getItem('country')
-      var mapBoundary=  lists.filter(function(list){
-        return list.name===selected
-      });
-      console.log(mapBoundary)
         const {map}=this.props.leaflet
-            var osm = new L.TileLayer.BoundaryCanvas("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-              boundary: this.props.jason,
+             osm = new L.TileLayer.BoundaryCanvas("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+              boundary: custom,
               attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
             }); 
-           osm.addTo(map)
+           map.addLayer(osm)
 /*             var ghLayer = L.geoJSON(custom);
             map.fitBounds(ghLayer.getBounds()); */
-          
 
 }
+componentDidUpdate() {
+
+  var selected=JSON.parse(localStorage.getItem('currentContinent'))
+  console.log(selected[0].geoJSON)
+  
+    const {map}=this.props.leaflet
+    map.removeLayer(osm)
+         osm = new L.TileLayer.BoundaryCanvas("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          boundary: selected[0].geoJSON,
+          attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
+        }); 
+        map.addLayer(osm)
+/*             var ghLayer = L.geoJSON(custom);
+        map.fitBounds(ghLayer.getBounds()); */
+
+}
+
 }
 export default withLeaflet(Boundary)

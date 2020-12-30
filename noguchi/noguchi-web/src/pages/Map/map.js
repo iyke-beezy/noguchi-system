@@ -61,7 +61,7 @@ state={
       },
     
     ]
-    
+
     const position = [this.state.lat, this.state.lng];
     return (
  
@@ -94,6 +94,7 @@ state={
                 <h2>{this.state.activeMarker.region}</h2>
               </div>
             </Popup>)}
+            
           <Boundary style={{position:'absolute',zIndex:-10}} jason={this.state.json} ></Boundary>
 {/*           <Choropleth
             data={custom}
