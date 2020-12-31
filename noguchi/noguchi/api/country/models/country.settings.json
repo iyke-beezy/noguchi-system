@@ -18,7 +18,8 @@
       "collection": "region"
     },
     "continent": {
-      "model": "continent"
+      "model": "continent",
+      "via": "countries"
     },
     "geoJSON": {
       "type": "json"

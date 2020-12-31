@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useTheme } from '@material-ui/core/styles';
-import { Button, Card, Input, Modal, Select, Tabs ,Avatar,Layout} from 'antd';
+import { Button, Card, Input, Modal, Select, Tabs ,Avatar,Layout, Empty} from 'antd';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
 import Legend, { Plot } from '../../controls/legend/legend';
 import {EditFilled ,UserOutlined,ExportOutlined,UserAddOutlined} from '@ant-design/icons';
@@ -8,8 +8,11 @@ import MainHeader from '../../components/mainHeader';
 const {TabPane}=Tabs;
 const {Option}=Select;
 const {Header}=Layout;
-const Box=()=>{
+const Box=(props)=>{
     const [modalState,setModalState]=useState(false);
+    const [profileName,setProfileName]=useState(props.data.username)
+    const [profileKey,setProfileKey]=useState(props.data.key)
+    console.log(props.data.key)
     return(
         <>
         <div style={{height:160,border:'2px solid #adadad',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',margin:20,cursor:'pointer'}} onClick={() => setModalState(true)}>
@@ -38,14 +41,16 @@ const Box=()=>{
                     <label >Profile Name</label>
                         <Input
                         type='text'
-                        value='Abu DaTeef'
+                        value={profileName}
+                        onChange={(e)=>setProfileName(e.target.value)}
                         size='large'
                         style={{width:'50%',minWidth:330,marginTop:5}}
                         />  
                         <label style={{marginTop:8}}>Profile Key</label>
                         <Input
                         type='text'
-                        value='********'
+                        value={profileKey}
+                        onChange={(e)=>setProfileKey(e.target.value)}
                         size='large'
                         style={{width:'45%',minWidth:300,marginTop:5}}
                         />  
@@ -83,22 +88,28 @@ const OrgAdminPage =()=>{
       ]
     
     const theme = useTheme();
+    const selectedOrg=JSON.parse(localStorage.getItem('selectedOrg'))[0];
+    let selectedAccounts=selectedOrg.org_users
     return(
       <div className='profilePage' style={{backgroundColor:'white'}}>
        <MainHeader/>
-        <div style={{display:'flex',marginTop:'8vh',width:'100%',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
-        <h1 style={{fontSize:'max(3vw,25px)',width:'80%',color:'grey'}}>GES ADMIN DASHBOARD</h1>
+        <div style={{display:'flex',marginTop:'10vh',width:'100%',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
+        <h1 style={{fontSize:'max(3vw,25px)',width:'80%',color:'grey'}}>{selectedOrg.username} ADMIN DASHBOARD</h1>
         <div style={{width:'80%'}}>
             <Tabs  tabPosition='top' defaultActiveKey='1' size='small' style={{height:'auto'}}>
                     <TabPane tab="Manage Profiles" key="1" >
                         <div className='adminProfiles' style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(230px,1fr))',height:'55vh'}}>
-                            
-                            <Box/>
-                            <Box/>
-                            <Box/>
-                            <Box/>
-                            <Box/>
-                        
+                           {
+                             selectedAccounts?
+                              <>
+                                {
+                                selectedAccounts.map((selectedAccount,index)=><Box   key={selectedAccount} data={selectedAccount}/>)
+                               }
+                              </>
+                             :
+                             <Empty/>
+                           }  
+                          
 
                         </div>
                         

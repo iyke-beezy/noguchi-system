@@ -14,15 +14,8 @@
     "question": {
       "type": "string"
     },
-    "survey": {
-      "model": "survey",
-      "via": "the_questions"
-    },
     "Keyword": {
       "type": "string"
-    },
-    "disease": {
-      "model": "disease"
     },
     "type": {
       "type": "enumeration",
@@ -34,6 +27,10 @@
         "list",
         "listpairs"
       ]
+    },
+    "disease": {
+      "via": "questions",
+      "model": "disease"
     }
   }
 }

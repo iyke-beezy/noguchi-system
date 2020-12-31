@@ -14,20 +14,21 @@
     "name": {
       "type": "string"
     },
-    "surveys": {
-      "collection": "survey",
-      "via": "diseases"
+    "cases": {
+      "collection": "case",
+      "via": "disease"
     },
     "forums": {
       "collection": "forum",
       "via": "disease"
     },
     "questions": {
-      "collection": "question"
+      "collection": "question",
+      "via": "disease"
     },
-    "case": {
-      "via": "disease",
-      "model": "case"
+    "surveys": {
+      "collection": "survey",
+      "via": "disease"
     }
   }
 }

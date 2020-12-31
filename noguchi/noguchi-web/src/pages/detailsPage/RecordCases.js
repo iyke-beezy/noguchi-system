@@ -1,4 +1,4 @@
-import { Layout,Card,Table, Tag, Space,Col,Row,Input,Select } from 'antd';
+import { Layout,Card,Table, Tag, Space,Col,Row,Input,Select, Empty, Spin } from 'antd';
 import React,{useState,useEffect} from 'react';
 import ForumList from '../../components/forumList';
 import MainHeader from '../../components/mainHeader';
@@ -6,13 +6,23 @@ import { Plot,Plot2 } from '../../controls/legend/legend';
 import axios from 'axios'
 
 const RecordCard=(props)=>{
+  console.log(props.data.surveys[0].surveyUID)
+  if(props.data.surveys){
+ /*    localStorage.setItem('expandSurvey',props.data.surveys.surveyUID)
+ */  }
+ const handleClick=()=>{
+  if(props.data.surveys){
+       localStorage.setItem('expandSurvey',props.data.surveys[0].surveyUID);
+       window.location.href='/details';
+      }
+ }
     return(
-        <Card style={{height:160,margin:10}}>
-            <h3>{props.name}</h3>
-            <>
-            <hr/>
-            <span>1000 cases</span>
-            </>
+        <Card onClick={handleClick} style={{height:160,margin:10,display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
+            <h1 >{props.data.Community}</h1>
+            
+            
+            <span>5% prevalence</span>
+            
 
         </Card>
     );
@@ -20,7 +30,9 @@ const RecordCard=(props)=>{
 
 
 const RecordCases=()=>{
-
+  const [selectedCountry,setSelectedCountry]=useState('');
+  const [selectedContinent,setSelectedContinent]=useState('');
+  const [selectedDisease,setSelectedDisease]=useState('');
   const [diseases,setDiseases]=useState([])
   useEffect(() => {
       axios.get('http://localhost:1337/diseases')
@@ -106,7 +118,26 @@ useEffect(() => {
   function handleChange(value) {
     console.log(`selected ${value}`);
   }
-  const{Header} = Layout;
+  const handleDisease=(value)=>{
+    setSelectedDisease(value)
+  }
+  const handleCountry=(value)=>{
+    setSelectedCountry(value)
+  }
+  const onContinentChange=(value)=>{
+    console.log(value)
+    setSelectedContinent(value)
+    const results=countries.filter(country=>country.continent.name===value);
+    console.log(results);
+    if (results.length>0){
+      const nouveau=results.map(result=>({name:result.name}));
+      setCountries(nouveau);
+    }else{
+      setCountries([]);
+    }
+  }
+ 
+    const{Header} = Layout;
 
     return(
         <div className='profilePage' style={{maxWidth:'100vw',backgroundColor:'white',width:'auto'}}>
@@ -141,7 +172,7 @@ useEffect(() => {
            <Col style={{padding:"10px 0px"}} xs={24} md={8}>
           {
             diseases?
-            <Select defaultValue="Schistosomiasis" style={{ width: 120 }} onChange={handleChange}>
+            <Select defaultValue="Select Disease" style={{ width: 120 }} onChange={handleDisease}>
               {
                 diseases.map(disease=><Option value={disease.name}>{disease.name}</Option>)
               }
@@ -154,7 +185,7 @@ useEffect(() => {
             
            {
             continents?
-            <Select defaultValue="Continent" style={{ width: 120 }} onChange={handleChange}> 
+            <Select defaultValue="Select Continent" style={{ width: 120 }} onChange={onContinentChange}> 
                {
             continents.map(continent=><Option value={continent.name}>{continent.name}</Option>)
           }
@@ -167,43 +198,35 @@ useEffect(() => {
            <Col style={{padding:"10px 0px"}} xs={24} md={8}>
            {
             countries?
-            <Select defaultValue="Country" style={{ width: 120 }} onChange={handleChange}>
+            <Select defaultValue="Select Country" style={{ width: 120 }} onChange={handleCountry}>
                {
                   countries.map(country=><Option value={country.name}>{country.name}</Option>)
                 }
           </Select>
             :
-            <Select/>
+            <Select defaultValue="No Data" />
           }
            
            </Col>
            </Row>
            <Row>
+             
              <Col xs={24}>
-               <h1>Recorded cases in Country</h1>
+               <h1>Recorded cases in {selectedCountry?selectedCountry:'...'}</h1>
              </Col>
            </Row>
            <Row>
-             <Col xs={24} md={6}>
-               <RecordCard 
-               
-               />
-             </Col>
-             <Col xs={24} md={6}>
-               <RecordCard 
-               
-               />
-             </Col>
-             <Col xs={24} md={6}>
-               <RecordCard 
-               
-               />
-             </Col>
-             <Col xs={24} md={6}>
-               <RecordCard 
-               
-               />
-             </Col>
+
+              {
+                communities?
+                communities.map((community,index)=><Col key={index} xs={24} md={6}><RecordCard data={community}/></Col>)
+                
+                :
+                <Spin/>
+              }
+
+             
+             
            </Row>
            </div>
         </div>

@@ -17,17 +17,9 @@
     "username": {
       "type": "string"
     },
-    "password": {
-      "type": "password"
-    },
-    "users_permissions_users": {
-      "plugin": "users-permissions",
-      "collection": "user",
-      "via": "organization"
-    },
     "org_admin": {
-      "via": "organization",
-      "model": "org-admin"
+      "model": "org-admin",
+      "via": "organization"
     },
     "email": {
       "type": "email"
@@ -37,6 +29,13 @@
     },
     "blocked": {
       "type": "boolean"
+    },
+    "org_users": {
+      "via": "organization",
+      "collection": "org-user"
+    },
+    "key": {
+      "type": "string"
     }
   }
 }

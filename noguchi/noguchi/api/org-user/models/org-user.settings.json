@@ -1,8 +1,8 @@
 {
   "kind": "collectionType",
-  "collectionName": "communities",
+  "collectionName": "org_users",
   "info": {
-    "name": "Community",
+    "name": "Org User",
     "description": ""
   },
   "options": {
@@ -11,19 +11,18 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "Community": {
+    "username": {
       "type": "string"
     },
-    "district": {
-      "model": "district",
-      "via": "communities"
+    "organization": {
+      "model": "organization",
+      "via": "org_users"
     },
-    "forums": {
-      "collection": "forum",
-      "via": "community"
+    "key": {
+      "type": "string"
     },
     "surveys": {
-      "via": "community",
+      "via": "org_user",
       "collection": "survey"
     }
   }

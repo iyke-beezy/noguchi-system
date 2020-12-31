@@ -8,13 +8,26 @@ import axios from 'axios'
 const TagSet =(props)=>{
     const [view,setView]=useState(false);
     const selectedDiseaseTag=localStorage.getItem('diseaseTag');
+    const selectedLocationTag=localStorage.getItem('communityTag');
     const [diseases,setDiseases]=useState([])
+    const [communities,setCommunities]=useState([])
     useEffect(() => {
         axios.get('http://localhost:1337/diseases')
         .then(
           res =>{
             if(res.data){
               setDiseases(res.data)
+          }} )
+        .catch((error) => {
+          console.log(error);
+        })
+    },[]);
+    useEffect(() => {
+        axios.get('http://localhost:1337/communities')
+        .then(
+          res =>{
+            if(res.data){
+              setCommunities(res.data)
           }} )
         .catch((error) => {
           console.log(error);
@@ -32,11 +45,7 @@ const TagSet =(props)=>{
                     diseases?
                     <>
                     {
-                        diseases.map(disease=><TagBox onClick={()=>{
-                                                    setView(true);
-                                                    localStorage.setItem('diseaseTag',disease.name)
-                                                
-                                                }} disease={disease.name} numberOfForums={disease.forums.reply.length}/>)
+                        diseases.map(disease=><TagBox onClick={()=>{ setView(true);localStorage.setItem('diseaseTag',disease.id)  }} disease={disease.name} numberOfForums={disease.forums.length}/>)
                       }
                       </>
                     :
@@ -71,17 +80,20 @@ const TagSet =(props)=>{
          {
             !view?
             <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))'}}>
-                <TagBox onClick={()=>setView(true)} location='Accra'/>
-                <TagBox onClick={()=>setView(true)} location='Kono'/>
-                <TagBox onClick={()=>setView(true)} location='Tono'/>
-                <TagBox onClick={()=>setView(true)} location='Bono'/>
-                <TagBox onClick={()=>setView(true)} location='Ahafo'/>
-                <TagBox onClick={()=>setView(true)} location='Cape'/>
-                <TagBox onClick={()=>setView(true)} location='Tamale'/>
+                {
+                    communities?
+                    <>
+                    {
+                        communities.map(community=><TagBox onClick={()=>{ setView(true);localStorage.setItem('communityTag',community.id)  }} location={community.Community} numberOfForums={community.forums.length}/>)
+                      }
+                      </>
+                    :
+                    <Empty/>
+                }
             </div>:
             <div style={{display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center'}}>
                 <Avatar size='small'  style={{boxShadow:'3px 3px 2px #00000010'/* ,border:'0px solid darkgreen' */,cursor:'pointer',fontWeight:'bolder',color:'white',backgroundColor:'orange',alignSelf:'flex-start'}}  onClick={()=>setView(false)} icon={<CloseOutlined/>}/>
-                <ForumList />
+                <ForumList location={selectedLocationTag}/>
 
             </div>
 

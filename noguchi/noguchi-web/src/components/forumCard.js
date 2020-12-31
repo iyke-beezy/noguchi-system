@@ -10,7 +10,7 @@ const ForumCard=({onClick,data,onPress,...props})=>{
     }
     return(
         
-        <div onClick={whenClicked} style={{minWidth:'70%',width:'100%',cursor:'pointer',height:'auto',borderWidth:'2px',borderStyle:'solid',borderColor:'whitesmoke',borderRadius:5,padding:15}}>
+        <div onClick={whenClicked} style={{minWidth:'70%',marginTop:15,marginBottom:15,width:'100%',cursor:'pointer',height:'auto',borderWidth:'2px',borderStyle:'solid',borderColor:'whitesmoke',borderRadius:5,padding:15}}>
           
             <h3 style={{textAlign:'left'}}>{data.title}</h3>
             <p style={{textAlign:'left'}}>
@@ -18,7 +18,7 @@ const ForumCard=({onClick,data,onPress,...props})=>{
              </p>
             <div style={{display:'flex',flexDirection:'row',justifyContent:'flex-end'}}>
             <Button onClick={whenClicked}>
-            <span >{data.reply.length}reply</span>
+            <span >{data.reply.length}{data.reply.length>1?'replies':'reply'}</span>
             </Button>
             
             </div>

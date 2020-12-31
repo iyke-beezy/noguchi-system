@@ -30,7 +30,8 @@ const Home=()=>{
 
   const [diseases,setDiseases]=useState([])
     useEffect(() => {
-        axios.get('http://localhost:1337/diseases')
+      async function fetchDiseases(){
+        await axios.get('http://localhost:1337/diseases')
         .then(
           res =>{
             if(res.data){
@@ -39,31 +40,44 @@ const Home=()=>{
         .catch((error) => {
           console.log(error);
         })
+
+      }
+      fetchDiseases();
+        
     },[]);
     const [continents, setContinents] =useState([]);
     useEffect(() => {
-      axios.get('http://localhost:1337/continents')
-      .then(
-        res =>{
-          if(res.data){
-            setContinents(res.data)
-        }} )
-      .catch((error) => {
-        console.log(error);
-      })
+      async function fetchContinents(){
+        await axios.get('http://localhost:1337/continents')
+        .then(
+          res =>{
+            if(res.data){
+              setContinents(res.data)
+          }} )
+        .catch((error) => {
+          console.log(error);
+        })
+      }
+      fetchContinents();
+      
   },[]);
   
     const [countries, setCountries] =useState([]);
     useEffect(() => {
-      axios.get('http://localhost:1337/countries')
-      .then(
-        res =>{
-          if(res.data){
-            setCountries(res.data)
-        }} )
-      .catch((error) => {
-        console.log(error);
-      })
+      async function fetchCountries(){
+        await axios.get('http://localhost:1337/countries')
+        .then(
+          res =>{
+            if(res.data){
+              setCountries(res.data)
+          }} )
+        .catch((error) => {
+          console.log(error);
+        })
+      }
+
+      fetchCountries();
+      
   },[]);
     const [hidden,setHidden]=useState(true);
    const [state, setState] = useState({
@@ -73,17 +87,26 @@ const Home=()=>{
     secondPaneOpen:false,
     thirdPaneOpen:false
   });
+  const [continent, setContinent] =useState('');
+  const [country, setCountry] = useState('');
+  const [continentJson,setContinentJson]=useState({})
+  
     const [disease, setDisease] =useState('Schistosomiasis');
     const handleChange = (event) => {
       setDisease(event.target.value);
     
   };
-  
-  const [continent, setContinent] =useState('AFRICA');
-  
-  const [country, setCountry] = useState('GHANA');
+  const handleContinent = (event) => {
+    setContinent(event.target.value);
+    localStorage.removeItem('currentContinent')
+    localStorage.setItem('currentContinent',JSON.stringify(continents.filter(continent=>continent.name==event.target.value)))
+};
+  console.log(continentJson)
+ 
   const {Header,Footer}=Layout;
+
   
+ 
   const marks = {
     2015: '2015',
     2016: '2016',
@@ -281,7 +304,16 @@ const Home=()=>{
           }
         </Select>
           :
-          <Select/>
+          <Select
+          variant="outlined"
+          labelId="demo-simple-select-outlined-label"
+          id="demo-simple-select-outlined"
+          value={disease}
+          style={{width:'80%',textAlign:'left',margin:2}}
+          onChange={handleChange}
+          >
+            <MenuItem value={disease}>{disease}</MenuItem>
+          </Select>
         }
         {continents?
         <Select 
@@ -297,7 +329,16 @@ const Home=()=>{
           }
         </Select>
           :
-          <Select/>
+          <Select
+          variant="outlined"
+          labelId="demo-simple-select-outlined-label"
+          id="demo-simple-select-outlined"
+          value={continent}
+          style={{width:'80%',textAlign:'left',margin:2}}
+          onChange={(e)=>setContinent(e.target.value)}
+          >
+            <MenuItem value={continent}>{continent}</MenuItem>
+          </Select>
         }
         {countries?
         <Select 
@@ -313,7 +354,16 @@ const Home=()=>{
           }
         </Select>
           :
-          <Select/>
+          <Select
+          variant="outlined"
+          labelId="demo-simple-select-outlined-label"
+          id="demo-simple-select-outlined"
+          value={country}
+          style={{width:'80%',textAlign:'left',margin:2}}
+          onChange={(e)=>setCountry(e.target.value)}
+          >
+            <MenuItem value={country}>{country}</MenuItem>
+          </Select>
         }
         {/* <Select 
         variant="outlined"
@@ -408,7 +458,7 @@ const Home=()=>{
         variant="outlined"
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
-          value={disease}
+          defaultValue='Select Disease'
           style={{width:'90%',textAlign:'left',margin:2}}
           onChange={handleChange}
         >
@@ -424,9 +474,9 @@ const Home=()=>{
         variant="outlined"
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
-          value={continent}
+          defaultValue='Select Continent'
           style={{width:'90%',textAlign:'left',margin:2}}
-          onChange={(e)=>setContinent(e.target.value)}
+          onChange={handleContinent}
         >
           {
             continents.map(continent=><MenuItem value={continent.name}>{continent.name}</MenuItem>)
@@ -438,9 +488,10 @@ const Home=()=>{
         {countries?
         <Select 
         variant="outlined"
+        defaultValue='Select Country'
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
-          value={country}
+          
           style={{width:'90%',textAlign:'left',margin:2}}
           onChange={(e)=>setCountry(e.target.value)}
         >
@@ -463,14 +514,11 @@ const Home=()=>{
         </Col>
 
         <Col  flex='auto' style={{position:'relative'}}>       
-               
-                <Mappings/>  
-                <div style={{position:'absolute',bottom:'0.2%',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center', left:1 ,margin:'50px', width:'min(300px,70vw)', backgroundColor:'white',padding:10,borderRadius:15}}>
-                  <h4 style={{textAlign:'left',width:'100%'}}>Year</h4>
-                  <Slider min={2015} max={2021} tooltipPlacement='bottom'  /* tooltipVisible={true} */ style={{width:'100%',color:'wheat'}} defaultValue={2020}/>
-                </div>
-                
-               
+                   <Mappings  country={country}/>  
+                  <div style={{position:'absolute',bottom:'0.2%',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center', left:1 ,margin:'50px', width:'min(300px,70vw)', backgroundColor:'white',padding:10,borderRadius:15}}>
+                    <h4 style={{textAlign:'left',width:'100%'}}>Year</h4>
+                    <Slider min={2015} max={2021} tooltipPlacement='bottom'  /* tooltipVisible={true} */ style={{width:'100%',color:'wheat'}} defaultValue={2020}/>
+                  </div>  
         </Col>
         <SlidingPane
         style={{zIndex:100000000,height:'10%',position:'absolute'}}
