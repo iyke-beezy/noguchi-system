@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "communities",
   "info": {
-    "name": "Community"
+    "name": "Community",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -18,12 +19,15 @@
       "via": "communities"
     },
     "answers": {
-      "via": "community",
-      "collection": "answer"
+      "collection": "answer",
+      "via": "community"
     },
     "forums": {
-      "via": "community",
-      "collection": "forum"
+      "collection": "forum",
+      "via": "community"
+    },
+    "population": {
+      "type": "integer"
     }
   }
 }

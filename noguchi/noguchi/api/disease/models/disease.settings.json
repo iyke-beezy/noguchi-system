@@ -14,10 +14,6 @@
     "name": {
       "type": "string"
     },
-    "cases": {
-      "collection": "case",
-      "via": "disease"
-    },
     "surveys": {
       "collection": "survey",
       "via": "diseases"
@@ -28,6 +24,10 @@
     },
     "questions": {
       "collection": "question"
+    },
+    "case": {
+      "via": "disease",
+      "model": "case"
     }
   }
 }

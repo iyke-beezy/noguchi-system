@@ -6,7 +6,7 @@ import 'leaflet/dist/leaflet.css';
 import {Paper} from '@material-ui/core'
 /* import Layers from './newTon'
 import Choro from './choro' */
-import custom from '../../controls/boundary/customs.geo.json'
+import custom from '../../controls/boundary/ghanaGeo.json'
 import Choropleth from 'react-leaflet-choropleth'
 
 

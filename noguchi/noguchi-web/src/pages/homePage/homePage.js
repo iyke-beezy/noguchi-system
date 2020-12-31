@@ -1,4 +1,4 @@
-import React ,{useState}from 'react';
+import React ,{useState,useEffect}from 'react';
 import { makeStyles,useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import {Paper,Chip,Avatar,Badge,ListItemSecondaryAction,Select,MenuItem,FormControl,InputLabel,FormHelperText, Button} from '@material-ui/core';
@@ -108,6 +108,10 @@ localStorage.setItem('country','all');
 const [continent, setContinent] = React.useState('africa');
 
 const [country, setCountry] = React.useState('all');
+useEffect(()=>{
+ re
+  
+},[])
 
   return (
     <div className={classes.root}>

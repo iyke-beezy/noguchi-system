@@ -34,8 +34,8 @@
       "model": "disease"
     },
     "community": {
-      "model": "community",
-      "via": "forums"
+      "via": "forums",
+      "model": "community"
     }
   }
 }
