@@ -4,12 +4,6 @@ import { Map, Marker,TileLayer,Popup} from 'react-leaflet';
 import Boundary from '../../controls/boundary/boundary';
 import 'leaflet/dist/leaflet.css';
 import {Paper} from '@material-ui/core'
-<<<<<<< HEAD
-/* import Layers from './newTon'
-import Choro from './choro' */
-import custom from '../../controls/boundary/ghanaGeo.json'
-=======
->>>>>>> 5c4d4c55239a8b0a0c9640fd59cc270eb99e851e
 import Choropleth from 'react-leaflet-choropleth'
 import africa from './../../controls/boundary/africa.geo.json'
 import axios from 'axios'
