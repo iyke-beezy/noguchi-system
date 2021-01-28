@@ -12,7 +12,7 @@ const RecordCard=(props)=>{
  */  }
  const handleClick=()=>{
   if(props.data.surveys){
-       localStorage.setItem('expandSurvey',props.data.surveys[0].surveyUID);
+       localStorage.setItem('expandedCommunity',props.data.id);
        window.location.href='/details';
       }
  }
@@ -21,7 +21,7 @@ const RecordCard=(props)=>{
             <h1 >{props.data.Community}</h1>
             
             
-            <span>5% prevalence</span>
+            <span>{props.data.surveys.length} surveys</span>
             
 
         </Card>
@@ -34,6 +34,8 @@ const RecordCases=()=>{
   const [selectedContinent,setSelectedContinent]=useState('');
   const [selectedDisease,setSelectedDisease]=useState('');
   const [diseases,setDiseases]=useState([])
+  const [filteredCommunities,setFilteredCommunities]=useState([])
+  const [filteredCountries,setFilteredCountries]=useState([])
   useEffect(() => {
       axios.get('http://localhost:1337/diseases')
       .then(
@@ -65,11 +67,13 @@ const RecordCases=()=>{
       res =>{
         if(res.data){
           setCountries(res.data)
+          
       }} )
     .catch((error) => {
       console.log(error);
     })
 },[]);
+console.log(countries)
 const [communities, setCommunities] =useState([]);
   useEffect(() => {
     axios.get('http://localhost:1337/communities')
@@ -114,7 +118,9 @@ useEffect(() => {
 
   const { Search } = Input;
   const { Option } = Select;
-  const onSearch = value => console.log(value);
+  const onSearch = value => {
+    setFilteredCommunities(communities.filter(community=>community.Community===value))
+  };
   function handleChange(value) {
     console.log(`selected ${value}`);
   }
@@ -123,18 +129,32 @@ useEffect(() => {
   }
   const handleCountry=(value)=>{
     setSelectedCountry(value)
-  }
+    let country=countries.filter(country=>country.name===value)
+      let rejiin=country[0]?.regions
+      
+      let id=rejiin.map(rej=>rej.id)
+     let dis=districts.filter(district=>id.includes(district.region.id))
+     if(dis[0]?.communities.length>0){
+     setFilteredCommunities(dis[0]?.communities) 
+    }else{
+      setFilteredCommunities([]) 
+    }
+      
+    }
+  
   const onContinentChange=(value)=>{
-    console.log(value)
+
     setSelectedContinent(value)
-    const results=countries.filter(country=>country.continent.name===value);
-    console.log(results);
-    if (results.length>0){
+    setFilteredCountries(countries.filter(country=>country.continent.name===value));
+    console.log(filteredCountries);
+    setFilteredCommunities([])
+    setSelectedCountry('...')
+    /* if (results.length>0){
       const nouveau=results.map(result=>({name:result.name}));
       setCountries(nouveau);
     }else{
       setCountries([]);
-    }
+    } */
   }
  
     const{Header} = Layout;
@@ -155,8 +175,7 @@ useEffect(() => {
                     /* onChange={onChange}
                     onFocus={onFocus}
                     onBlur={onBlur}*/
-                    onSearch={onSearch} 
-            
+                    onChange={onSearch}
             
             >
               {
@@ -197,14 +216,14 @@ useEffect(() => {
            </Col>
            <Col style={{padding:"10px 0px"}} xs={24} md={8}>
            {
-            countries?
+            filteredCountries.length>0?
             <Select defaultValue="Select Country" style={{ width: 120 }} onChange={handleCountry}>
                {
                   countries.map(country=><Option value={country.name}>{country.name}</Option>)
                 }
           </Select>
             :
-            <Select defaultValue="No Data" />
+            <Select defaultValue='No Data'  />
           }
            
            </Col>
@@ -218,11 +237,14 @@ useEffect(() => {
            <Row>
 
               {
-                communities?
-                communities.map((community,index)=><Col key={index} xs={24} md={6}><RecordCard data={community}/></Col>)
+                filteredCommunities.length>0?
+                communities.map((community,index)=><Col key={index} xs={24} md={6}><RecordCard key={index} data={community}/></Col>)
                 
                 :
-                <Spin/>
+                <Col xs={24}>
+                  <Empty description='Search for a Community'/>
+                </Col>
+                
               }
 
              

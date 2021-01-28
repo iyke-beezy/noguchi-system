@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
 import { useTheme } from '@material-ui/core/styles';
-import { Button, Card, Input, Modal, Select, Tabs ,Avatar,Layout, Empty} from 'antd';
+import { Button, Card, Input, Modal, Select, Tabs ,Avatar,Layout, Empty,Form,Result} from 'antd';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
 import Legend, { Plot } from '../../controls/legend/legend';
 import {EditFilled ,UserOutlined,ExportOutlined,UserAddOutlined} from '@ant-design/icons';
 import MainHeader from '../../components/mainHeader';
+import Axios from 'axios';
+
 const {TabPane}=Tabs;
 const {Option}=Select;
 const {Header}=Layout;
@@ -87,12 +89,41 @@ const OrgAdminPage =()=>{
         createData('24:00', undefined),
       ]
     
+    const [username,setUsername]=useState('')
+    const [password,setPassword]=useState('')
     const theme = useTheme();
     const selectedOrg=JSON.parse(localStorage.getItem('selectedOrg'))[0];
     let selectedAccounts=selectedOrg.org_users
+
+    const createOrgUser=()=>{
+      Axios.post('http://localhost:1337/org-users', 
+      {
+        username: username,
+        key: password,
+        organization:JSON.parse(localStorage.getItem('selectedOrg'))[0].id
+      }
+      )
+        .then(
+          res =>{
+            if(res.data){
+              console.log(res.data)
+          }}
+
+        
+        )
+        .catch((error) => {
+          console.log(error);
+        })
+    
+    }
+    let me=localStorage.getItem('org_admin')
     return(
       <div className='profilePage' style={{backgroundColor:'white'}}>
        <MainHeader/>
+
+       {
+                me?
+                <>
         <div style={{display:'flex',marginTop:'10vh',width:'100%',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
         <h1 style={{fontSize:'max(3vw,25px)',width:'80%',color:'grey'}}>{selectedOrg.username} ADMIN DASHBOARD</h1>
         <div style={{width:'80%'}}>
@@ -138,34 +169,62 @@ const OrgAdminPage =()=>{
                         
                     </TabPane>
                     <TabPane tab="New Profile" key="3" >
-                    <div style={{display:'flex',flexDirection:'column',height:'55vh',alignItems:'flex-start'}}>
+                    <Form layout='vertical' onFinish={createOrgUser} style={{display:'flex',flexDirection:'column',height:'55vh',alignItems:'flex-start'}}>
 
                         <h1 style={{fontSize:'min(35px,8vw)',color:'lightslategray'}}>New Profile</h1> 
 
                         
                         <Avatar shape='square' size='large' icon={<UserAddOutlined/>} />
                         <label style={{marginTop:10,color:'lightgray'}}>Profile Name</label>
+                        <Form.Item
+                          name="username"
+                          rules={[{ required: true, message: 'Please input profile name!' }]}
+                        >
                         <Input
                         type='text'
                         placeholder='Enter profile name'
                         size='large'
+                        value={username}
                         style={{width:'max(50%,55vw)',margin:5}}
+                        onChange={(e)=>setUsername(e.target.value)}
                         />  
+                        </Form.Item>
                         <label style={{marginTop:15,color:'lightgray'}}>Profile Key</label>
+                        <Form.Item
+                        
+                          name="password"
+                          rules={[{ required: true, message: 'Please input profile key!' }]}
+                        >
                         <Input
                         type='text'
                         placeholder='Enter profile key'
                         size='large'
+                        value={password}
                         style={{width:'max(45%,50vw)',margin:5}}
-                        />  
-                       <Button type='primary' style={{alignSelf:'flex-end',height:45,marginTop:30,backgroundColor:'lightslategray',borderColor:'lightslategray'}}>Create Profile</Button>
-                    </div>
+                        onChange={(e)=>setPassword(e.target.value)}
+                        /> 
+                        </Form.Item> 
+                       <Button type='primary' htmlType='submit' style={{alignSelf:'flex-end',height:45,marginTop:30,backgroundColor:'lightslategray',borderColor:'lightslategray'}}>Create Profile</Button>
+                    </Form>
                         
                     </TabPane>
                     </Tabs>
                   
         </div>
         </div>
+        </>
+                :
+                <>
+                <Result
+                    style={{marginTop:'8vh'}}
+                    status="403"
+                    title="Unauthorized Access"
+                    subTitle="Sorry, you are not authorized to access this page."
+                    extra={<Button size='large' onClick={()=>window.location.href='/home'} type="primary">Back to Home</Button>}
+                />
+                </>
+                
+            }
         </div>
 
     );

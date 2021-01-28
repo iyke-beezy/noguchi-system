@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from "react";
-import { Input, Card, Space, Button ,Avatar,Tabs, Radio,Checkbox,Layout} from 'antd';
+import { Input, Card, Space, Button ,Avatar,Tabs, Radio,Checkbox,Layout, Result} from 'antd';
 import "antd/dist/antd.css";
 import '../../App.css';
 import axios from 'axios'
@@ -38,7 +38,10 @@ const OtherProfile=()=>{
     return(
         <div className='profilePage'>
             <MainHeader/>
-            <Headers/>
+            {
+                me?
+                <>
+                <Headers/>
             <div className='profileMidSection'>
             
                     <Card bordered style={{flex:0.3,height:'auto',minWidth:'min(95vw,350px)',backgroundColor:'white',textAlign:'left',display:'flex',flexDirection:'column',justifyContent:'space-between',alignItems:'flex-start',flexShrink:0,margin:20,/* boxShadow:'3px 3px 20px #00000010' */}}>
@@ -58,7 +61,16 @@ const OtherProfile=()=>{
                         </h3>
                         <Input type='password' value={me.password} disabled={disability} size='large' onChange={(e)=>{setOrgPassword(e.target.value)}} style={{marginBottom:15,fontSize:17,backgroundColor:'transparent',borderWidth:3}}/>
                         <Button type='primary' size='large' onClick={()=>{setDisability(!disability)}}  block style={{marginBottom:30,backgroundColor:'#6461ff'}}>{disability?'Edit Profile':'Save'}</Button>
-                        <Button type='primary' size='large' onClick={()=>{window.location.href='/';}} danger block>Logout</Button>
+                        <Button type='primary' size='large' 
+                        onClick={()=>{
+                            localStorage.removeItem('currentUser');
+                            
+                            window.location.href='/';
+                        }} 
+                        danger 
+                        block>
+                        Logout
+                        </Button>
 
                     </Card>
                 {/* <div style={{flex:0.45,display:'flex',flexDirection:'column',margin:20,minWidth:350,height:'auto',justifyContent:'space-between'}}>
@@ -136,7 +148,20 @@ const OtherProfile=()=>{
                 
             </div>
             
+            </>
+                :
+                <>
+                <Result
+                    style={{marginTop:'8vh'}}
+                    status="403"
+                    title="403"
+                    subTitle="Sorry, you are not authorized to access this page."
+                    extra={<Button size='large' onClick={()=>window.location.href='/login'} type="primary">Go to Login</Button>}
+                />
+                </>
                 
+            }
+        
 
         </div>
     );

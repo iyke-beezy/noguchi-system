@@ -11,9 +11,6 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "answers": {
-      "collection": "answer"
-    },
     "surveys": {
       "collection": "survey"
     }

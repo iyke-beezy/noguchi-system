@@ -1,19 +1,32 @@
 import React from 'react';
 /* import Legend from './legend' */
-import { Map, Marker,TileLayer,Popup} from 'react-leaflet';
-import Boundary from '../../controls/boundary/boundary';
-import 'leaflet/dist/leaflet.css';
-import {Paper} from '@material-ui/core'
+import {useMap, MapContainer, Marker,TileLayer,Popup} from 'react-leaflet';
+/* import Boundary from '../../controls/boundary/boundary';
+ */import 'leaflet/dist/leaflet.css';
+import {Button, Paper} from '@material-ui/core'
 import Choropleth from 'react-leaflet-choropleth'
 import africa from './../../controls/boundary/africa.geo.json'
 import axios from 'axios'
+
+
+function ChangeView({ center, zoom }) {
+  const map = useMap();
+  map.setView(center, zoom);
+  return null;
+}
+
+
+
 class Mappings extends React.Component {
 state={
       lat: 7.946527,
       lng: -1.023194,
-      zoom: 6,
+      zoom: 2,
       json:africa
     }
+
+    
+    
    async componentDidMount(){
     await axios.get('http://localhost:1337/communities')
     .then(
@@ -27,6 +40,7 @@ state={
     }
   
   render() {
+    var selected=JSON.parse(localStorage.getItem('currentContinent'))
     const style = {
       fillColor: '#F28F3B',
       weight: 2,
@@ -36,6 +50,7 @@ state={
       fillOpacity: 0.5
   };
 
+  
 
   
     const data=[
@@ -65,7 +80,7 @@ state={
     const position = [this.state.lat, this.state.lng];
     return (
  
-      <Map center={position}  zoom={this.state.zoom} maxBounds={[[11.222,-3.274],[4.456,1.230]]} maxZoom={18}  >
+      <MapContainer center={position}  zoom={this.state.zoom} >
 {/*          <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url='https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'
@@ -95,8 +110,8 @@ state={
               </div>
             </Popup>)}
             
-          <Boundary style={{position:'absolute',zIndex:-10}} jason={this.state.json} ></Boundary>
-{/*           <Choropleth
+         {/*   <Boundary style={{position:'absolute',zIndex:-10}} jason={this.state.json} ></Boundary>
+         <Choropleth
             data={custom}
             valueProperty={(feature) => feature.properties.value}
             //visible={(feature) => feature.id !== active.id}
@@ -108,7 +123,7 @@ state={
             ref={(el) => this.choropleth = el.leafletElement}
           /> */}
 
-      </Map>
+      </MapContainer>
       
    
 
@@ -116,3 +131,61 @@ state={
   }
 }
 export default Mappings;
+
+
+export class Mapp extends React.Component {
+  state={
+        lat:7.946527,
+        lng: -1.023194,
+        zoom: 3,
+        json:africa
+      }
+  
+      
+    /*  async componentDidMount(){
+      await axios.get('http://localhost:1337/communities')
+      .then(
+        res =>{
+          if(res.data){
+            /* setDiseases(res.data) 
+        }} )
+      .catch((error) => {
+        console.log(error);
+      })
+      } */
+      
+    render() {
+      console.log(this.props.center)
+      const style = {
+        fillColor: '#F28F3B',
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.5
+    };
+    const changeCenter=()=>{
+      this.setState(() => ({
+        lat:51.505, 
+        
+        lng:-0.09
+      }));
+      console.log(this.state.lat,this.state.lng)
+    }
+      /* const position = [this.state.lat, this.state.lng]; */
+
+      return (
+      
+        <MapContainer center={this.props.center.lat && this.props.center.long?[this.props.center.lat, this.props.center.long]:[this.state.lat, this.state.lng]}  zoom={this.state.zoom} scrollWheelZoom={false} >
+          <ChangeView center={this.props.center.lat && this.props.center.long?[this.props.center.lat, this.props.center.long]:[this.state.lat, this.state.lng]}  zoom={this.state.zoom} /> 
+          <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url='https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'
+          /> 
+        </MapContainer>
+       
+     
+  
+      );
+    }
+  }

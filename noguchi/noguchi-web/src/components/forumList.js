@@ -105,7 +105,7 @@ const ForumList =(props)=>{
                 {
                   
                     forums?
-                    forums.map((forum)=><ForumCard id={forum.id} data={forum}  onClick={()=>setMore(true)}/>)
+                    forums.map((forum)=><ForumCard id={forum.id} key={forum.id} data={forum}  onClick={()=>setMore(true)}/>)
                     :
                    <Empty description='No Forums'/>
                 }

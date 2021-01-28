@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Input, Card, Space, Button ,Avatar, Form} from 'antd';
+import { message,Input, Card, Space, Button ,Avatar, Form} from 'antd';
 import "antd/dist/antd.css";
 import './components.css'
 import {UserOutlined,LockOutlined,KeyOutlined} from '@ant-design/icons';
@@ -28,14 +28,23 @@ const handleSubmit=(e)=>{
       paramsSerializer:(params)=>qs.stringify(params,{arrayFormat:'repeat'})
     }
   )
-        .then(response => {
-          localStorage.setItem('selectedOrg',JSON.stringify(response.data))
+   .then(response => {
+          
           console.log(response.data)
-          window.location.href='/orgAccounts'
+          if(response.data.length>0){
+            localStorage.setItem('selectedOrg',JSON.stringify(response.data))
+            window.location.href='/orgAccounts'
+          }
+          else{
+            
+            message.error('Organization Not Found')
+          }
+         
         
         }
         )
         .catch((error) => {
+          
           console.log(error);
         })
     
@@ -56,6 +65,7 @@ const  handleSubmit2=(e)=>{
   })
   .catch(error => {
     // Handle error.
+    message.error('Incorrect Details')
     console.log('An error occurred:', error.response);
   });
   /* axios.post('http://localhost:1337/user',)
@@ -131,18 +141,28 @@ return(
     </Space>
     </Form>
     :
-    <Form>
+    <Form layout='vertical' onFinish={handleSubmit}>
     <Space direction='vertical' size={10}>
     <h1 style={{fontSize:30,fontWeight:'bold',textAlign:'left'}}>Org Sign In</h1>
     <div style={{display:'flex',flexDirection:'row',justifyContent:'flex-start'}}><h4 style={{fontSize:14,color:'#8a2be290',textAlign:'left',marginRight:6,cursor:'pointer'}} onClick={()=>setLoginType('org')} >Org Login</h4><span style={{color:'blue'}}>/</span><h4 style={{fontSize:14,textAlign:'left',color:'lightblue',marginLeft:6,cursor:'pointer'}} onClick={()=>setLoginType('other')}>Other</h4></div>
+    <Form.Item
+        label="Org Username"
+        name="org_username"
+        rules={[{ required: true, message: "Please input the organization's username!" }]}
+      >
     <Input 
     size="large"
-  
     className='formInput'
     onChange={(e)=>{setUsername(e.target.value)}}
     placeholder="Enter org username" 
     prefix={<UserOutlined className="site-form-item-icon" />} 
     />
+    </Form.Item>
+    <Form.Item
+        label="Org Password"
+        name="org_password"
+        rules={[{ required: true, message: "Please input the organization's password!" }]}
+      >
     <Input 
     size="large"
     className='formInput'
@@ -150,12 +170,12 @@ return(
     placeholder="Enter org password" 
     prefix={<LockOutlined className="site-form-item-icon" />} 
     />
+    </Form.Item>
     <Button 
     size='large'
     block
     style={{height:55,backgroundColor:'#247aeb',color:'white',marginTop:20,borderRadius:8}}
-    
-        onClick={()=>handleSubmit()}
+    htmlType='submit'
     >
     Sign In
     </Button>

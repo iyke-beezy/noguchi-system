@@ -9,7 +9,12 @@ export const MiniMiniHeader=(props)=>{
   const content = (
       <div style={{display:'flex',flexDirection:'column'}}>
         <Button className='popoverButtons' type='link' size='large' onClick={()=>{window.location.href='/profile'}}><UserOutlined/>Profile</Button>
-        <Button className='popoverButtons' type='link' size='large' danger onClick={()=>props.onClick()}><ExportOutlined/>Logout</Button>
+        <Button className='popoverButtons' type='link' size='large' danger 
+        onClick={()=>{
+          localStorage.removeItem('current_user');
+          localStorage.removeItem('currentUser');
+          window.location.href='/';
+        }}><ExportOutlined/>Logout</Button>
       </div>
     );
   return(
