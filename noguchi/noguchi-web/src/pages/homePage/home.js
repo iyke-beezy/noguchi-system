@@ -2,9 +2,9 @@ import {Modal, Button, Space,List ,Layout,Row,Col, Card,Slider} from 'antd'
 import React ,{useState,useEffect} from 'react';
 import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
-import {Paper,Badge,Select,MenuItem,Typography} from '@material-ui/core';
+import {Paper,Badge,Select,MenuItem,Typography,FormControl,InputLabel} from '@material-ui/core';
 import axios from 'axios';
-import Mappings from '../Map/map'
+import Mappings, { Mapp } from '../Map/map'
 import './home.css'
 import MainHeader from '../../components/mainHeader';
 
@@ -70,6 +70,7 @@ const Home=()=>{
           res =>{
             if(res.data){
               setCountries(res.data)
+            
           }} )
         .catch((error) => {
           console.log(error);
@@ -88,10 +89,12 @@ const Home=()=>{
     thirdPaneOpen:false
   });
   const [continent, setContinent] =useState('');
+  const [center, setCenter] =useState({});
   const [country, setCountry] = useState('');
+  const [filteredCountries, setFilteredCountries] = useState([]);
   const [continentJson,setContinentJson]=useState({})
-  
-    const [disease, setDisease] =useState('Schistosomiasis');
+  const [year,setYear]=useState('')
+    const [disease, setDisease] =useState('');
     const handleChange = (event) => {
       setDisease(event.target.value);
     
@@ -100,6 +103,10 @@ const Home=()=>{
     setContinent(event.target.value);
     localStorage.removeItem('currentContinent')
     localStorage.setItem('currentContinent',JSON.stringify(continents.filter(continent=>continent.name==event.target.value)))
+    let contt=continents.filter(continent=>continent.name==event.target.value)
+    setFilteredCountries(countries.filter(country=>country.continent.name===event.target.value))
+    let cent=contt[0]?.center
+    setCenter(cent)
 };
   console.log(continentJson)
  
@@ -291,118 +298,79 @@ const Home=()=>{
         <div style={{zIndex:10000000000}}>
         <div style={{display:'flex',alignSelf:'center',marginTop:15,flexDirection:'column',height:'20vh',justifyContent:'space-between',alignItems:'center'}}>
         {diseases?
+        <FormControl style={{width:'80%',margin:2}}>
+        <InputLabel id="demo-simple-select-autowidth-label" style={{paddingLeft:5}}>Select Disease</InputLabel>
         <Select 
         variant="outlined"
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
+          label='Select Disease'
+        
           value={disease}
-          style={{width:'80%',textAlign:'left',margin:2}}
           onChange={handleChange}
         >
           {
-            diseases.map(disease=><MenuItem value={disease.name}>{disease.name}</MenuItem>)
+            diseases.map((disease,index)=><MenuItem key={index} value={disease.name}>{disease.name}</MenuItem>)
           }
         </Select>
+        </FormControl>
           :
-          <Select
-          variant="outlined"
-          labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined"
-          value={disease}
-          style={{width:'80%',textAlign:'left',margin:2}}
-          onChange={handleChange}
-          >
-            <MenuItem value={disease}>{disease}</MenuItem>
-          </Select>
+          <FormControl style={{width:'80%',margin:2}}>
+            <InputLabel id="demo-simple-select-autowidth-label" style={{paddingLeft:5}}>Select Disease</InputLabel>
+                 <Select/>
+          </FormControl>
         }
         {continents?
+         <FormControl style={{width:'80%',margin:2}}>
+         <InputLabel id="demo-simple-select-autowidth-label" style={{paddingLeft:5}}>Select Continent</InputLabel>
         <Select 
         variant="outlined"
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
+          label='Select Continent'
+     
           value={continent}
-          style={{width:'80%',textAlign:'left',margin:2}}
-          onChange={(e)=>setContinent(e.target.value)}
+          onChange={handleContinent}
         >
           {
-            continents.map(continent=><MenuItem value={continent.name}>{continent.name}</MenuItem>)
+            continents.map((continent,index)=><MenuItem key={index} value={continent.name}>{continent.name}</MenuItem>)
           }
         </Select>
+        </FormControl>
           :
-          <Select
-          variant="outlined"
-          labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined"
-          value={continent}
-          style={{width:'80%',textAlign:'left',margin:2}}
-          onChange={(e)=>setContinent(e.target.value)}
-          >
-            <MenuItem value={continent}>{continent}</MenuItem>
-          </Select>
+          <FormControl style={{width:'80%',margin:2}}>
+            <InputLabel id="demo-simple-select-autowidth-label" style={{paddingLeft:5}}>Select Continent</InputLabel>
+                 <Select/>
+          </FormControl>
         }
-        {countries?
+        {filteredCountries?
+        <FormControl style={{width:'80%',margin:2}}>
+        <InputLabel id="demo-simple-select-autowidth-label" style={{paddingLeft:5}}>Select Country</InputLabel>
         <Select 
         variant="outlined"
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
           value={country}
-          style={{width:'80%',textAlign:'left',margin:2}}
-          onChange={(e)=>setCountry(e.target.value)}
-        >
-          {
-            countries.map(country=><MenuItem value={country.name}>{country.name}</MenuItem>)
-          }
-        </Select>
-          :
-          <Select
-          variant="outlined"
-          labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined"
-          value={country}
-          style={{width:'80%',textAlign:'left',margin:2}}
-          onChange={(e)=>setCountry(e.target.value)}
-          >
-            <MenuItem value={country}>{country}</MenuItem>
-          </Select>
-        }
-        {/* <Select 
-        variant="outlined"
-          labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined"
-          value={continent}
-          style={{width:'80%',textAlign:'left',margin:2}}
-          onChange={(e)=>setContinent(e.target.value)}
-        >
-          <MenuItem value={'africa'}>Africa</MenuItem>
-          <MenuItem value={'europe'}>Europe</MenuItem>
-          <MenuItem value={'america'}>America</MenuItem>
-        </Select>
-        <Select 
-        variant="outlined"
-        
-          labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined"
-          value={country}
-          style={{width:'80%',textAlign:'left',margin:2}}
-          onChange={(e)=>{
-            setCountry(e.target.value)
-            localStorage.setItem('country',e.target.value)
           
-          }}
+          onChange={(e)=>setCountry(e.target.value)}
         >
-          <MenuItem value={'all'}>All</MenuItem>
-          <MenuItem value={'ghana'}>Ghana</MenuItem>
-          <MenuItem value={'nigeria'}>Nigeria</MenuItem>
-          <MenuItem value={'togo'}>Togo</MenuItem>
+          {
+            filteredCountries.map((filteredCountry,index)=><MenuItem key={index} value={filteredCountry.name}>{filteredCountry.name}</MenuItem>)
+          }
         </Select>
- */}
+        </FormControl>
+          :
+          <FormControl style={{width:'80%',margin:2}}>
+            <InputLabel id="demo-simple-select-autowidth-label" style={{paddingLeft:5}}>Select Country</InputLabel>
+                 <Select/>
+          </FormControl>
+         
+        }
        <Button style={{marginTop:"10px"}} onClick={() => setState({ isPaneOpenLeft: !state.isPaneOpenLeft })}>
          Done
        </Button>
         </div>
-       
-       
-          </div>
+       </div>
       </SlidingPane>
       </Row>
    
@@ -454,53 +422,73 @@ const Home=()=>{
        
         <div style={{display:'flex',alignSelf:'center',marginTop:15,flexDirection:'column',height:'18vh',justifyContent:'space-between',alignItems:'center'}}>
         {diseases?
+        <FormControl style={{width:'90%',margin:2}}>
+        <InputLabel id="demo-simple-select-autowidth-label" style={{paddingLeft:5}}>Select Disease</InputLabel>
         <Select 
         variant="outlined"
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
-          defaultValue='Select Disease'
-          style={{width:'90%',textAlign:'left',margin:2}}
+          label='Select Disease'
+        
+          value={disease}
           onChange={handleChange}
         >
           {
-            diseases.map(disease=><MenuItem value={disease.name}>{disease.name}</MenuItem>)
+            diseases.map((disease,index)=><MenuItem key={index} value={disease.name}>{disease.name}</MenuItem>)
           }
         </Select>
+        </FormControl>
           :
-          <Select/>
+          <FormControl style={{width:'90%',margin:2}}>
+            <InputLabel id="demo-simple-select-autowidth-label" style={{paddingLeft:5}}>Select Disease</InputLabel>
+                 <Select/>
+          </FormControl>
         }
         {continents?
+         <FormControl style={{width:'90%',margin:2}}>
+         <InputLabel id="demo-simple-select-autowidth-label" style={{paddingLeft:5}}>Select Continent</InputLabel>
         <Select 
         variant="outlined"
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
-          defaultValue='Select Continent'
-          style={{width:'90%',textAlign:'left',margin:2}}
+          label='Select Continent'
+     
+          value={continent}
           onChange={handleContinent}
         >
           {
-            continents.map(continent=><MenuItem value={continent.name}>{continent.name}</MenuItem>)
+            continents.map((continent,index)=><MenuItem key={index} value={continent.name}>{continent.name}</MenuItem>)
           }
         </Select>
+        </FormControl>
           :
-          <Select/>
+          <FormControl style={{width:'90%',margin:2}}>
+            <InputLabel id="demo-simple-select-autowidth-label" style={{paddingLeft:5}}>Select Continent</InputLabel>
+                 <Select/>
+          </FormControl>
         }
-        {countries?
+        {filteredCountries?
+        <FormControl style={{width:'90%',margin:2}}>
+        <InputLabel id="demo-simple-select-autowidth-label" style={{paddingLeft:5}}>Select Country</InputLabel>
         <Select 
         variant="outlined"
-        defaultValue='Select Country'
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
+          value={country}
           
-          style={{width:'90%',textAlign:'left',margin:2}}
           onChange={(e)=>setCountry(e.target.value)}
         >
           {
-            countries.map(country=><MenuItem value={country.name}>{country.name}</MenuItem>)
+            filteredCountries.map((filteredCountry,index)=><MenuItem key={index} value={filteredCountry.name}>{filteredCountry.name}</MenuItem>)
           }
         </Select>
+        </FormControl>
           :
-          <Select/>
+          <FormControl style={{width:'90%',margin:2}}>
+            <InputLabel id="demo-simple-select-autowidth-label" style={{paddingLeft:5}}>Select Country</InputLabel>
+                 <Select/>
+          </FormControl>
+         
         }
 
         <Button style={{width:"80%"}} onClick={()=>setState({secondPaneOpen:!state.secondPaneOpen})}>
@@ -514,10 +502,10 @@ const Home=()=>{
         </Col>
 
         <Col  flex='auto' style={{position:'relative'}}>       
-                   <Mappings  country={country}/>  
+                   <Mapp center={center} disease={disease} year={year}/>  
                   <div style={{position:'absolute',bottom:'0.2%',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center', left:1 ,margin:'50px', width:'min(300px,70vw)', backgroundColor:'white',padding:10,borderRadius:15}}>
                     <h4 style={{textAlign:'left',width:'100%'}}>Year</h4>
-                    <Slider min={2015} max={2021} tooltipPlacement='bottom'  /* tooltipVisible={true} */ style={{width:'100%',color:'wheat'}} defaultValue={2020}/>
+                    <Slider min={2015} max={2021} onChange={(value)=>setYear(value)} tooltipPlacement='bottom' style={{width:'100%',color:'wheat'}} defaultValue={2020}/>
                   </div>  
         </Col>
         <SlidingPane

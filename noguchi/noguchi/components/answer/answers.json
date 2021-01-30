@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_answer_answers",
+  "info": {
+    "name": "answers",
+    "icon": "check",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "question": {
+      "model": "question"
+    },
+    "answer": {
+      "type": "json"
+    }
+  }
+}

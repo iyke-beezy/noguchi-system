@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react';
-import { Button, Card, Tabs,Row,Col,Divider,Modal ,Layout,Form,Space,Input} from 'antd';
+import { Button, Card, Tabs,Row,Col,Divider,Modal ,Layout,Form,Space,Input,Result} from 'antd';
 import FormInput from '../../components/input'
 import  '../../components/components.css';
 import TagBox from '../../components/tagBox';
@@ -42,7 +42,7 @@ const Box=(props)=>{
                 }
               )
                     .then(response => {
-                        localStorage.setItem('current_user',JSON.stringify(response.data))
+                        localStorage.setItem('org_admin',JSON.stringify(response.data))
                         window.location.href='/orgAdmin'
                     }
                     )
@@ -80,7 +80,7 @@ const Box=(props)=>{
             )
                   .then(response => {
                       localStorage.setItem('current_user',JSON.stringify(response.data))
-                      window.location.href='/other'
+                      window.location.href='/profile'
                   }
                   )
                   .catch((error) => {
@@ -160,10 +160,13 @@ const OrgAccountss=()=> {
           })
        */
     }
-
+    let cur_org=localStorage.getItem('selectedOrg')
     return(
         <div style={{minHeight:'100vh',height:'auto',width:'100%',display:'flex',backgroundColor:'#4e54c8', flexDirection:'column'/* ,justifyContent:'center' */,alignItems:'center'}}>
             <MainHeader/>
+            {
+                cur_org?
+                <>
             <div  style={{height:'80vh',width:'85%',marginTop:'10vh'}}>
                 {
                     selectedAdmin?
@@ -230,6 +233,19 @@ const OrgAccountss=()=> {
                 }
                 
             </div> 
+            </>
+                :
+                <>
+                <Result
+                    style={{marginTop:'8vh'}}
+                    status="403"
+                    title={<span style={{color:'white'}}>Unauthorized Access</span>}
+                    subTitle={<span style={{color:'white'}}>Sorry, you are not authorized to access this page.</span>}
+                    extra={<Button size='large' onClick={()=>window.location.href='/home'} type="primary">Back to Home</Button>}
+                />
+                </>
+                
+            }
         </div>
       
     );

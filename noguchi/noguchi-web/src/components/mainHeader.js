@@ -1,5 +1,5 @@
 import { Row,Layout,Menu } from 'antd'
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Button,Avatar} from '@material-ui/core';
 
 import {MessageOutlined,FileSearchOutlined,UserOutlined} from '@ant-design/icons';
@@ -7,7 +7,14 @@ import { MiniMiniHeader } from './miniheader';
 const {Header}=Layout
 
 const MainHeader=()=>{
-    const [online,setOnline]=useState(true)
+    const [online,setOnline]=useState(false)
+    
+    useEffect(()=>{
+        if(localStorage.getItem('currentUser')||localStorage.getItem('current_user')){
+            setOnline(true)
+        }
+    },[])
+    
     return(
         <Header style={{position:'fixed',height:'auto',borderBottom:'1px solid whitesmoke',zIndex:1,backgroundColor:"white",width:'100%',display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
             <div className="logo" onClick={()=>{window.location.href='/home';}}><span style={{fontWeight:'bold',cursor:'pointer'}} >IDCS</span ></div>

@@ -25,6 +25,9 @@
     "surveys": {
       "via": "community",
       "collection": "survey"
+    },
+    "location": {
+      "type": "json"
     }
   }
 }

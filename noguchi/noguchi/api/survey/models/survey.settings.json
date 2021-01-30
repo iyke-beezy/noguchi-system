@@ -21,17 +21,21 @@
     "surveyUID": {
       "type": "uid"
     },
-    "answers": {
-      "collection": "answer",
-      "via": "survey"
-    },
     "community": {
       "model": "community",
       "via": "surveys"
     },
     "disease": {
-      "via": "surveys",
-      "model": "disease"
+      "model": "disease",
+      "via": "surveys"
+    },
+    "answers": {
+      "type": "component",
+      "repeatable": true,
+      "component": "answer.answers"
+    },
+    "evaluated": {
+      "type": "boolean"
     }
   }
 }

@@ -1,10 +1,11 @@
-import {Tabs,Row, Col,Modal,Popover, Avatar, Button, Card ,List, Progress, Empty} from "antd";
+import {message,Tabs,Row, Col,Modal,Input, Avatar, Button, Form ,List, Result, Empty, Select} from "antd";
 import React,{useState,useEffect} from "react";
 import {UserOutlined,ExportOutlined} from '@ant-design/icons';
 import SurveyCard from "../../components/surveyCard";
 import MainHeader from '../../components/mainHeader';
 import axios from 'axios';
 
+const {Option}=Select;
 const MiniCard=(props)=>{
 
     const [modalState,setModalState]=useState(false);
@@ -36,8 +37,9 @@ const MiniCard=(props)=>{
         </Button>
         <Modal
         title={props.text}
-        style={{ top: 20 }}
-        width={800}
+        centered
+        style={{ top: '20%'}}
+        width={920}
         visible={modalState}
         onOk={() => setModalState(false)}
         onCancel={() => setModalState(false)}
@@ -47,7 +49,7 @@ const MiniCard=(props)=>{
             <List
             className='adminProfiles'
                     size='medium'
-                    style={{height:'50vh',overflowY:'scroll'}}
+                    style={{height:'35vh',overflowY:'scroll'}}
                     dataSource={filtered}
                     renderItem={item => <List.Item>{item.question}</List.Item>}
                 />
@@ -62,8 +64,14 @@ const MiniCard=(props)=>{
 }
 const Entry=()=>{
     const {TabPane} = Tabs;
+
+    const [surveyUID,setSurveyUID]=useState('')
+    const [selectedCommunity,setSelectedCommunity]=useState();
+
     const [start,setStart]=useState(false)
+    const [step,setStep]=useState(false)
     const [diseases,setDiseases]=useState([])
+    const [communities,setCommunities]=useState([])
     useEffect(() => {
         axios.get('http://localhost:1337/diseases')
         .then(
@@ -77,6 +85,23 @@ const Entry=()=>{
         })
     },[]);
 
+    useEffect(() => {
+        axios.get('http://localhost:1337/communities')
+        .then(
+          res =>{
+            if(res.data){
+              console.log(res.data)
+              setCommunities(res.data)
+          }} )
+        .catch((error) => {
+          console.log(error);
+        })
+    },[]);
+
+    const error = () => {
+        message.error('This is an error message');
+      };
+
     const content = (
         <div style={{display:'flex',flexDirection:'column'}}>
           <Button type='link' size='large' onClick={()=>{window.location.href='/profile'}}><UserOutlined/>Profile</Button>
@@ -84,10 +109,14 @@ const Entry=()=>{
         </div>
       );
       const [preview,setPreview]=useState(true);
+      const mee=localStorage.getItem('current_user')
     return(
         
-        <div>
+        <div style={{minHeight:'100vh',height:'auto',width:'100%',display:'flex',backgroundColor:'#4e54c8', flexDirection:'column'/* ,justifyContent:'center' */,alignItems:'center'}}>
             <MainHeader/>
+            {
+                mee?
+                <>
             <Row className={"entryDesktop"} xs={0} sm={24} >
            
             <div className='entryPoint'>
@@ -116,26 +145,60 @@ const Entry=()=>{
                         
                     </div>
                     :
-                    
                     <div className='selectDisease'>
                         <Row style={{width:'100%',height:'100%'}}>
+                            
+                            
                             <Col md={12} className='svgee' >
 
 
                             </Col>
                             <Col md={12} flex='auto' style={{backgroundColor:'#4e54c8'}}>
-
                                 {
+                                    !step?
+                                    <div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',height:'100%'}}>
+                                    <h1 style={{color:'white',fontSize:'max(20px,2.5vw)'}}>Enter Survey Details</h1>
+                                    <div  style={{width:'100%',display:'flex',justifyContent:'center',alignItems:'center'}}>
+                                    <Form
+                                        layout='vertical'   
+                                    >
+                                        
+                                        <Form.Item label="SurveyUID">
+                                        <Input placeholder="Enter Survey Identifier" size='large' onChange={(e)=>setSurveyUID(e.target.value)} value={surveyUID} style={{width:300}}/>
+                                        </Form.Item>
+                                        <Form.Item label="Community">
+                                        <Select value={selectedCommunity} onChange={(value)=>setSelectedCommunity(value)} style={{width:300}} size='large'>
+                                            {
+                                                communities?
+                                                communities.map(
+                                                    (community,index)=><Option key={index} value={community.id}>{community.Community}</Option>
+                                                )
+                                                :
+                                                null
+                                                
+                                            }
+                                        </Select>
+                                        </Form.Item>
+                                        <Form.Item >
+                                        <Button type="primary" block size='large' 
+                                        onClick={()=>{
+                                            setStep(true)
+                                        }} >Next</Button>
+                                        </Form.Item> 
+                                    </Form>
+                                    </div>
+                                    
+                                    </div>
+                                    :
+                                    <>
+                                        {
                                     start?
                                     <div style={{alignItems: 'center',display:'flex',flexDirection:'column'}}>
                                     <h1 style={{width:'100%',fontSize:'20px',textAlign:'left',padding:10, marginBottom:20,color:'lightgray'}}>Schistosomiasis</h1>    
                                     
                                     <Row style={{width:'100%'}}>
                                         <Col style={{width:'100%',height:'60vh',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
-                                        <h1 style={{fontSize:'14em',lineHeight:0.4,color:'lightgrey',opacity:0.2,fontWeight:'bolder'}}>
-                                            01
-                                        </h1>
-                                        <SurveyCard/>
+                                        <SurveyCard surveyUID={surveyUID} community={selectedCommunity}/>
                                         </Col>
                                     </Row>          
                                     
@@ -146,40 +209,26 @@ const Entry=()=>{
                                 <div style={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center',flexWrap:'wrap',}} >
                                 {
                                     diseases.map(
-                                        (disease)=><Button onClick={()=>setStart(true)} className='diseaseButton' style={{height:'8vh',fontSize:18,width:'auto',fontWeight:'500',margin:6,borderRadius:20}}  key={disease.id} >{disease.name}</Button>
+                                        (disease)=><Button onClick={()=>{
+                                            setStart(disease.questions.length>0?true:false)
+                                            if(!disease.questions.length>0)message.error('There is no survey under this disease yet')
+                                        }} className='diseaseButton' style={{height:'8vh',fontSize:18,width:'auto',fontWeight:'500',margin:6,borderRadius:20}}  key={disease.id} >{disease.name}</Button>
                                         
                                     )
                                 }
                                 </div>
                                 </div>
                                 }
+                                    </>
+                                }
+                                
                                 
                                 
 
                             </Col>
                         </Row>
 
-                         {/* <div style={{display:'flex',flexDirection:'row',flexWrap:'wrap',height:'100%'}} >
-                        <div className='svgee'  style={{flex:0.5,display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center',minWidth:'min(95vw,280px)'}}>
-                         {/* <h1 style={{fontSize:'min(100px,7vw)',lineHeight:1.4,color:'lightgrey',opacity:0.6,fontWeight:'bolder',textAlign:'left'}}>Select A Disease to Start </h1> 
 
-                         
-                         
-                         </div>
-                        
-                        <div style={{flex:0.5,display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center',minWidth:'min(95vw,280px)'}}>
-                        <div style={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center',flexWrap:'wrap',}} >
-                        {
-                            ['Schistosomiasis', 'Malaria','Cholera','Dysentry','Kwashiorkor','Marasmus'].map(
-                                (value,index)=><Button className='diseaseButton' style={{height:'8vh',fontSize:18,width:'auto',fontWeight:'500',margin:6,borderRadius:20}}  key={index} >{value}</Button>
-                                
-                            )
-                        }
-                        </div>
-                        </div>
-                        
-                        
-                    </div> */}
                     </div>
                     }
                     
@@ -224,7 +273,21 @@ const Entry=()=>{
                 </div>
              
             </Row>
-
+            </>
+                :
+                <>
+                <Result
+                    style={{marginTop:'8vh',color:'white'}}
+                    status="403"
+                    
+                    title={<span style={{color:'white'}}>403</span>}
+                
+                    subTitle={<span style={{color:'white'}}>Sorry, you are not authorized to access this page.</span>}
+                    extra={<Button size='large' onClick={()=>window.location.href='/login'} type="primary">Go to Login</Button>}
+                />
+                </>
+                
+            }
         </div>
     );
 };

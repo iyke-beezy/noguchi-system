@@ -1,10 +1,12 @@
-import { Layout,Card,Table, Tag, Space } from 'antd';
+import { Layout,Card,Table, Tag, Space, Select } from 'antd';
 import React,{useState,useEffect} from 'react';
 import ForumList from '../../components/forumList';
 import MainHeader from '../../components/mainHeader';
 import { Plot,Plot2 } from '../../controls/legend/legend';
 import axios from 'axios';
-import qs from 'qs'
+import qs from 'qs';
+
+const {Option}=Select
 
 const column2=[
   {
@@ -79,7 +81,7 @@ const columns = [
 const Details=(props)=>{
 
   const [continents, setContinents] =useState([]);
-
+  const [current, setCurrent] =useState([]);
   const [expandSurvey, setExpandSurvey] =useState();
   const [questions, setQuestions] =useState();
 
@@ -105,7 +107,7 @@ const Details=(props)=>{
       await axios.get('http://localhost:1337/surveys',
       {
         params:{
-          surveyUID:localStorage.getItem('expandSurvey'),
+          community:localStorage.getItem('expandedCommunity'),
         },
         paramsSerializer:(params)=>qs.stringify(params,{arrayFormat:'repeat'})
       }
@@ -125,19 +127,46 @@ const Details=(props)=>{
 },[]);
 
 let expandeds = expandSurvey?expandSurvey[0].answers:null;
-let keys=questions?questions.map(question=>question.Keyword):null
-console.log(keys)
-let data2=expandeds?expandeds.map(expanded=> ({keyword:keys[expanded.question-1],data:expanded.answer})):null
+let years=expandSurvey?expandSurvey.map(exs=> exs.ActualSurveyDate):null
+console.log(expandSurvey)
+let data2=expandeds?expandeds.map(expanded=> ({keyword:expanded.question.Keyword,data:expanded.answer.toString()})):null
 console.log(data2)
   const {Header}=Layout;
+
+ const handleChange=(value)=>{
+  let selectedSurvey=expandSurvey.filter(exs=>exs.ActualSurveyDate===value);
+  let ssanswers=selectedSurvey[0]?.answers
+  
+  let tableFormat=ssanswers?ssanswers.map(ssanswer=> ({keyword:ssanswer.question.Keyword,data:ssanswer.answer.toString()})):null
+  console.log(tableFormat)
+  setCurrent(tableFormat)
+ }
+
     return(
       <div className='profilePage' style={{maxWidth:'100vw',backgroundColor:'white',width:'100%'}}>
         <MainHeader/>
         <div style={{width:'100%',marginTop:'10vh',padding:'0px 50px 50px 50px'}}>
-           
-            <h1 style={{fontSize:50}}>{data2?data2[0].data:null}</h1>
-              
-             <Table bordered columns={column2} dataSource={data2} size='middle'/>
+           <div style={{display:'flex',flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+           <h1 style={{fontSize:50}}>{expandSurvey?expandSurvey[0].community.Community:null}</h1>
+          <Select placeholder='Select Year' style={{width:150}} onChange={(value)=>{handleChange(value)}}>
+          
+            
+            {
+              years?
+                years.map(year=><Option key={year}>{year.slice(0,4)}</Option>)
+              :
+              null
+            }
+          </Select>
+           </div>
+
+             {
+               current.length>0?
+               <Table bordered columns={column2} dataSource={current} size='middle'/>
+               :
+               <Table bordered columns={column2} dataSource={data2} size='middle'/>
+               
+               }
             <Card  style={{minHeight:'40vh',marginTop:20,borderRadius:5,marginBottom:40}}>
              <Plot2 yname='No of Cases'/>
             </Card>

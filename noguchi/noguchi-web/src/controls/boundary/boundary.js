@@ -1,8 +1,7 @@
-import { MapControl, withLeaflet } from "react-leaflet";
+/* import { useLeaflet } from "react-leaflet";
 import React from 'react';
 import L from "leaflet";
-import 'leaflet-choropleth'
-import 'leaflet-boundary-canvas'
+
 import custom from './ghanaGeo.json'
 import africa from './africa.geo.json'
 import asia from './asiaGeo.json'
@@ -32,7 +31,7 @@ class Boundary extends MapControl{
             }); 
            map.addLayer(osm)
 /*             var ghLayer = L.geoJSON(custom);
-            map.fitBounds(ghLayer.getBounds()); */
+            map.fitBounds(ghLayer.getBounds()); 
 
 }
 componentDidUpdate() {
@@ -48,9 +47,9 @@ componentDidUpdate() {
         }); 
         map.addLayer(osm)
 /*             var ghLayer = L.geoJSON(custom);
-        map.fitBounds(ghLayer.getBounds()); */
+        map.fitBounds(ghLayer.getBounds()); 
 
 }
 
 }
-export default withLeaflet(Boundary)
+export default withLeaflet(Boundary) */

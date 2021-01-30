@@ -31,8 +31,8 @@
       "via": "disease"
     },
     "surveys": {
-      "collection": "survey",
-      "via": "disease"
+      "via": "disease",
+      "collection": "survey"
     }
   }
 }
