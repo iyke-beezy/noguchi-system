@@ -73,7 +73,7 @@ const Activity=()=>{
 }
 
 
-const OrgAdminPage =()=>{
+const AdminPage =()=>{
     function createData(time, amount) {
         return { time, amount };
       }
@@ -91,10 +91,13 @@ const OrgAdminPage =()=>{
       ] */
     
     const theme = useTheme();
-    const selectedOrg=JSON.parse(localStorage.getItem('selectedOrg'))[0];
-    let selectedAccounts=selectedOrg.org_users;
-  
-  
+   // const selectedOrg=JSON.parse(localStorage.getItem('selectedOrg'))[0];
+   // let selectedAccounts=selectedOrg.org_users;
+   const data ={
+    username:"james",
+    id:1
+  }
+   let selectedAccounts= [data]
     return(
       <div className='profilePage' style={{backgroundColor:'white'}}>
        <MainHeader/>
@@ -102,73 +105,17 @@ const OrgAdminPage =()=>{
         <h1 style={{fontSize:'max(3vw,25px)',width:'80%',color:'grey'}}>username ADMIN DASHBOARD</h1>
         <div style={{width:'80%'}}>
             <Tabs  tabPosition='top' defaultActiveKey='1' size='small' style={{height:'auto'}}>
-                    <TabPane tab="Manage Profiles" key="1" >
-                        <div className='adminProfiles' style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(230px,1fr))',height:'55vh'}}>
-                           {
-                             selectedAccounts?
-                              <>
-                                {
-                                selectedAccounts.map((selectedAccount,index)=><Box   key={selectedAccount} data={selectedAccount}/>)
-                               }
-                              </>
-                             :
-                             <Empty/>
-                           }  
-                          
-
-                        </div>
-                        
-                    </TabPane>
-                    
-                    <TabPane tab="Profile Activities" key="2"  >
-                        
-                        <div style={{display:'flex',flexDirection:'column',height:'55vh'}}>
-                         <Select defaultValue='kofi' size='large' style={{maxWidth:'max(20%,100px)'}}>
-                           <Option value='kofi'>Kofi</Option> 
-                           <Option value='ama'>Ama</Option> 
-                           <Option value='tetteh'>Tetteh</Option> 
-                           <Option value='kookor'>Kookor</Option> 
-                           <Option value='baba'>Baba</Option> 
-                           <Option value='timo'>Timo</Option> 
-                           <Option value='man'>Manoo</Option>  
-                         </Select>
-                         <Card  style={{minHeight:'40vh',marginTop:20,borderRadius:5}}>
-                            <Plot yname='No of Entries'/>
-                         </Card>
-                          
-                        </div>
-                        
-                        
-                        
-                        
-                    </TabPane>
-                    <TabPane tab="New Profile" key="3" >
-                    <div style={{display:'flex',flexDirection:'column',height:'55vh',alignItems:'flex-start'}}>
-
-                        <h1 style={{fontSize:'min(35px,8vw)',color:'lightslategray'}}>New Profile</h1> 
-
-                        
-                        <Avatar shape='square' size='large' icon={<UserAddOutlined/>} />
-                        <label style={{marginTop:10,color:'lightgray'}}>Profile Name</label>
-                        <Input
-                        type='text'
-                        placeholder='Enter profile name'
-                        size='large'
-                        style={{width:'max(50%,55vw)',margin:5}}
-                        />  
-                        <label style={{marginTop:15,color:'lightgray'}}>Profile Key</label>
-                        <Input
-                        type='text'
-                        placeholder='Enter profile key'
-                        size='large'
-                        style={{width:'max(45%,50vw)',margin:5}}
-                        />  
-                       <Button type='primary' style={{alignSelf:'flex-end',height:45,marginTop:30,backgroundColor:'lightslategray',borderColor:'lightslategray'}}>Create Profile</Button>
-                    </div>
-                        
-                    </TabPane>
-
+            <TabPane tab="Build Survey " key="1" >
                   
+                  <Survey />
+                  
+                       
+                   </TabPane>
+                  
+                    <TabPane tab="Manage requests (5)" key="2" >
+                   <Request/>   
+                    </TabPane>
+                   
                     </Tabs>
                   
         </div>
@@ -177,4 +124,4 @@ const OrgAdminPage =()=>{
 
     );
 }
-export default OrgAdminPage;
+export default AdminPage;

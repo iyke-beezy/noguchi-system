@@ -18,6 +18,10 @@
       "collection": "case",
       "via": "disease"
     },
+    "case": {
+      "collection": "case",
+      "via": "disease"
+    },
     "forums": {
       "collection": "forum",
       "via": "disease"

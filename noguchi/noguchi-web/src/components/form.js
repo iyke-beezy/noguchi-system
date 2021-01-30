@@ -4,7 +4,7 @@ import "antd/dist/antd.css";
 import './components.css'
 import {UserOutlined,LockOutlined,KeyOutlined} from '@ant-design/icons';
 import { Link } from "react-router-dom";
-import axios from 'axios'
+import axios from 'axios';
 import qs from 'qs';
 
 const OrgForm =({onClick,...props})=>{

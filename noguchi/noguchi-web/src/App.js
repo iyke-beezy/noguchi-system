@@ -19,6 +19,7 @@ import OrgAccountss from './pages/orgAccounts/orgAccountss';
 import Home from './pages/homePage/home';
 import Details from './pages/detailsPage/details';
 import RecordCases from './pages/detailsPage/RecordCases';
+import AdminPage from './pages/admin/admin';
 function App() {
 require('react-dom');
 window.React2 = require('react');
@@ -63,6 +64,9 @@ console.log(window.React1 === window.React2);
           </Route>
           <Route path="/orgadmin">
             <OrgAdminPage/>
+          </Route>
+          <Route path="/admin">
+            <AdminPage/>
           </Route>
         </Switch>
       
