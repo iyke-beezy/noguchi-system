@@ -126,7 +126,16 @@ const Details=(props)=>{
     
 },[]);
 
-let expandeds = expandSurvey?expandSurvey[0].answers:null;
+let selectedYear=localStorage.getItem('selectedYear');
+let expandeds;
+if(selectedYear){
+let filterByYearSelection=expandSurvey?expandSurvey.filter(exsurvey=>exsurvey.ActualSurveyDate==selectedYear):null;
+console.log(filterByYearSelection)
+expandeds = filterByYearSelection?filterByYearSelection[0].answers:null;
+}else{
+  expandeds = expandSurvey?expandSurvey[0].answers:null;
+}
+
 let years=expandSurvey?expandSurvey.map(exs=> exs.ActualSurveyDate):null
 console.log(expandSurvey)
 let data2=expandeds?expandeds.map(expanded=> ({keyword:expanded.question.Keyword,data:expanded.answer.toString()})):null
@@ -142,13 +151,13 @@ console.log(data2)
   setCurrent(tableFormat)
  }
 
-    return(
+  return(
       <div className='profilePage' style={{maxWidth:'100vw',backgroundColor:'white',width:'100%'}}>
         <MainHeader/>
         <div style={{width:'100%',marginTop:'10vh',padding:'0px 50px 50px 50px'}}>
            <div style={{display:'flex',flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
            <h1 style={{fontSize:50}}>{expandSurvey?expandSurvey[0].community.Community:null}</h1>
-          <Select placeholder='Select Year' style={{width:150}} onChange={(value)=>{handleChange(value)}}>
+          <Select placeholder='Change Year' style={{width:150}}  onChange={(value)=>{handleChange(value)}}>
           
             
             {
@@ -159,7 +168,9 @@ console.log(data2)
             }
           </Select>
            </div>
-
+            <h3 style={{textAlign:'left',color:'brown'}}>
+              Current Disease: Schistosomiasis
+            </h3>
              {
                current.length>0?
                <Table bordered columns={column2} dataSource={current} size='middle'/>
@@ -168,7 +179,7 @@ console.log(data2)
                
                }
             <Card  style={{minHeight:'40vh',marginTop:20,borderRadius:5,marginBottom:40}}>
-             <Plot2 yname='No of Cases'/>
+             <Plot2 yname='Prevalence(%)'/>
             </Card>
 
             <Table bordered columns={columns} dataSource={data} size='middle'/>

@@ -21,9 +21,6 @@
       "model": "continent",
       "via": "countries"
     },
-    "geoJSON": {
-      "type": "json"
-    },
     "center": {
       "type": "json"
     }

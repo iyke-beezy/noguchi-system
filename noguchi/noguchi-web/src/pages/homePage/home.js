@@ -1,7 +1,5 @@
-import {Modal, Button, Space,List ,Layout,Row,Col, Card,Slider} from 'antd'
+import {Modal, Button, Space,List ,Layout,Row,Col, Card,Slider,Drawer} from 'antd'
 import React ,{useState,useEffect} from 'react';
-import SlidingPane from "react-sliding-pane";
-import "react-sliding-pane/dist/react-sliding-pane.css";
 import {Paper,Badge,Select,MenuItem,Typography,FormControl,InputLabel} from '@material-ui/core';
 import axios from 'axios';
 import Mappings, { Mapp } from '../Map/map'
@@ -27,7 +25,7 @@ const data=[
 
 
 const Home=()=>{
-
+  const [markers,setMarkers]=useState([])
   const [diseases,setDiseases]=useState([])
     useEffect(() => {
       async function fetchDiseases(){
@@ -43,6 +41,23 @@ const Home=()=>{
 
       }
       fetchDiseases();
+        
+    },[]);
+    const [surveys,setSurveys]=useState([])
+    useEffect(() => {
+      async function fetchSurveys(){
+        await axios.get('http://localhost:1337/surveys')
+        .then(
+          res =>{
+            if(res.data){
+              setSurveys(res.data)
+          }} )
+        .catch((error) => {
+          console.log(error);
+        })
+
+      }
+      fetchSurveys();
         
     },[]);
     const [continents, setContinents] =useState([]);
@@ -93,10 +108,21 @@ const Home=()=>{
   const [country, setCountry] = useState('');
   const [filteredCountries, setFilteredCountries] = useState([]);
   const [continentJson,setContinentJson]=useState({})
-  const [year,setYear]=useState('')
-    const [disease, setDisease] =useState('');
+  const [year,setYear]=useState(2020)
+    const [disease, setDisease] =useState(``);
     const handleChange = (event) => {
       setDisease(event.target.value);
+      let byYears;
+      if(markers.length>0){
+        let oldMarkers=markers;
+        byYears=oldMarkers.filter(oldMarker=>oldMarker.ActualSurveyDate.includes(year))
+        setMarkers(byYears.filter(byYear=>byYear.disease.id==event.target.value))
+      }else{
+        byYears=surveys.filter(survey=>survey.ActualSurveyDate.includes(year))
+        console.log(byYears)
+        setMarkers(byYears.filter(byYear=>byYear.disease.id==event.target.value))
+      }
+      
     
   };
   const handleContinent = (event) => {
@@ -108,7 +134,7 @@ const Home=()=>{
     let cent=contt[0]?.center
     setCenter(cent)
 };
-  console.log(continentJson)
+
  
   const {Header,Footer}=Layout;
 
@@ -124,84 +150,19 @@ const Home=()=>{
     2021:'2021'
 
   };
+  console.log(markers)
 
     return(
       <div>
-        <Modal
-          title="Details"
-          visible={state.visible}
-          onOk={()=>setState({visible:false})}
-          onCancel={()=>setState({visible:false})}
-          okText="Done"
-          cancelText="Cancel"
-        >
-          <p>
-          <Typography style={{fontweight:'500',fontSize: 17,lineHeight:2,textAlign:'left'}} noWrap>
-            Total Confirmed Cases
-          </Typography>
-          <Typography style={{fontSize: 12,color:'grey',textAlign:'left'}} noWrap>
-            Updated 25 mins ago
-          </Typography>
-          <Typography variant='h3' style={{color:'red',textAlign:'left',lineHeight:1.5,}} noWrap>
-            6,092
-          </Typography>
-
-       <div style={{display:'flex',flexDirection:'row',justifyContent:'space-around',width:'80%',marginBottom:"10px"}}>
-      
-          <Typography style={{fontSize: 13,textAlign:'left'}} noWrap>
-            Active Cases
-          </Typography>
-          <Badge style={{marginTop:"10px"}}  badgeContent={4133} max={9999} color="secondary"  >
-          </Badge>
-         </div>  
-         <div style={{display:'flex',flexDirection:'row',justifyContent:'space-around',width:'80%',marginBottom:"10px"}}>
-      
-          <Typography style={{fontSize: 13,textAlign:'left'}} noWrap>
-            Recorded Cases
-          </Typography>
-          <Badge style={{marginTop:"10px"}}  badgeContent={1733} max={9999} color="primary"  >
-          </Badge>
-         </div>  
-         <div style={{display:'flex',flexDirection:'row',justifyContent:'space-around',width:'80%',marginBottom:"10px"}}>
-      
-          <Typography style={{fontSize: 13,textAlign:'left'}} noWrap>
-            Fatal Cases
-          </Typography>
-          <Badge style={{marginTop:"10px"}}  badgeContent={31} max={9999} color="secondary"  >
-          </Badge>
-         </div>  
-         
-
-          </p>
-          <p>
-          <div  style={{display:'flex',flexDirection:'column',alignItems:'flex-start'}}  >
-            <h1 style={{textAlign:'left'}}>Recorded for Accra</h1>
-            <span style={{textAlign:'left'}}>20th Nov 2019</span>
-            
-            <List
-            size="large"
-            dataSource={data}
-            renderItem={dat => <List.Item>
-            <h3 style={{textAlign:'left'}}>{dat.question}:<span style={{textAlign:'left',color:'grey'}}>{dat.answer}</span></h3>
-            </List.Item>}
-          />
-    
-
-        </div>
-          </p>
-         
-        </Modal>
-        <SlidingPane
-        style={{zIndex:100000000,height:'10%'}}
-        closeIcon={<div style={{backgroundColor:'red',padding:'2px 8px 3px 8px',borderRadius:30,color:'white',fontWeight:'bold'}}>Close</div>}
-        isOpen={state.thirdPaneOpen}
-        hideHeader={false}
-        from="right"
-        width="100%"
-        height="10%"
-        onRequestClose={() => setState({ thirdPaneOpen: false })}
+        <Drawer
+        title="Details"
+        placement="right"
+        width='90%'
+        closable={true}
+        onClose={() => setState({ thirdPaneOpen: false })}
+        visible={state.thirdPaneOpen}
       >
-       <div style={{zIndex:100000000000,display:'flex',flexDirection:'column',alignItems:'flex-start'}} contenteditable >
+        <div style={{zIndex:100000000000,display:'flex',flexDirection:'column',alignItems:'flex-start'}} contenteditable >
             <h1 style={{textAlign:'left'}}>Recorded for Accra</h1>
             <span style={{textAlign:'left'}}>20th Nov 2019</span>
             
@@ -216,8 +177,8 @@ const Home=()=>{
     
 
         </div>
-        
-      </SlidingPane>
+
+      </Drawer>
          
       <Row style={{height:"5vh"}}>
       <Col xs={24}><MainHeader/></Col>
@@ -252,26 +213,7 @@ const Home=()=>{
        
       </Row>
       </Col>
-     {/*  <Row justify='center' style={{margin:5}}>
-        <Col xs={10} md={0}>
-        <Card>
-                <h1 style={{color:'red',fontWeight:'bold'}}>6093</h1>
-        </Card>
-        </Col> 
-      </Row>
-      <Row justify='center' gutter={[10,10]}>
-            <Col xs={10} md={0}>
-            <Card>
-               <h1 style={{color:'red'}}>6093</h1>
-              </Card>
-              </Col>
-              <Col xs={10} md={0}>
-              <Card>
-               <h1 style={{color:'red'}}>6093</h1>
-              </Card>
-              </Col>
-            
-        </Row> */}
+    
       <Row style={{padding:"10px 0"}} sm={0}>
       <Col xs={18} md={0} style={{flex:"0 0 64%",paddingRight:"5px"}}>
        <Button onClick={() => setState({ isPaneOpenLeft: !state.isPaneOpenLeft })} style={{fontSize:"12px"}}>
@@ -284,15 +226,13 @@ const Home=()=>{
          View Details 
        </Button>
       </Col>
-      <SlidingPane
-        style={{zIndex:100000,height:'10%'}}
-        closeIcon={<div>close</div>}
-        isOpen={state.isPaneOpenLeft}
-        hideHeader={true}
-        from="bottom"
-        width="100%"
-        height="10%"
-        onRequestClose={() => setState({ isPaneOpenLeft: false })}
+      <Drawer
+      title="Change Disease/Location"
+      placement="bottom"
+      height='50%'
+      closable={true}
+      onClose={() => setState({ isPaneOpenLeft: false })}
+      visible={state.isPaneOpenLeft}
       >
        
         <div style={{zIndex:10000000000}}>
@@ -310,7 +250,7 @@ const Home=()=>{
           onChange={handleChange}
         >
           {
-            diseases.map((disease,index)=><MenuItem key={index} value={disease.name}>{disease.name}</MenuItem>)
+            diseases.map((disease,index)=><MenuItem key={index} value={disease.id}>{disease.name}</MenuItem>)
           }
         </Select>
         </FormControl>
@@ -371,7 +311,7 @@ const Home=()=>{
        </Button>
         </div>
        </div>
-      </SlidingPane>
+      </Drawer>
       </Row>
    
       
@@ -434,7 +374,7 @@ const Home=()=>{
           onChange={handleChange}
         >
           {
-            diseases.map((disease,index)=><MenuItem key={index} value={disease.name}>{disease.name}</MenuItem>)
+            diseases.map((disease,index)=><MenuItem key={index} value={disease.id}>{disease.name}</MenuItem>)
           }
         </Select>
         </FormControl>
@@ -502,42 +442,27 @@ const Home=()=>{
         </Col>
 
         <Col  flex='auto' style={{position:'relative'}}>       
-                   <Mapp center={center} disease={disease} year={year}/>  
+                   <Mapp center={center} markers={markers} onClick={()=>setState({secondPaneOpen:!state.secondPaneOpen})}/>  
                   <div style={{position:'absolute',bottom:'0.2%',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center', left:1 ,margin:'50px', width:'min(300px,70vw)', backgroundColor:'white',padding:10,borderRadius:15}}>
                     <h4 style={{textAlign:'left',width:'100%'}}>Year</h4>
-                    <Slider min={2015} max={2021} onChange={(value)=>setYear(value)} tooltipPlacement='bottom' style={{width:'100%',color:'wheat'}} defaultValue={2020}/>
+                    <Slider min={2015} max={2021} 
+                    onChange={(value)=>{
+                      setYear(value);
+                      if(disease){
+                        let yearSurveys=surveys.filter(survey=>survey.disease.id==disease)
+                        setMarkers(yearSurveys?.filter(yearSurvey=>yearSurvey.ActualSurveyDate.includes(value)))
+                      }else{
+                        setMarkers(surveys.filter(survey=>survey.ActualSurveyDate.includes(value)))
+                      }
+                      
+                      
+                      
+                      
+                      }} tooltipPlacement='bottom' style={{width:'100%',color:'wheat'}} defaultValue={2020}/>
                   </div>  
         </Col>
-        <SlidingPane
-        style={{zIndex:100000000,height:'10%',position:'absolute'}}
-        closeIcon={<div style={{backgroundColor:'red',padding:'2px 8px 3px 8px',borderRadius:30,color:'white',fontWeight:'bold'}}>Close</div>}
-        isOpen={state.secondPaneOpen}
-        hideHeader={false}
-        from="right"
-        width="30%"
-        height="10%"
-        onRequestClose={() => setState({ isPaneOpenLeft: false })}
-      >
-       <div style={{zIndex:100000000000,display:'flex',flexDirection:'column',alignItems:'flex-start'}} contenteditable >
-            <h1 style={{textAlign:'left'}}>Recorded for Accra</h1>
-            <span style={{textAlign:'left'}}>20th Nov 2019</span>
-            
-            <List
-            size="large"
-            style={{width:'100%'}}
-            dataSource={data}
-            renderItem={dat => <List.Item >
-            <h3 style={{textAlign:'left'}}>{dat.question}:<span style={{textAlign:'left',color:'grey'}}>{dat.answer}</span></h3>
-            </List.Item>}
-          />
-    
-
-        </div>
         
-      </SlidingPane>
-        {/* <Col xs={hidden?0:12} md={hidden ? 0 : 6 }>
         
-        </Col> */}
 
         </Row>
 

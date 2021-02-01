@@ -56,8 +56,8 @@ import { Paper,Select,MenuItem,Typography } from '@material-ui/core';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer,Tooltip,BarChart,Bar} from 'recharts';
 import { useTheme } from '@material-ui/core/styles';
 
-function createData(time, cases) {
-  return { time, cases };
+function createData(time, prevalence) {
+  return { time, prevalence };
 }
 
 const data = [
@@ -86,18 +86,8 @@ const data2 = [
   createData('Dec', 7),
 ]
 const data3 = [
-  createData('2010', 0),
-  createData('2011', 1),
-  createData('2012', 3),
-  createData('2013', 4),
-  createData('2014', 1),
-  createData('2015', 0),
-  createData('2016', 0),
-  createData('2017', 2),
-  createData('2018', 3),
-  createData('2019', 1),
-  createData('2020', 4),
-  createData('2021', 7),
+  createData('2017', 7),
+  createData('2018', 5),
 ]
 
 export const Plot =(props)=>{
@@ -125,7 +115,7 @@ export const Plot =(props)=>{
                    {props.yname}
                   </Label>
                 </YAxis>
-                <Line type="monotone" dataKey="cases" stroke={theme.palette.primary.main} dot={false} />
+                <Line type="monotone" dataKey="prevalence" stroke={theme.palette.primary.main} dot={false} />
               </LineChart>
       </ResponsiveContainer>  
 
@@ -158,7 +148,7 @@ export const Plot2 =(props)=>{
                    {props.yname}
                   </Label>
                 </YAxis>
-                <Bar type="monotone" dataKey="cases"  fill="#8884d8" />
+                <Bar type="monotone" dataKey="prevalence"  fill="#8884d8" />
               </BarChart>
       </ResponsiveContainer>  
 
@@ -171,19 +161,19 @@ const Legend =()=>{
 
   const theme = useTheme();
     const [age, setAge] = React.useState('new');
-    const [caseType,setCaseType]=React.useState('New Cases')
+    const [caseType,setCaseType]=React.useState('New prevalence')
     const handleChange = (event) => {
         setAge(event.target.value);
         setCaseType(setCaseTypes(event.target.value))
     };
     const setCaseTypes=(age)=>{
       if(age==='new' ){
-        return 'New Cases'
+        return 'New prevalence'
       }
       else if(age==='fatal'){
-        return 'Fatal Cases'
+        return 'Fatal prevalence'
       }else{
-        return 'Recovered Cases'
+        return 'Recovered prevalence'
       }
     }; 
   
@@ -194,16 +184,16 @@ const Legend =()=>{
                 <span >Legend info goes here</span>
             </Paper>
             <Paper>
-                <h3>New and fatal cases</h3>
+                <h3>New and fatal prevalence</h3>
                 <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={age}
                 onChange={handleChange}
                 >
-                <MenuItem value={'new'}>New Cases</MenuItem>
-                <MenuItem value={'fatal'}>Fatal Cases</MenuItem>
-                <MenuItem value={'recovered'}>Recovered Cases</MenuItem>
+                <MenuItem value={'new'}>New prevalence</MenuItem>
+                <MenuItem value={'fatal'}>Fatal prevalence</MenuItem>
+                <MenuItem value={'recovered'}>Recovered prevalence</MenuItem>
                 </Select>
                 <Paper style={{height:'45vh',paddingBottom:20}}>
                 <h3 >
@@ -226,10 +216,10 @@ const Legend =()=>{
                     position="left"
                     style={{ textAnchor: 'middle', fill: theme.palette.text.primary }}
                   >
-                    Cases (100)
+                    prevalence (100)
                   </Label>
                 </YAxis>
-                <Line type="monotone" dataKey="cases" stroke={theme.palette.primary.main} dot={false} />
+                <Line type="monotone" dataKey="prevalence" stroke={theme.palette.primary.main} dot={false} />
               </LineChart>
       </ResponsiveContainer>                 
                 </Paper>
