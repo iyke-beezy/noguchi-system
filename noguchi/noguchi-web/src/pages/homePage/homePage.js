@@ -109,7 +109,7 @@ const [continent, setContinent] = React.useState('africa');
 
 const [country, setCountry] = React.useState('all');
 useEffect(()=>{
- re
+ 
   
 },[])
 

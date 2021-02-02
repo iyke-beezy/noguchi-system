@@ -1,8 +1,10 @@
-import React from 'react';
-import {Button} from 'antd';
-
-const MyCard=(props)=>{
+import React,{useState} from 'react';
+import {Button,Modal} from 'antd';
+import FormInput from './input'
+const MyCard=({ ...props})=>{
     const colorCode='#adff2f50';
+    const [showModal,setShowModal] = useState(false);
+    const [reply,setReply] = useState('');
     
 
     return(
@@ -12,9 +14,28 @@ const MyCard=(props)=>{
             <h3 style={{textAlign:'left'}}>{props.data.title}</h3>
              <p>{props.data.content}</p>
             <div style={{display:'flex',flexDirection:'row',justifyContent:'flex-end'}}>
-            <Button>
+            <Button onClick={()=>setShowModal(!showModal)}>
             <span>Reply</span>
             </Button>
+            <Modal
+                        title="Enter Your Reply"
+                        visible={showModal}
+                        onOk={()=>{setShowModal(!showModal);}}
+                        onCancel={()=>{setShowModal(!showModal)}}
+                        >
+                       <FormInput
+                             
+                              name="key"
+                              type="textArea"
+                              value={reply}
+                              onChange={(e)=>{setReply(e.target.value)}}
+                              placeholder="Enter Reply"
+                              error ={false}
+                              required
+                              className="formInput"
+                       />
+                       
+                          </Modal>
             </div>
         </div>
         

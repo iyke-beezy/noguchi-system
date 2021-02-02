@@ -4,15 +4,14 @@ import { Button, Card, Tabs,Modal,Col,Row } from 'antd';
 import  '../../components/components.css';
 import TagBox from '../../components/tagBox';
 import ForumCard from '../../components/forumCard';
-import FormInput from '../../components/input'
+
 import {MyCard, MyReplies} from '../../components/card';
 import ForumList from '../../components/forumList';
 import TagSet from '../../components/tagSet';
 
 const OtherForum =()=>{
     const [showDetails,setShowDetails] = useState(false);
-    const [showModal,setShowModal] = useState(false);
-    const [reply,setReply] = useState('');
+   
     const [title,setTitle] = useState("Title");
     const [desc,setDesc] = useState('Descriptions');
     const replies = ['Great article','The best','Love Ya','Not a useful article'];
@@ -59,27 +58,9 @@ const OtherForum =()=>{
             <Card  title={<Button onClick={()=>{setShowDetails(!showDetails)}} style={{height:50,width:100,fontSize:20}}>&lt;Back</Button>} style={{textAlign:'left',height:'85vh',width:'80%',borderRadius:15}}>
              
                         <div style={{display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',overflowY:'scroll',height:'63vh'}}>
-                        <MyCard title={title} description={desc} onClick={()=>{setShowModal(!showModal)}}/>
+                        <MyCard title={title} description={desc} />
                         <MyReplies title="Replies" replies={replies} />
-                        <Modal
-                        title="Enter Your Key"
-                        visible={showModal}
-                        onOk={()=>{setShowModal(!showModal);replies.push(reply);console.log(replies)}}
-                        onCancel={()=>{setShowModal(!showModal)}}
-                        >
-                       <FormInput
-                             
-                              name="key"
-                              type="textArea"
-                              value={reply}
-                              onChange={(e)=>{setReply(e.target.value)}}
-                              placeholder="Enter Reply"
-                              error ={false}
-                              required
-                              className="formInput"
-                       />
                        
-                          </Modal>
                         </div>
                         
                    

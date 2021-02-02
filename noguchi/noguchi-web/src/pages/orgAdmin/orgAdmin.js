@@ -5,11 +5,14 @@ import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recha
 import Legend, { Plot } from '../../controls/legend/legend';
 import {EditFilled ,UserOutlined,ExportOutlined,UserAddOutlined} from '@ant-design/icons';
 import MainHeader from '../../components/mainHeader';
+import {Request} from '../request/request'
+import {Survey} from '../survey/survey'
 import Axios from 'axios';
 
 const {TabPane}=Tabs;
 const {Option}=Select;
 const {Header}=Layout;
+
 const Box=(props)=>{
     const [modalState,setModalState]=useState(false);
     const [profileName,setProfileName]=useState(props.data.username)
@@ -77,7 +80,7 @@ const OrgAdminPage =()=>{
         return { time, amount };
       }
       
-      const data = [
+  /*     const data = [
         createData('00:00', 0),
         createData('03:00', 300),
         createData('06:00', 600),
@@ -87,12 +90,17 @@ const OrgAdminPage =()=>{
         createData('18:00', 2400),
         createData('21:00', 2400),
         createData('24:00', undefined),
-      ]
+      ] */
     
     const [username,setUsername]=useState('')
     const [password,setPassword]=useState('')
     const theme = useTheme();
     const selectedOrg=JSON.parse(localStorage.getItem('selectedOrg'))[0];
+<<<<<<< HEAD
+    let selectedAccounts=selectedOrg.org_users;
+  
+  
+=======
     let selectedAccounts=selectedOrg.org_users
 
     const createOrgUser=()=>{
@@ -117,6 +125,7 @@ const OrgAdminPage =()=>{
     
     }
     let me=localStorage.getItem('org_admin')
+>>>>>>> d8cf25a233ecb6bc910363ba933d9a6c265183c4
     return(
       <div className='profilePage' style={{backgroundColor:'white'}}>
        <MainHeader/>
@@ -125,7 +134,7 @@ const OrgAdminPage =()=>{
                 me?
                 <>
         <div style={{display:'flex',marginTop:'10vh',width:'100%',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
-        <h1 style={{fontSize:'max(3vw,25px)',width:'80%',color:'grey'}}>{selectedOrg.username} ADMIN DASHBOARD</h1>
+        <h1 style={{fontSize:'max(3vw,25px)',width:'80%',color:'grey'}}>username ADMIN DASHBOARD</h1>
         <div style={{width:'80%'}}>
             <Tabs  tabPosition='top' defaultActiveKey='1' size='small' style={{height:'auto'}}>
                     <TabPane tab="Manage Profiles" key="1" >
@@ -208,6 +217,8 @@ const OrgAdminPage =()=>{
                     </Form>
                         
                     </TabPane>
+
+                  
                     </Tabs>
                   
         </div>
