@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useTheme } from '@material-ui/core/styles';
-import { Button, Card, Input, Modal, Select, Tabs ,Avatar,Layout, Empty} from 'antd';
+import { Button, Card, Input, Modal, Select, Tabs ,Avatar,Layout, Empty, Space} from 'antd';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
 import Legend, { Plot } from '../../controls/legend/legend';
 import {EditFilled ,UserOutlined,ExportOutlined,UserAddOutlined} from '@ant-design/icons';
@@ -74,6 +74,7 @@ const Activity=()=>{
 
 
 const AdminPage =()=>{
+  const [logged,setLogged]=useState(false)
     function createData(time, amount) {
         return { time, amount };
       }
@@ -99,27 +100,47 @@ const AdminPage =()=>{
   }
    let selectedAccounts= [data]
     return(
-      <div className='profilePage' style={{backgroundColor:'white'}}>
-       <MainHeader/>
-        <div style={{display:'flex',marginTop:'10vh',width:'100%',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
-        <h1 style={{fontSize:'max(3vw,25px)',width:'80%',color:'grey'}}>username ADMIN DASHBOARD</h1>
-        <div style={{width:'80%'}}>
-            <Tabs  tabPosition='top' defaultActiveKey='1' size='small' style={{height:'auto'}}>
-            <TabPane tab="Build Survey " key="1" >
-                  
-                  <Survey />
-                  
-                       
-                   </TabPane>
-                  
-                    <TabPane tab="Manage requests (5)" key="2" >
-                   <Request/>   
-                    </TabPane>
-                   
-                    </Tabs>
-                  
+      <div className='profilePage'>
+        {
+          logged?
+          
+          <div style={{display:'flex',width:'100%',height:'100vh',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
+              <h1 style={{fontSize:'max(3vw,25px)',width:'80%',color:'grey'}}>ADMIN</h1>
+              <div style={{width:'80%'}}>
+                  <Tabs  tabPosition='top' defaultActiveKey='1' size='small' style={{height:'auto',backgroundColor:'white',padding:30,}}>
+                  <TabPane tab="Build Survey " key="1" >
+                        
+                        <Survey />
+                        
+                            
+                        </TabPane>
+                        
+                          <TabPane tab="Manage requests" key="2" >
+                        <Request/>   
+                          </TabPane>
+                        
+                          </Tabs>
+                        
+              </div>
         </div>
-        </div>
+          
+          :
+          <div style={{display:'flex',width:'100%',height:'100vh',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
+
+              <Card  style={{height:200,width:400,borderRadius:25}}>
+                <Space size='middle' direction='vertical'>
+                 <h2> 
+                   ADMIN LOGIN
+                 </h2>
+                  <div style={{display:'flex'}}>
+                  <Input placeholder='Enter admin key' size='large' type='text'  /><Button onClick={()=>setLogged(true)} type='primary' size='large'>Login</Button>
+                  </div>
+                  </Space>
+                 
+              </Card>
+            </div>
+        }
+        
         </div>
 
     );

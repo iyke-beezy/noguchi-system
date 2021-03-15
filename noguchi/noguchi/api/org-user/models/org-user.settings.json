@@ -24,6 +24,14 @@
     "surveys": {
       "via": "org_user",
       "collection": "survey"
+    },
+    "replies": {
+      "via": "org_user",
+      "collection": "reply"
+    },
+    "forums": {
+      "via": "org_author",
+      "collection": "forum"
     }
   }
 }

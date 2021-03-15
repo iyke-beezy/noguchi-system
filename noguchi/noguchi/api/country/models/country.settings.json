@@ -18,11 +18,14 @@
       "collection": "region"
     },
     "continent": {
-      "model": "continent",
-      "via": "countries"
+      "via": "countries",
+      "model": "continent"
     },
     "center": {
       "type": "json"
+    },
+    "zoom": {
+      "type": "integer"
     }
   }
 }

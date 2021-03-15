@@ -8,11 +8,20 @@ import {EditFilled ,UserOutlined,ExportOutlined} from '@ant-design/icons';
 export const MiniMiniHeader=(props)=>{
   const content = (
       <div style={{display:'flex',flexDirection:'column'}}>
-        <Button className='popoverButtons' type='link' size='large' onClick={()=>{window.location.href='/profile'}}><UserOutlined/>Profile</Button>
+        <Button className='popoverButtons' type='link' size='large' onClick={()=>{
+          if(localStorage.getItem('current_user')){
+            window.location.href='/profile'
+          }else if(localStorage.getItem('currentUser')){
+            window.location.href='/other'
+          }else if(localStorage.getItem('org_admin')){
+            window.location.href='/orgadmin'
+          }
+          }}><UserOutlined/>Profile</Button>
         <Button className='popoverButtons' type='link' size='large' danger 
         onClick={()=>{
           localStorage.removeItem('current_user');
           localStorage.removeItem('currentUser');
+          localStorage.removeItem('org_admin');
           window.location.href='/';
         }}><ExportOutlined/>Logout</Button>
       </div>

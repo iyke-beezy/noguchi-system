@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import {
   BrowserRouter as Router,
   Switch,
@@ -7,12 +6,10 @@ import {
   Link
 } from "react-router-dom";
 import './App.css';
-import OrgForm from './components/form';
 import OrgLogin from './pages/Login/login';
 import ProfilePage from './pages/Profile/profile';
 import Entry from './pages/entry/entry';
 import OtherProfile from './pages/otherProfile/otherProfile'
-import Forum from './pages/forum/forum';
 import OtherForum from './pages/forum/otherForum';
 import OrgAdminPage from './pages/orgAdmin/orgAdmin';
 import OrgAccountss from './pages/orgAccounts/orgAccountss';
@@ -48,9 +45,6 @@ console.log(window.React1 === window.React2);
             <OtherProfile/>
           </Route>
           <Route path="/forum">
-            <Forum/>
-          </Route>
-          <Route path="/oforum">
             <OtherForum/>
           </Route>
           <Route path="/details">

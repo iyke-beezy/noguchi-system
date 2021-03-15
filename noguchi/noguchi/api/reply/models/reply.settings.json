@@ -11,7 +11,7 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "users_permissions_user": {
+    "user": {
       "plugin": "users-permissions",
       "model": "user",
       "via": "replies"
@@ -20,8 +20,12 @@
       "via": "reply",
       "model": "forum"
     },
+    "org_user": {
+      "model": "org-user",
+      "via": "replies"
+    },
     "reply": {
-      "type": "richtext"
+      "type": "string"
     }
   }
 }

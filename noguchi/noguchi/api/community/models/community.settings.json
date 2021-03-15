@@ -19,8 +19,8 @@
       "via": "communities"
     },
     "forums": {
-      "collection": "forum",
-      "via": "community"
+      "via": "community",
+      "collection": "forum"
     },
     "surveys": {
       "via": "community",

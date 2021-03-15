@@ -26,7 +26,7 @@ const MiniCard=(props)=>{
     
     
 
-      let filtered=questions.filter(question=>question.disease.name===props.text)
+      let filtered=questions.filter(question=>question.disease?.name===props.text)
       
  
     return(
@@ -67,6 +67,7 @@ const Entry=()=>{
 
     const [surveyUID,setSurveyUID]=useState('')
     const [selectedCommunity,setSelectedCommunity]=useState();
+    const [asDate,setAsDate]=useState('')
 
     const [start,setStart]=useState(false)
     const [step,setStep]=useState(false)
@@ -120,15 +121,15 @@ const Entry=()=>{
                 <>
             <Row  sm={24} >
            
-            <div className='entryPoint'>
-                <div className='links' style={{backgroundColor:'#f5f5f580'}}>
+            <Row className='entryPoint'>
+                <Col md={start?0:4}  className='links' style={{backgroundColor:'#f5f5f580'}}>
                 {/* <Popover content={content} trigger="click">
                     <Avatar size={70} icon={<UserOutlined/>} style={{marginTop:30,marginBottom:20}}/>
                 </Popover> */}
                     <Button block  size='large' style={{height:60,border:'none',borderBottom:'1px solid #f5f5f5',textAlign:'left',backgroundColor:'transparent',fontSize:17,color:'lightslategray'}} onClick={()=>{setPreview(true)}}>Preview</Button>
                     <Button  block size='large' style={{height:60,border:'none',borderBottom:'1px solid #f5f5f5',textAlign:'left',backgroundColor:'transparent',fontSize:17,color:'lightslategray'}} onClick={()=>{setPreview(false)}}>Take A Survey</Button>
-                </div>
-                <div className='entryContent'>
+                </Col>
+                <Col md={start?24:20} className='entryContent'>
                     {
                         preview?
                         <div style={{padding:35}}>
@@ -158,17 +159,52 @@ const Entry=()=>{
                                 {
                                     !step?
                                     <div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',height:'100%'}}>
+                                    <h1 style={{color:'white',textTransform:'uppercase',fontSize:'max(20px,2.5vw)'}}>Select A Disease to Start</h1>
+                                    <div style={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center',flexWrap:'wrap',}} >
+                                    {
+                                        diseases.map(
+                                            (disease)=><Button onClick={()=>{
+                                                setStep(disease.questions.length>0?true:false)
+                                                if(!disease.questions.length>0)message.error('There is no survey under this disease yet')
+                                            }} className='diseaseButton' style={{height:'8vh',fontSize:18,width:'auto',fontWeight:'500',margin:6,borderRadius:20}}  key={disease.id} >{disease.name}</Button>
+                                            
+                                        )
+                                    }
+                                    </div>
+                                    </div>
+                                    
+                                    :
+                                    <>
+                                        {
+                                    start?
+                                    <div style={{alignItems: 'center',display:'flex',flexDirection:'column'}}>
+                                    <h1 style={{width:'100%',fontSize:'20px',textAlign:'left',padding:10, marginBottom:20,color:'lightgray'}}>Schistosomiasis</h1>    
+                                    
+                                    <Row style={{width:'100%'}}>
+                                        <Col style={{width:'100%',height:'60vh',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
+                                        <SurveyCard surveyUID={surveyUID} asDate={asDate} community={selectedCommunity}/>
+                                        </Col>
+                                    </Row>          
+                                    
+                                </div> 
+                                    :
+                                    <div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',height:'100%'}}>
                                     <h1 style={{color:'white',fontSize:'max(20px,2.5vw)'}}>Enter Survey Details</h1>
                                     <div  style={{width:'100%',display:'flex',justifyContent:'center',alignItems:'center'}}>
                                     <Form
-                                        layout='vertical'   
+                                        layout='vertical'  
+                                        onFinish={()=>setStart(true)}
+                                        
                                     >
                                         
-                                        <Form.Item label="SurveyUID">
-                                        <Input placeholder="Enter Survey Identifier" size='large' onChange={(e)=>setSurveyUID(e.target.value)} value={surveyUID} style={{width:300}}/>
+                                        <Form.Item name="surveyUID" label="SurveyUID" rules={[{ required: true, message: 'Please input a surveyUID!' }]}>
+                                        <Input className='formInput' placeholder="Enter Survey Identifier" size='large' onChange={(e)=>setSurveyUID(e.target.value)} value={surveyUID} style={{width:300}}/>
                                         </Form.Item>
-                                        <Form.Item label="Community">
-                                        <Select value={selectedCommunity} onChange={(value)=>setSelectedCommunity(value)} style={{width:300}} size='large'>
+                                        <Form.Item name="ActualSurveyDate" label="Actual Survey Date" rules={[{ required: true, message: 'Please enter the actual survey date!' }]}>
+                                        <Input className='formInput' type='date' placeholder="Enter Actual Survey Date" size='large' onChange={(e)=>setAsDate(e.target.value)} value={asDate} style={{width:300}}/>
+                                        </Form.Item>
+                                        <Form.Item name="community" label="Community" rules={[{ required: true, message: 'Please select a community' }]}>
+                                        <Select className='formInput' value={selectedCommunity} onChange={(value)=>setSelectedCommunity(value)} style={{width:300}} size='large'>
                                             {
                                                 communities?
                                                 communities.map(
@@ -181,44 +217,12 @@ const Entry=()=>{
                                         </Select>
                                         </Form.Item>
                                         <Form.Item >
-                                        <Button type="primary" block size='large' 
-                                        onClick={()=>{
-                                            setStep(true)
-                                        }} >Next</Button>
+                                        <Button type="primary" block size='large' htmlType='submit' >Next</Button>
                                         </Form.Item> 
                                     </Form>
                                     </div>
                                     
                                     </div>
-                                    :
-                                    <>
-                                        {
-                                    start?
-                                    <div style={{alignItems: 'center',display:'flex',flexDirection:'column'}}>
-                                    <h1 style={{width:'100%',fontSize:'20px',textAlign:'left',padding:10, marginBottom:20,color:'lightgray'}}>Schistosomiasis</h1>    
-                                    
-                                    <Row style={{width:'100%'}}>
-                                        <Col style={{width:'100%',height:'60vh',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
-                                        <SurveyCard surveyUID={surveyUID} community={selectedCommunity}/>
-                                        </Col>
-                                    </Row>          
-                                    
-                                </div> 
-                                    :
-                                <div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',height:'100%'}}>
-                                <h1 style={{color:'white',textTransform:'uppercase',fontSize:'max(20px,2.5vw)'}}>Select A Disease to Start</h1>
-                                <div style={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center',flexWrap:'wrap',}} >
-                                {
-                                    diseases.map(
-                                        (disease)=><Button onClick={()=>{
-                                            setStart(disease.questions.length>0?true:false)
-                                            if(!disease.questions.length>0)message.error('There is no survey under this disease yet')
-                                        }} className='diseaseButton' style={{height:'8vh',fontSize:18,width:'auto',fontWeight:'500',margin:6,borderRadius:20}}  key={disease.id} >{disease.name}</Button>
-                                        
-                                    )
-                                }
-                                </div>
-                                </div>
                                 }
                                     </>
                                 }
@@ -233,8 +237,8 @@ const Entry=()=>{
                     </div>
                     }
                     
-                </div>
-            </div>
+                </Col>
+            </Row>
                  
             </Row>
             {//Code for mobile version

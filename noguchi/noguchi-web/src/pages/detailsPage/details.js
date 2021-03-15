@@ -19,6 +19,17 @@ const column2=[
     title: 'Data',
     dataIndex: 'data',
     key: 'data',
+    render:data=><div>
+      {
+          typeof(data)==='object'?
+          typeof(data[0])==='object'?
+          data.map(dat=>Object.values(dat)).join(' | ')
+          :
+          data.join(',')
+          :
+          data
+      }
+    </div>
   
   }
 ]
@@ -138,7 +149,7 @@ expandeds = filterByYearSelection?filterByYearSelection[0].answers:null;
 
 let years=expandSurvey?expandSurvey.map(exs=> exs.ActualSurveyDate):null
 console.log(expandSurvey)
-let data2=expandeds?expandeds.map(expanded=> ({keyword:expanded.question.Keyword,data:expanded.answer.toString()})):null
+let data2=expandeds?expandeds.map(expanded=> ({keyword:expanded.question.Keyword,data:expanded.answer})):null
 console.log(data2)
   const {Header}=Layout;
 

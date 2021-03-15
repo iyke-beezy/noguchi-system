@@ -30,12 +30,16 @@
       "type": "string"
     },
     "disease": {
-      "via": "forums",
-      "model": "disease"
+      "model": "disease",
+      "via": "forums"
     },
     "community": {
-      "via": "forums",
-      "model": "community"
+      "model": "community",
+      "via": "forums"
+    },
+    "org_author": {
+      "model": "org-user",
+      "via": "forums"
     }
   }
 }

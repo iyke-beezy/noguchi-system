@@ -25,12 +25,18 @@
         "number",
         "radio",
         "list",
-        "listpairs"
+        "listpairs",
+        "listselect",
+        "check",
+        "radiolist"
       ]
     },
     "disease": {
-      "via": "questions",
-      "model": "disease"
+      "model": "disease",
+      "via": "questions"
+    },
+    "options": {
+      "type": "json"
     }
   }
 }

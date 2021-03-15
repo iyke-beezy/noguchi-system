@@ -14,15 +14,15 @@
     "name": {
       "type": "string"
     },
-    "geoJSON": {
-      "type": "json"
-    },
     "center": {
       "type": "json"
     },
     "countries": {
-      "via": "continent",
-      "collection": "country"
+      "collection": "country",
+      "via": "continent"
+    },
+    "zoom": {
+      "type": "integer"
     }
   }
 }

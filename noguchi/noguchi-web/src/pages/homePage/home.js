@@ -50,7 +50,8 @@ const Home=()=>{
         .then(
           res =>{
             if(res.data){
-              setSurveys(res.data)
+
+              setSurveys(res.data.filter(dat=>dat.evaluated===true))
           }} )
         .catch((error) => {
           console.log(error);
@@ -95,6 +96,37 @@ const Home=()=>{
       fetchCountries();
       
   },[]);
+  const [regions, setRegions] =useState([]);
+    useEffect(() => {
+      async function fetchRegions(){
+        await axios.get('http://localhost:1337/countries')
+        .then(
+          res =>{
+            if(res.data){
+              setRegions(res.data)
+            
+          }} )
+        .catch((error) => {
+          console.log(error);
+        })
+      }
+
+      fetchRegions();
+      
+  },[]);
+  const [districts, setDistricts] =useState([]);
+  useEffect(() => {
+  axios.get('http://localhost:1337/districts')
+  .then(
+    res =>{
+      if(res.data){
+        console.log(res.data)
+        setDistricts(res.data)
+    }} )
+  .catch((error) => {
+    console.log(error);
+  })
+},[]);
     const [hidden,setHidden]=useState(true);
    const [state, setState] = useState({
     isPaneOpen: false,
@@ -105,23 +137,46 @@ const Home=()=>{
   });
   const [continent, setContinent] =useState('');
   const [center, setCenter] =useState({});
+  const [zoom, setZoom] =useState();
   const [country, setCountry] = useState('');
   const [filteredCountries, setFilteredCountries] = useState([]);
-  const [continentJson,setContinentJson]=useState({})
   const [year,setYear]=useState(2020)
     const [disease, setDisease] =useState(``);
     const handleChange = (event) => {
       setDisease(event.target.value);
       let byYears;
+      
+      if(country!=''){
+        let count=countries.filter(country=>country.name===country);
+        let rejiin=count[0]?.regions
+        let id=rejiin?.map(rej=>rej.id)
+        let dis=id?districts.filter(district=>id.includes(district.region.id)):[]
+        let comms=dis?.map(di=>di.communities)
       if(markers.length>0){
         let oldMarkers=markers;
-        byYears=oldMarkers.filter(oldMarker=>oldMarker.ActualSurveyDate.includes(year))
-        setMarkers(byYears.filter(byYear=>byYear.disease.id==event.target.value))
+        if(comms.length>0){
+          let commIds=comms[0]?.map(comm=>comm.id)
+          let byComms=oldMarkers.filter(oldMarker=>commIds.includes(oldMarkers.community.id))
+          byYears=byComms.filter(byComm=>byComm.ActualSurveyDate.includes(year))
+          setMarkers(byYears.filter(byYear=>byYear.disease.id==event.target.value))
+        }else{
+          setMarkers([])
+        }
+        
       }else{
-        byYears=surveys.filter(survey=>survey.ActualSurveyDate.includes(year))
-        console.log(byYears)
-        setMarkers(byYears.filter(byYear=>byYear.disease.id==event.target.value))
+        if(comms.length>0){
+          let commIds=comms[0]?.map(comm=>comm.id)
+          let byComms=surveys.filter(survey=>commIds.includes(survey.community.id))
+          byYears=byComms.filter(byComm=>byComm.ActualSurveyDate.includes(year))
+          console.log(byYears)
+          setMarkers(byYears.filter(byYear=>byYear.disease.id==event.target.value))
+        }else{
+          setMarkers([])
+        }
       }
+    }else{
+      setMarkers([])
+    }
       
     
   };
@@ -132,8 +187,39 @@ const Home=()=>{
     let contt=continents.filter(continent=>continent.name==event.target.value)
     setFilteredCountries(countries.filter(country=>country.continent.name===event.target.value))
     let cent=contt[0]?.center
+    setCountry('')
     setCenter(cent)
+    setZoom(contt[0]?.zoom)
+    setMarkers([])
+
 };
+const handleCountry=(event)=>{
+    setCountry(event.target.value);
+    let count=countries.filter(country=>country.name===event.target.value);
+    setCenter(count[0]?.center)
+    setZoom(count[0]?.zoom)
+    if(disease){
+      let yearSurveys=surveys.filter(survey=>survey.disease.id==disease)
+      let rejiin=count[0]?.regions
+        
+      let id=rejiin.map(rej=>rej.id)
+      let dis=districts.filter(district=>id.includes(district.region.id))
+      
+      let comms=dis.map(di=>di.communities)
+      
+      if(comms.length>0){
+        let commIds=comms[0]?.map(comm=>comm.id)
+        let byCommIds=yearSurveys?.filter(yearSurvey=>commIds.includes(yearSurvey.community.id))
+      console.log(byCommIds)
+      setMarkers(byCommIds?.filter(byCommId=>byCommId.ActualSurveyDate.includes(year)))
+      }else{
+        setMarkers([])
+      }
+      
+    }
+    
+
+}
 
  
   const {Header,Footer}=Layout;
@@ -292,7 +378,7 @@ const Home=()=>{
           id="demo-simple-select-outlined"
           value={country}
           
-          onChange={(e)=>setCountry(e.target.value)}
+          onChange={handleCountry}
         >
           {
             filteredCountries.map((filteredCountry,index)=><MenuItem key={index} value={filteredCountry.name}>{filteredCountry.name}</MenuItem>)
@@ -416,7 +502,7 @@ const Home=()=>{
           id="demo-simple-select-outlined"
           value={country}
           
-          onChange={(e)=>setCountry(e.target.value)}
+          onChange={handleCountry}
         >
           {
             filteredCountries.map((filteredCountry,index)=><MenuItem key={index} value={filteredCountry.name}>{filteredCountry.name}</MenuItem>)
@@ -431,9 +517,7 @@ const Home=()=>{
          
         }
 
-        <Button style={{width:"80%"}} onClick={()=>setState({secondPaneOpen:!state.secondPaneOpen})}>
-                Show Details
-            </Button>
+        
 
         </div>
        
@@ -442,23 +526,38 @@ const Home=()=>{
         </Col>
 
         <Col  flex='auto' style={{position:'relative'}}>       
-                   <Mapp center={center} markers={markers} onClick={()=>setState({secondPaneOpen:!state.secondPaneOpen})}/>  
+                   <Mapp center={center} markers={markers} zoom={zoom} onClick={()=>setState({secondPaneOpen:!state.secondPaneOpen})}/>  
                   <div style={{position:'absolute',bottom:'0.2%',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center', left:1 ,margin:'50px', width:'min(300px,70vw)', backgroundColor:'white',padding:10,borderRadius:15}}>
                     <h4 style={{textAlign:'left',width:'100%'}}>Year</h4>
                     <Slider min={2015} max={2021} 
                     onChange={(value)=>{
                       setYear(value);
-                      if(disease){
-                        let yearSurveys=surveys.filter(survey=>survey.disease.id==disease)
-                        setMarkers(yearSurveys?.filter(yearSurvey=>yearSurvey.ActualSurveyDate.includes(value)))
-                      }else{
-                        setMarkers(surveys.filter(survey=>survey.ActualSurveyDate.includes(value)))
-                      }
+                      if(country!=''){
+                        let count=countries.filter(countr=>countr.name===country);
+                        let rejiin=count[0]?.regions
+                        let id=rejiin?.map(rej=>rej.id)
+                        let dis=id?districts.filter(district=>id.includes(district.region.id)):[]
+                        let comms=dis?.map(di=>di.communities)
+                        
+                        if(comms.length>0){
+                          let commIds=comms[0]?.map(comm=>comm.id)
+                          let byCommIds=surveys.filter(survey=>commIds.includes(survey.community.id))
+                          if(disease){
+                            let yearSurveys=byCommIds.filter(byCommId=>byCommId.disease.id==disease)
+                            setMarkers(yearSurveys?.filter(yearSurvey=>yearSurvey.ActualSurveyDate.includes(value)))
+                          }
+                        }else{
+                          setMarkers([])
+                        }
+                        }else{
+                          setMarkers([])
+                        }
+                        
                       
                       
                       
                       
-                      }} tooltipPlacement='bottom' style={{width:'100%',color:'wheat'}} defaultValue={2020}/>
+                      }} tooltipPlacement='bottom' tooltipVisible={true} style={{width:'100%',color:'wheat'}} defaultValue={2020}/>
                   </div>  
         </Col>
         

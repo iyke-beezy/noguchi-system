@@ -11,7 +11,7 @@ module.exports = {
           *
           * @return {Object}
           */  
-         async create(ctx) {
+         /* async create(ctx) {
            console.log(ctx.request.body);
            let entity;
            if (ctx.is('multipart')) {
@@ -76,7 +76,7 @@ module.exports = {
             }
         
             return sanitizeEntity(entity, { model: strapi.models.forum });
-          },
+          }, */
 };
    
 

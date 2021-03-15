@@ -10,16 +10,16 @@ const MainHeader=()=>{
     const [online,setOnline]=useState(false)
     
     useEffect(()=>{
-        if(localStorage.getItem('currentUser')||localStorage.getItem('current_user')){
+        if(localStorage.getItem('currentUser')||localStorage.getItem('current_user')||localStorage.getItem('org_admin')){
             setOnline(true)
         }
     },[])
     
     return(
-        <Header style={{position:'fixed',height:'auto',borderBottom:'1px solid whitesmoke',zIndex:1,backgroundColor:"white",width:'100%',display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
+        <Header style={{position:'fixed',top:0,height:'auto',borderBottom:'1px solid whitesmoke',zIndex:1,backgroundColor:"white",width:'100%',display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
             <div className="logo" onClick={()=>{window.location.href='/home';}}><span style={{fontWeight:'bold',cursor:'pointer'}} >IDCS</span ></div>
             <Menu theme="light"  mode="horizontal"  style={{borderBottom:'none',width:'30%',display:'flex',justifyContent:'flex-end'}}>
-                <Menu.Item icon={<MessageOutlined/>} key="1" onClick={()=>{window.location.href='/oforum';}}>Forums</Menu.Item>
+                <Menu.Item icon={<MessageOutlined/>} key="1" onClick={()=>{window.location.href='/forum';}}>Forums</Menu.Item>
                 <Menu.Item icon={<FileSearchOutlined/>} key="2" onClick={()=>{window.location.href='/cases';}}>Explore Cases </Menu.Item>
                 {
                     online?

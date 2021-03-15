@@ -64,11 +64,14 @@ export class Mapp extends React.Component {
       console.log(this.state.lat,this.state.lng)
     }
       
+    let showingFilter=this.props.markers.map(marker=>marker.answers.filter( answer=>answer.question.Keyword==='Population'||answer.question.Keyword==='Schistosomiasis Prevalence'||answer.question.Keyword==='Schistosomiasis Control Approaches'||answer.question.Keyword==='Stakeholders and Activities'))
 
+    let prevalence=this.props.markers.map(marker=>marker.answers.filter(ans=>ans.question.Keyword==='Schistosomiasis Prevalence'))
+    let prevv=prevalence[0]
       return (
       
-        <MapContainer center={this.props.center.lat && this.props.center.long?[this.props.center.lat, this.props.center.long]:[this.state.lat, this.state.lng]}  zoom={this.state.zoom} scrollWheelZoom={false} >
-          <ChangeView center={this.props.center.lat && this.props.center.long?[this.props.center.lat, this.props.center.long]:[this.state.lat, this.state.lng]}  zoom={this.state.zoom} /> 
+        <MapContainer center={this.props.center.lat && this.props.center.long?[this.props.center.lat, this.props.center.long]:[this.state.lat, this.state.lng]}  zoom={this.props.zoom?this.props.zoom:this.state.zoom} scrollWheelZoom={false} >
+          <ChangeView center={this.props.center.lat && this.props.center.long?[this.props.center.lat, this.props.center.long]:[this.state.lat, this.state.lng]}  zoom={this.props.zoom?this.props.zoom:this.state.zoom} /> 
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url='https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'
@@ -88,18 +91,29 @@ export class Mapp extends React.Component {
               >
             <div style={{zIndex:100000000000,display:'flex',flexDirection:'column',alignItems:'flex-start'}}  >
             <h1 style={{textAlign:'left'}}>Recorded for {marker.community.Community}</h1>
-            <span style={{textAlign:'left'}}>{marker.published_at}</span>
+            <span style={{textAlign:'left',color:'slateblue'}}>{marker.published_at?.slice(0,10)}</span>
             
             <List
             size="large"
             style={{width:'100%'}}
-            dataSource={marker.answers.slice(0,6)}
+            dataSource={showingFilter[0]}
             renderItem={mark => <List.Item >
-            <h3 style={{textAlign:'left'}}>{mark.question.Keyword}:<span style={{textAlign:'left',color:'grey'}}>{mark.answer}</span></h3>
+            <h3 style={{textAlign:'left'}}>{mark.question.Keyword}</h3>&nbsp;<span style={{textAlign:'left',color:'grey'}}>{
+
+                    typeof(mark.answer)==='object'?
+                      typeof(mark.answer[0])==='object'?
+                        mark.answer.map(dat=>Object.values(dat)).join(' | ')
+                      :
+                        mark.answer.join(',')
+                    :
+                    mark.answer
+
+            }</span>
             </List.Item>} 
           />
     
               <Button block size='large' onClick={()=>{
+               
                 localStorage.setItem('expandedCommunity',marker.community.id)
                 localStorage.setItem('selectedYear',marker.ActualSurveyDate)
                 window.location.href='/details'
@@ -109,7 +123,16 @@ export class Mapp extends React.Component {
       </Drawer>
             <Popup>
               <h3>{marker.community.Community}</h3>
-              <Button variant='outlined' onClick={() => this.setState(() => ({open:true}))} >View Details</Button>
+              <h1>
+                {
+                  prevv[0]?.answer
+                }
+              </h1>
+              <Button variant='outlined' onClick={() => {
+                 console.log(prevalence[0].id)
+                this.setState(() => ({open:true}))
+                
+                }} >View Details</Button>
             </Popup>
           </Marker>)
           }

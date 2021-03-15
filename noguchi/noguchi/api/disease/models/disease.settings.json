@@ -23,12 +23,12 @@
       "via": "disease"
     },
     "forums": {
-      "collection": "forum",
-      "via": "disease"
+      "via": "disease",
+      "collection": "forum"
     },
     "questions": {
-      "collection": "question",
-      "via": "disease"
+      "via": "disease",
+      "collection": "question"
     },
     "surveys": {
       "via": "disease",

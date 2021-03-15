@@ -96,11 +96,6 @@ const OrgAdminPage =()=>{
     const [password,setPassword]=useState('')
     const theme = useTheme();
     const selectedOrg=JSON.parse(localStorage.getItem('selectedOrg'))[0];
-<<<<<<< HEAD
-    let selectedAccounts=selectedOrg.org_users;
-  
-  
-=======
     let selectedAccounts=selectedOrg.org_users
 
     const createOrgUser=()=>{
@@ -125,7 +120,6 @@ const OrgAdminPage =()=>{
     
     }
     let me=localStorage.getItem('org_admin')
->>>>>>> d8cf25a233ecb6bc910363ba933d9a6c265183c4
     return(
       <div className='profilePage' style={{backgroundColor:'white'}}>
        <MainHeader/>
