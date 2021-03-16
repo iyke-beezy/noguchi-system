@@ -1,4 +1,4 @@
-import { Button,List ,Row,Col, Card,Slider,Drawer} from 'antd'
+import {Modal, Button, Space,List ,Layout,Row,Col, Card,Slider,Drawer} from 'antd'
 import React ,{useState,useEffect} from 'react';
 import {Paper,Badge,Select,MenuItem,Typography,FormControl,InputLabel} from '@material-ui/core';
 import axios from 'axios';
@@ -127,7 +127,7 @@ const Home=()=>{
     console.log(error);
   })
 },[]);
-    
+    const [hidden,setHidden]=useState(true);
    const [state, setState] = useState({
     isPaneOpen: false,
     isPaneOpenLeft: false,
@@ -146,7 +146,7 @@ const Home=()=>{
       setDisease(event.target.value);
       let byYears;
       
-      if(country!==''){
+      if(country!=''){
         let count=countries.filter(country=>country.name===country);
         let rejiin=count[0]?.regions
         let id=rejiin?.map(rej=>rej.id)
@@ -158,7 +158,7 @@ const Home=()=>{
           let commIds=comms[0]?.map(comm=>comm.id)
           let byComms=oldMarkers.filter(oldMarker=>commIds.includes(oldMarkers.community.id))
           byYears=byComms.filter(byComm=>byComm.ActualSurveyDate.includes(year))
-          setMarkers(byYears.filter(byYear=>byYear.disease.id===event.target.value))
+          setMarkers(byYears.filter(byYear=>byYear.disease.id==event.target.value))
         }else{
           setMarkers([])
         }
@@ -169,7 +169,7 @@ const Home=()=>{
           let byComms=surveys.filter(survey=>commIds.includes(survey.community.id))
           byYears=byComms.filter(byComm=>byComm.ActualSurveyDate.includes(year))
           console.log(byYears)
-          setMarkers(byYears.filter(byYear=>byYear.disease.id===event.target.value))
+          setMarkers(byYears.filter(byYear=>byYear.disease.id==event.target.value))
         }else{
           setMarkers([])
         }
@@ -183,8 +183,8 @@ const Home=()=>{
   const handleContinent = (event) => {
     setContinent(event.target.value);
     localStorage.removeItem('currentContinent')
-    localStorage.setItem('currentContinent',JSON.stringify(continents.filter(continent=>continent.name===event.target.value)))
-    let contt=continents.filter(continent=>continent.name===event.target.value)
+    localStorage.setItem('currentContinent',JSON.stringify(continents.filter(continent=>continent.name==event.target.value)))
+    let contt=continents.filter(continent=>continent.name==event.target.value)
     setFilteredCountries(countries.filter(country=>country.continent.name===event.target.value))
     let cent=contt[0]?.center
     setCountry('')
@@ -199,7 +199,7 @@ const handleCountry=(event)=>{
     setCenter(count[0]?.center)
     setZoom(count[0]?.zoom)
     if(disease){
-      let yearSurveys=surveys.filter(survey=>survey.disease.id===disease)
+      let yearSurveys=surveys.filter(survey=>survey.disease.id==disease)
       let rejiin=count[0]?.regions
         
       let id=rejiin.map(rej=>rej.id)
@@ -222,11 +222,20 @@ const handleCountry=(event)=>{
 }
 
  
-  
+  const {Header,Footer}=Layout;
 
   
  
-  
+  const marks = {
+    2015: '2015',
+    2016: '2016',
+    2017: '2017',
+    2018:'2018',
+    2019:'2019',
+    2020:'2020',
+    2021:'2021'
+
+  };
   console.log(markers)
 
     return(
@@ -523,7 +532,7 @@ const handleCountry=(event)=>{
                     <Slider min={2015} max={2021} 
                     onChange={(value)=>{
                       setYear(value);
-                      if(country!==''){
+                      if(country!=''){
                         let count=countries.filter(countr=>countr.name===country);
                         let rejiin=count[0]?.regions
                         let id=rejiin?.map(rej=>rej.id)
@@ -534,7 +543,7 @@ const handleCountry=(event)=>{
                           let commIds=comms[0]?.map(comm=>comm.id)
                           let byCommIds=surveys.filter(survey=>commIds.includes(survey.community.id))
                           if(disease){
-                            let yearSurveys=byCommIds.filter(byCommId=>byCommId.disease.id===disease)
+                            let yearSurveys=byCommIds.filter(byCommId=>byCommId.disease.id==disease)
                             setMarkers(yearSurveys?.filter(yearSurvey=>yearSurvey.ActualSurveyDate.includes(value)))
                           }
                         }else{

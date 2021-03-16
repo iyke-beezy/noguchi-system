@@ -1,9 +1,11 @@
 import React, {useState,useEffect} from "react";
-import { Input, Card, Button ,Form,Tabs, Radio,Layout, Result, Select} from 'antd';
+import { Input, Card, Space, Button ,Form,Tabs, Radio,Checkbox,Layout, Result, Select} from 'antd';
 import "antd/dist/antd.css";
 import '../../App.css';
 import axios from 'axios'
 import Headers from "../../components/header";
+import Banner from "../../components/banner";
+import ForumCard from "../../components/forumCard";
 import ForumList from "../../components/forumList";
 import MainHeader from "../../components/mainHeader";
 
@@ -73,6 +75,10 @@ const OtherProfile=()=>{
       }
 
     const [disability,setDisability]=useState(true);
+    const [orgname,setOrgname]=useState('Akwasi Mensah')
+    const [orgUsername,setOrgUsername]=useState('Akwmensah');
+    const [orgPassword,setOrgPassword]=useState('yerspiyooor');
+    const{Header}=Layout;
     return(
         <div className='profilePage'>
             <MainHeader/>

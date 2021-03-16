@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import ForumList from './forumList';
-import { Empty } from 'antd';
+import { Button, Empty } from 'antd';
 import {CloseOutlined} from '@ant-design/icons';
 import TagBox from './tagBox';
 import Avatar from 'antd/lib/avatar/avatar';
@@ -33,7 +33,8 @@ const TagSet =(props)=>{
           console.log(error);
         })
     },[]);
-     return(
+    const replies = ['Great article','The best','Love Ya','Piece Of shit article','Great article','The best','Love Ya','Piece Of shit article','Great article','The best','Love Ya','Piece Of shit article'];
+    return(
         <>
         {props.disease?
         <>

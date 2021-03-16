@@ -2,6 +2,7 @@ import React from 'react';
 import {Button} from 'antd';
 
 const ForumCard=({onClick,data,onPress,...props})=>{
+    const colorCode='#adff2f50';
     const whenClicked=()=>{
         onClick();
         localStorage.setItem('clicked',data.id)
