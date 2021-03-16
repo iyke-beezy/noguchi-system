@@ -1,19 +1,12 @@
-import React,{useEffect, useState} from 'react';
-import { Button, Card, Tabs,Row,Col,Divider,Modal ,Layout,Form,Space,Input,Result} from 'antd';
+import React,{useState} from 'react';
+import { Button, Card, Tabs,Layout,Form,Space,Input,Result} from 'antd';
 import FormInput from '../../components/input'
 import  '../../components/components.css';
-import TagBox from '../../components/tagBox';
-import ForumCard from '../../components/forumCard';
 import axios from 'axios'
 import qs from 'qs';
 import MainHeader from '../../components/mainHeader';
-const {TabPane}=Tabs;
 const style = { background: '#0092ff', padding: '8px 0',height:'180px', marginBottom:'10px',
 color:'white',display:'flex',flexDirection:'Column',alignItems:'flex-start',fontSize:'15px' };
-const adminStyle = { background: '#0092ff', padding: '8px 0',height:'180px' };
-const loginStyle={
-    backgroundColor:"red"
-}
 
 
 const Box=(props)=>{
@@ -101,9 +94,7 @@ const Box=(props)=>{
         </>
     );
 }
-const image=require('../../assets/whiteGhana.png');
 const OrgAccountss=()=> {
-    const [noUsers,setNoUsers]=useState(true)
     const [username,setUsername]=useState('')
     const [password,setPassword]=useState('')
     const {Header}=Layout;

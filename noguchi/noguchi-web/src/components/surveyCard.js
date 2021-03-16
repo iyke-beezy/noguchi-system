@@ -4,9 +4,6 @@ import "antd/dist/antd.css";
 import './components.css'
 import {PlusOutlined,ArrowUpOutlined,ArrowDownOutlined,MinusCircleOutlined ,ExclamationCircleOutlined} from '@ant-design/icons';
 import axios from 'axios';
-import Background from '../assets/desktop4.png';
-import Background2 from '../assets/desktop7.png';
-import Background3 from '../assets/desktop3.png';
 
 const {Option}=Select
 const SurveyCard=(props)=>{

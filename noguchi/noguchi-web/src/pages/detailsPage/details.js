@@ -1,8 +1,8 @@
-import { Layout,Card,Table, Tag, Space, Select } from 'antd';
+import { Layout,Card,Table, Select } from 'antd';
 import React,{useState,useEffect} from 'react';
 import ForumList from '../../components/forumList';
 import MainHeader from '../../components/mainHeader';
-import { Plot,Plot2 } from '../../controls/legend/legend';
+import { Plot2 } from '../../controls/legend/legend';
 import axios from 'axios';
 import qs from 'qs';
 
@@ -91,7 +91,6 @@ const columns = [
 
 const Details=(props)=>{
 
-  const [continents, setContinents] =useState([]);
   const [current, setCurrent] =useState([]);
   const [expandSurvey, setExpandSurvey] =useState();
   const [questions, setQuestions] =useState();
@@ -140,7 +139,7 @@ const Details=(props)=>{
 let selectedYear=localStorage.getItem('selectedYear');
 let expandeds;
 if(selectedYear){
-let filterByYearSelection=expandSurvey?expandSurvey.filter(exsurvey=>exsurvey.ActualSurveyDate==selectedYear):null;
+let filterByYearSelection=expandSurvey?expandSurvey.filter(exsurvey=>exsurvey.ActualSurveyDate===selectedYear):null;
 console.log(filterByYearSelection)
 expandeds = filterByYearSelection?filterByYearSelection[0].answers:null;
 }else{

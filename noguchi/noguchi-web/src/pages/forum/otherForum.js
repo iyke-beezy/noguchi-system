@@ -3,10 +3,7 @@ import axios from 'axios'
 import { Button, Card, Tabs,Form,Col,Row, Result,Input,Radio,Select } from 'antd';
 
 import  '../../components/components.css';
-import TagBox from '../../components/tagBox';
-import ForumCard from '../../components/forumCard';
 
-import {MyCard, MyReplies} from '../../components/card';
 import ForumList from '../../components/forumList';
 import TagSet from '../../components/tagSet';
 import MainHeader from '../../components/mainHeader';
@@ -14,8 +11,6 @@ import MainHeader from '../../components/mainHeader';
 const {Option}=Select
 const {TextArea}=Input
 const OtherForum =()=>{
-    const [showDetails,setShowDetails] = useState(false);
-    const image=require('../../assets/whiteGhana.png')
     const {TabPane} = Tabs;
     let me=JSON.parse(localStorage.getItem('currentUser'))
     let otherMe=JSON.parse(localStorage.getItem('current_user'))

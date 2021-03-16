@@ -1,12 +1,11 @@
 import React, {useState} from "react";
-import { Input, Card, Space, Button ,Avatar,Select, Form} from 'antd';
+import { Input, Card, Button , Form} from 'antd';
 import "antd/dist/antd.css";
 import './components.css'
-import {UserOutlined,LockOutlined,KeyOutlined,MailOutlined} from '@ant-design/icons';
-import { Link } from "react-router-dom";
-import { IconButton } from "@material-ui/core";
+import {UserOutlined,LockOutlined,MailOutlined} from '@ant-design/icons';
+
 import axios from 'axios'
-const {Option}=Select;
+
 const SignUpCard =({onClick,...props})=>{
   const [fullname,setFullname]=useState('');
 const [username,setUsername]=useState('');

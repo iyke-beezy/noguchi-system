@@ -1,4 +1,4 @@
-import {message,Tabs,Row, Col,Modal,Input, Avatar, Button, Form ,List, Result, Empty, Select} from "antd";
+import {message,Row, Col,Modal,Input, Button, Form ,List, Result,  Select} from "antd";
 import React,{useState,useEffect} from "react";
 import {UserOutlined,ExportOutlined} from '@ant-design/icons';
 import SurveyCard from "../../components/surveyCard";
@@ -63,7 +63,7 @@ const MiniCard=(props)=>{
     );
 }
 const Entry=()=>{
-    const {TabPane} = Tabs;
+
 
     const [surveyUID,setSurveyUID]=useState('')
     const [selectedCommunity,setSelectedCommunity]=useState();
@@ -99,16 +99,8 @@ const Entry=()=>{
         })
     },[]);
 
-    const error = () => {
-        message.error('This is an error message');
-      };
+    
 
-    const content = (
-        <div style={{display:'flex',flexDirection:'column'}}>
-          <Button type='link' size='large' onClick={()=>{window.location.href='/profile'}}><UserOutlined/>Profile</Button>
-          <Button type='link' size='large' danger onClick={()=>{window.location.href='/'}}><ExportOutlined/>Logout</Button>
-        </div>
-      );
       const [preview,setPreview]=useState(true);
       const mee=localStorage.getItem('current_user')
       let style=mee?{}:{minHeight:'100vh',height:'auto',width:'100%',display:'flex',backgroundColor:'#4e54c8', flexDirection:'column',alignItems:'center'}

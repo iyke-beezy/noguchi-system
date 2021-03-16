@@ -1,9 +1,8 @@
 import React, {useState} from "react";
-import { Input, Card, Space, Button ,Avatar,Layout, Result} from 'antd';
+import { Input, Card, Button , Result} from 'antd';
 import "antd/dist/antd.css";
 import '../../App.css';
 import Headers from "../../components/header";
-import Banner from "../../components/banner";
 import MainHeader from "../../components/mainHeader";
 
 const ProfilePage=()=>{
@@ -11,7 +10,6 @@ const ProfilePage=()=>{
     const [orgname,setOrgname]=useState('GHANA EDUCATION SERVICE')
     const [orgUsername,setOrgUsername]=useState('GeSNoguchi');
     const [orgPassword,setOrgPassword]=useState('osemigor123');
-    const{Header}=Layout;
     const mee=localStorage.getItem('current_user')
     return(
         <div className='profilePage'>

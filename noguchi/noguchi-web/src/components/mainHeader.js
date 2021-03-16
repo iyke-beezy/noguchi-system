@@ -1,8 +1,8 @@
-import { Row,Layout,Menu } from 'antd'
+import { Layout,Menu } from 'antd'
 import React, {useEffect, useState} from 'react'
-import {Button,Avatar} from '@material-ui/core';
+import {Button} from '@material-ui/core';
 
-import {MessageOutlined,FileSearchOutlined,UserOutlined} from '@ant-design/icons';
+import {MessageOutlined,FileSearchOutlined} from '@ant-design/icons';
 import { MiniMiniHeader } from './miniheader';
 const {Header}=Layout
 

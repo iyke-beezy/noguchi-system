@@ -1,9 +1,8 @@
 import React, {useState} from "react";
-import { message,Input, Card, Space, Button ,Avatar, Form} from 'antd';
+import { message,Input, Card, Space, Button , Form} from 'antd';
 import "antd/dist/antd.css";
 import './components.css'
-import {UserOutlined,LockOutlined,KeyOutlined} from '@ant-design/icons';
-import { Link } from "react-router-dom";
+import {UserOutlined,LockOutlined} from '@ant-design/icons';
 import axios from 'axios';
 import qs from 'qs';
 
@@ -11,7 +10,6 @@ const OrgForm =({onClick,...props})=>{
 
 const [username,setUsername]=useState('');
 const [password,setPassword]=useState('');
-const [key,setKey]=useState('');
 const [loginType,setLoginType]=useState('other');
 const handleSubmit=(e)=>{
     const org={

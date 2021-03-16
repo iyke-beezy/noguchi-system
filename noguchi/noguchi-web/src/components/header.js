@@ -1,8 +1,8 @@
-import React, {useState} from "react";
-import { Input, Card, Space, Button ,Avatar} from 'antd';
+import React from "react";
+import { Avatar} from 'antd';
 import "antd/dist/antd.css";
 import './components.css';
-import {EditFilled ,UserOutlined} from '@ant-design/icons';
+import {UserOutlined} from '@ant-design/icons';
 
 const Headers=()=>{
     return(
