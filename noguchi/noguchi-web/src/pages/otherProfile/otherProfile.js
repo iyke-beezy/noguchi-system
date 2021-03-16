@@ -79,9 +79,9 @@ const OtherProfile=()=>{
             {
                 me?
                 <>
+                
+                <div className='profileMidSection'>
                 <Headers/>
-            <div className='profileMidSection'>
-            
                     <Card bordered style={{flex:0.3,height:'auto',minWidth:'min(95vw,350px)',backgroundColor:'white',textAlign:'left',display:'flex',flexDirection:'column',justifyContent:'space-between',alignItems:'flex-start',flexShrink:0,margin:20,/* boxShadow:'3px 3px 20px #00000010' */}}>
                         <h1 style={{color:'black',fontSize:30}}>
                          PROFILE
