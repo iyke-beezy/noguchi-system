@@ -1,3 +1,5 @@
+import firebase from 'firebase'
+
 const REACT_APP_API_URL= 'http://localhost:1337'
 
 export const Post = async(url,body,token) => {
@@ -110,3 +112,16 @@ export const Get = async(url,token) => {
 
 
 }
+
+
+
+const firebaseConfig = {
+   apiKey: "AIzaSyAmewLzrI0U6MGDV0Tn5xBjpy2ZNeou4-Y",
+   authDomain: "noguchiidcs.firebaseapp.com",
+   projectId: "noguchiidcs",
+   storageBucket: "noguchiidcs.appspot.com",
+   messagingSenderId: "823238592225",
+   appId: "1:823238592225:web:8801b8d0d25394fb44d9a0"
+ };
+
+ export default firebase.initializeApp(firebaseConfig);

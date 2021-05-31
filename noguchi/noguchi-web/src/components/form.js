@@ -6,12 +6,13 @@ import {UserOutlined,LockOutlined,KeyOutlined} from '@ant-design/icons';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import qs from 'qs';
+import { UserLogin } from "../functions";
 
 const OrgForm =({onClick,...props})=>{
 
 const [username,setUsername]=useState('');
 const [password,setPassword]=useState('');
-const [key,setKey]=useState('');
+
 const [loginType,setLoginType]=useState('other');
 const handleSubmit=(e)=>{
     const org={
@@ -50,24 +51,24 @@ const handleSubmit=(e)=>{
     
 }
 const  handleSubmit2=(e)=>{
-  axios
-  .post('http://localhost:1337/auth/local', {
-    identifier: username,
-    password: password,
-  })
-  .then(response => {
-    // Handle success.
-    console.log('Well done!');
-    console.log('User profile', response.data.user);
-    console.log('User token', response.data.jwt);
-    localStorage.setItem('currentUser',JSON.stringify(response.data.user))
-    window.location.href='/other'
-  })
-  .catch(error => {
-    // Handle error.
-    message.error('Incorrect Details')
-    console.log('An error occurred:', error.response);
-  });
+  // axios
+  // .post('http://localhost:1337/auth/local', {
+  //   identifier: username,
+  //   password: password,
+  // })
+  // .then(response => {
+  //   // Handle success.
+  //   console.log('Well done!');
+  //   console.log('User profile', response.data.user);
+  //   console.log('User token', response.data.jwt);
+  //   localStorage.setItem('currentUser',JSON.stringify(response.data.user))
+  //   window.location.href='/other'
+  // })
+  // .catch(error => {
+  //   // Handle error.
+  //   message.error('Incorrect Details')
+  //   console.log('An error occurred:', error.response);
+  // });
   /* axios.post('http://localhost:1337/user',)
       .then(response =>window.location.href='/other')
       .catch((error) => {
@@ -94,6 +95,8 @@ const  handleSubmit2=(e)=>{
         body: JSON.stringify(user) // body data type must match "Content-Type" header
       })
       console.log(response.json()) */
+
+      UserLogin(username,password);
   
 }
 return(
