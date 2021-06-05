@@ -18,7 +18,7 @@ const ForumCard=({onClick,data,onPress,...props})=>{
              </p>
             <div style={{display:'flex',flexDirection:'row',justifyContent:'flex-end'}}>
             <Button onClick={whenClicked}>
-            <span >{data.reply.length}{data.reply.length>1?'replies':'reply'}</span>
+            <span >{data.replies.length}{data.replies.length>1?'replies':'reply'}</span>
             </Button>
             
             </div>

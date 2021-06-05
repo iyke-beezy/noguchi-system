@@ -4,7 +4,8 @@ import FormInput from '../../components/input'
 import  '../../components/components.css';
 import TagBox from '../../components/tagBox';
 import ForumCard from '../../components/forumCard';
-import axios from 'axios'
+import axios from 'axios';
+import firebase from '../../api';
 import qs from 'qs';
 import MainHeader from '../../components/mainHeader';
 const {TabPane}=Tabs;
@@ -108,8 +109,8 @@ const OrgAccountss=()=> {
     const [password,setPassword]=useState('')
     const {Header}=Layout;
 
-    const selectedOrg=JSON.parse(localStorage.getItem('selectedOrg'))[0];
-    let selectedAdmin=selectedOrg.org_admin;
+    const selectedOrg=localStorage.getItem('selectedOrg');
+    let selectedAdmin=selectedOrg?.org_admin;
     let selectedAccounts
     let accounts=[]
     if(selectedAdmin){
@@ -117,28 +118,19 @@ const OrgAccountss=()=> {
         accounts=[selectedAdmin,...selectedAccounts]
     }
     
-    console.log(accounts)
+   
     const addAdmin=(e)=>{
-        
-        axios.post('http://localhost:1337/org-admins', {
-            username:username,
-            key:password,
-            organization:selectedOrg.id
-        })
-          .then(
-            res =>{
-              if(res.data){
-                console.log(res.data)
-                localStorage.setItem('current_user',JSON.stringify(res.data))
-                window.location.href='/orgAdmin'
-            }}
+      console.log(selectedOrg)
+     firebase.firestore().collection('organisations').doc(selectedOrg).update({
+       admin:{
+         username:username,
+         password:password,
+       }
+     }).then(()=>{
+       window.location.href='/orgAdmin'
+     })
       
-          
-          )
-          .catch((error) => {
-            console.log(error);
-          })
-
+      
         /* const user = {
           name: username,
           privateKey: password,
@@ -185,26 +177,26 @@ const OrgAccountss=()=> {
                             <Form.Item
                                 label="Username"
                                 name="username"
-                                rules={[{ required: true, message: 'Please input your username!' }]}
+                                rules={[{ required: true, message: 'Please input admin name!' }]}
                             >
                             <Input 
                             size="large"
                             className='formInput'
                             value={username}
-                            placeholder="Enter your username" 
+                            placeholder="Enter Admin name" 
                             onChange={(e)=>setUsername(e.target.value)}
                             />
                             </Form.Item>
                             <Form.Item
                                 label="Password"
                                 name="password"
-                                rules={[{ required: true, message: 'Please input your password!' }]}
+                                rules={[{ required: true, message: 'Please input admin password!' }]}
                             >
                             <Input.Password 
                             size="large"
                             className='formInput'
                             value={password}
-                            placeholder="Enter your password" 
+                            placeholder="Enter Admin password" 
                             onChange={(e)=>setPassword(e.target.value)}
                            
                             />

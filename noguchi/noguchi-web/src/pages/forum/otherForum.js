@@ -10,6 +10,8 @@ import {MyCard, MyReplies} from '../../components/card';
 import ForumList from '../../components/forumList';
 import TagSet from '../../components/tagSet';
 import MainHeader from '../../components/mainHeader';
+import firebase from '../../api';
+
 
 const {Option}=Select
 const {TextArea}=Input
@@ -76,6 +78,7 @@ const OtherForum =()=>{
           console.log(error);
         })
     }
+    
     return(
         <div >
             <MainHeader/>

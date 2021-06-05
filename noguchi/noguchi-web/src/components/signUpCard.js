@@ -30,16 +30,11 @@ const SignUpCard = ({ onClick, ...props }) => {
 
 //Org Form Submission
   const handleSubmit = (e) => {
-
       orgSignUp(orgEmail,orgPassword,orgName);
-
   }
   //User Form Submission
   const handleUserSubmit = (e) => {
-
-
     userSignUp(email,password,username)
-
   }
 
   const ChangeType = () => {

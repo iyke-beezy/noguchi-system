@@ -95,7 +95,7 @@ const OtherProfile=()=>{
                         <h3 style={{color:'#40404090'}}>
                             Username
                         </h3>
-                        <Input type='text' value={me.username} onChange={(e)=>{setOrgname(e.target.value)}} disabled={disability} size='large' style={{marginBottom:15,fontSize:17,backgroundColor:'transparent',borderWidth:3}}/>
+                        <Input type='text' value={me.uid} onChange={(e)=>{setOrgname(e.target.value)}} disabled={disability} size='large' style={{marginBottom:15,fontSize:17,backgroundColor:'transparent',borderWidth:3}}/>
                         <h3 style={{color:'#40404090'}}>
                             Email
                         </h3>

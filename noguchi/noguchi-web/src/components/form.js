@@ -6,7 +6,7 @@ import {UserOutlined,LockOutlined,KeyOutlined} from '@ant-design/icons';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import qs from 'qs';
-import { UserLogin } from "../functions";
+import { OrgLogin, UserLogin } from "../functions";
 
 const OrgForm =({onClick,...props})=>{
 
@@ -15,39 +15,40 @@ const [password,setPassword]=useState('');
 
 const [loginType,setLoginType]=useState('other');
 const handleSubmit=(e)=>{
-    const org={
-      username:username,
-      password:password
-    }
-    console.log(org)
-  axios.get('http://localhost:1337/organizations',
-    {
-      params:{
-        username:username,
-        key:password
-      },
-      paramsSerializer:(params)=>qs.stringify(params,{arrayFormat:'repeat'})
-    }
-  )
-   .then(response => {
+  //   const org={
+  //     username:username,
+  //     password:password
+  //   }
+  //   console.log(org)
+  // axios.get('http://localhost:1337/organizations',
+  //   {
+  //     params:{
+  //       username:username,
+  //       key:password
+  //     },
+  //     paramsSerializer:(params)=>qs.stringify(params,{arrayFormat:'repeat'})
+  //   }
+  // )
+  //  .then(response => {
           
-          console.log(response.data)
-          if(response.data.length>0){
-            localStorage.setItem('selectedOrg',JSON.stringify(response.data))
-            window.location.href='/orgAccounts'
-          }
-          else{
+  //         console.log(response.data)
+  //         if(response.data.length>0){
+  //           localStorage.setItem('selectedOrg',JSON.stringify(response.data))
+  //           window.location.href='/orgAccounts'
+  //         }
+  //         else{
             
-            message.error('Organization Not Found')
-          }
+  //           message.error('Organization Not Found')
+  //         }
          
         
-        }
-        )
-        .catch((error) => {
+  //       }
+  //       )
+  //       .catch((error) => {
           
-          console.log(error);
-        })
+  //         console.log(error);
+  //       })
+  OrgLogin(username,password)
     
 }
 const  handleSubmit2=(e)=>{

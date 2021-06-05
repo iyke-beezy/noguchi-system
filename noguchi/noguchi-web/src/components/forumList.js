@@ -4,8 +4,12 @@ import {MyCard, MyReplies} from './card';
 import { Button, Empty } from 'antd';
 import {ArrowLeftOutlined} from '@ant-design/icons';
 import axios from 'axios';
+import firebase from '../api';
+
 const ForumList =(props)=>{
     const [forums,setForums]=useState([])
+    const [firebaseForums,setFirebaseForums]=useState([])
+
     useEffect(() => {
       async function getForums(){
       if(props.filter){
@@ -91,7 +95,21 @@ const ForumList =(props)=>{
        
         
       },[props.filter])
-      
+
+      useEffect(()=>{
+        firebase.firestore().collection('forums').onSnapshot(
+
+          snapshot=>{
+            let allForums=[]
+            snapshot.docs.map(
+              d=>{
+                allForums.push(d.data())
+              }
+            )
+            setFirebaseForums(allForums)
+          }
+        )
+      },[])
       
     const [more,setMore]=useState(false);
     const clicked=localStorage.getItem('clicked');
@@ -104,8 +122,8 @@ const ForumList =(props)=>{
             <div  style={{display:'flex',flexDirection:'column',alignItems:'flex-start',width:'100%',padding:'0% 5% 0% 5%'}}>
                 {
                   
-                    forums?
-                    forums.map((forum)=><ForumCard id={forum.id} key={forum.id} data={forum}  onClick={()=>setMore(true)}/>)
+                    firebaseForums?
+                    firebaseForums.map((forum)=><ForumCard id={forum.id} key={forum.id} data={forum}  onClick={()=>setMore(true)}/>)
                     :
                    <Empty description='No Forums'/>
                 }
@@ -117,8 +135,8 @@ const ForumList =(props)=>{
                 <div style={{display:'flex',flexDirection:'column',alignItems:'flex-start',width:'100%',padding:'0% 5% 0% 5%'}}>
                 <Button size='small' style={{borderRadius:40,fontWeight:'bold',border:'1px solid lightslategrey',color:'lightslategrey'}}  onClick={()=>setMore(false)}><ArrowLeftOutlined/></Button>
                 <div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'flex-start',width:'100%'}}>
-                        <MyCard data={selectedForum[0]} /* onClick={()=>{setShowDetails(!showDetails)}} *//>
-                        <MyReplies title="Replies" replies={selectedForum[0].reply} />
+                        <MyCard data={selectedForum} /* onClick={()=>{setShowDetails(!showDetails)}} *//>
+                        {/* <MyReplies title="Replies" replies={selectedForum[0].replies} /> */}
                     
                  </div>
                 </div>
