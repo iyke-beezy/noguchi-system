@@ -15,8 +15,8 @@
       "type": "date"
     },
     "org_user": {
-      "model": "org-user",
-      "via": "surveys"
+      "via": "surveys",
+      "model": "org-user"
     },
     "surveyUID": {
       "type": "uid"

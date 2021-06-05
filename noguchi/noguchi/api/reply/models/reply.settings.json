@@ -12,17 +12,17 @@
   },
   "attributes": {
     "user": {
+      "via": "replies",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "replies"
+      "model": "user"
     },
     "forum": {
       "via": "reply",
       "model": "forum"
     },
     "org_user": {
-      "model": "org-user",
-      "via": "replies"
+      "via": "replies",
+      "model": "org-user"
     },
     "reply": {
       "type": "string"

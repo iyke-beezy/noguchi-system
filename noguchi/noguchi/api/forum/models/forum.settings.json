@@ -18,9 +18,9 @@
       "type": "string"
     },
     "author": {
+      "via": "forums",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "forums"
+      "model": "user"
     },
     "reply": {
       "collection": "reply",
@@ -38,8 +38,8 @@
       "via": "forums"
     },
     "org_author": {
-      "model": "org-user",
-      "via": "forums"
+      "via": "forums",
+      "model": "org-user"
     }
   }
 }

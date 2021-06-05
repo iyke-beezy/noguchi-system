@@ -60,12 +60,18 @@
       "configurable": false
     },
     "forums": {
-      "via": "author",
-      "collection": "forum"
+      "collection": "forum",
+      "via": "author"
     },
     "replies": {
-      "via": "user",
-      "collection": "reply"
+      "collection": "reply",
+      "via": "user"
+    },
+    "company": {
+      "type": "boolean"
+    },
+    "adminKey": {
+      "type": "string"
     }
   }
 }

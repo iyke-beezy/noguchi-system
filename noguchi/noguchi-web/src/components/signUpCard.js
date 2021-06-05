@@ -8,7 +8,7 @@ import { IconButton } from "@material-ui/core";
 import axios from 'axios'
 const {Option}=Select;
 const SignUpCard =({onClick,...props})=>{
-  const [fullname,setFullname]=useState('');
+
 const [username,setUsername]=useState('');
 const [email,setEmail]=useState('');
 const [password,setPassword]=useState('');
@@ -16,56 +16,53 @@ const [key,setKey]=useState('');
 const [loginType,setLoginType]=useState('other');
 
 const handleSubmit=(e)=>{
-    e.preventDefault();
-    const org = {
-      fullName: fullname,
-      username: username,
-      password: password,
-    }
+    // e.preventDefault();
 
-    axios.post('http://localhost:5002/auth/signUp', org)
-      .then(
-        res =>{
-          if(res.data){
-            console.log(res.data)
-        }}
-
-      
-      )
-      .catch((error) => {
-        console.log(error);
-      })
-  ;
+  axios
+ .post('http://localhost:1337/auth/local/register', {
+    username: username,
+    email:email,
+    password: password,
+    company:true,
+  })
+ .then(response => {
+   // Handle success.
+   console.log('Well done!');
+   console.log('User profile', response.data.user);
+   console.log('User token', response.data.jwt);
+ })
+ .catch(error => {
+   // Handle error.
+   console.log('An error occurred:', error.response);
+ });
 
     
 }
 const handleSubmit2=(e)=>{
  /* console.log([username,password,email]) */
-
-  axios.post('http://localhost:1337/users', 
-  {
+ axios
+ .post('http://localhost:1337/auth/local/register', {
     username: username,
     email:email,
     password: password
-  }
-  )
-    .then(
-      res =>{
-        if(res.data){
-          console.log(res.data)
-      }}
-
-    
-    )
-    .catch((error) => {
-      console.log(error);
-    })
-
+  })
+ .then(response => {
+   // Handle success.
+   console.log('Well done!');
+   console.log('User profile', response.data.user);
+   console.log('User token', response.data.jwt);
+ })
+ .catch(error => {
+   // Handle error.
+   console.log('An error occurred:', error.response);
+ });
+  
 }
 return(
     <Card style={{flex: 0.28,width:'min(95vw,100%)',border:'1px solid graysmoke',display:'flex',flexDirection:'column',alignItems:'center',borderRadius:15,backgroundColor:'white',justifyContent:'center'}}>
       {
         loginType==='other'?
+        //Normal User SignUp
         <Form layout='vertical' onFinish={handleSubmit2}>
        
      
@@ -142,6 +139,7 @@ return(
 
     </Form>
     :
+    //Organization SignUp
     <Form layout='vertical' onFinish={handleSubmit}>
     
     <h1 style={{fontSize:30,marginRight:10,fontWeight:'bold',textAlign:'left'}}>Org Sign Up</h1>
@@ -150,21 +148,7 @@ return(
 
     <div style={{display:'flex',flexDirection:'row',justifyContent:'flex-start'}}><h4 style={{fontSize:14,color:'#8a2be290',textAlign:'left',marginRight:6,cursor:'pointer'}} onClick={()=>setLoginType('org')} >Org SignUp</h4><span style={{color:'blue'}}>/</span><h4 style={{fontSize:14,textAlign:'left',color:'lightblue',marginLeft:6,cursor:'pointer'}} onClick={()=>setLoginType('other')}>Other</h4></div>
     <Form.Item
-        label="Org Name"
-        name="org_name"
-        rules={[{ required: true, message: 'Please enter org name!' }]}
-      >
-    <Input 
-    size="small"
-  
-    className='formInput'
-    onChange={(e)=>{setFullname(e.target.value)}}
-    placeholder="Enter org name" 
-    prefix={<UserOutlined className="site-form-item-icon" />} 
-    />
-  </Form.Item>
-    <Form.Item
-        label="Username"
+        label="Organization Name"
         name="username"
         rules={[{ required: true, message: 'Please enter org username!' }]}
       >
@@ -177,6 +161,20 @@ return(
     prefix={<UserOutlined className="site-form-item-icon" />} 
     />
     </Form.Item>
+    <Form.Item
+        label="Email"
+        name="email"
+        rules={[{ required: true, message: 'Please input your email!' }]}
+      >
+      <Input 
+      size="small"
+      className='formInput'
+      value={email}
+      onChange={(e)=>{setEmail(e.target.value)}}
+      placeholder="Enter your email" 
+      prefix={<MailOutlined className="site-form-item-icon" />} 
+      />
+      </Form.Item>
       <Form.Item
         label="Password"
         name="password"

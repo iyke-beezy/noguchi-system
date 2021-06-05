@@ -22,16 +22,20 @@
       "type": "string"
     },
     "surveys": {
-      "via": "org_user",
-      "collection": "survey"
+      "collection": "survey",
+      "via": "org_user"
     },
     "replies": {
-      "via": "org_user",
-      "collection": "reply"
+      "collection": "reply",
+      "via": "org_user"
     },
     "forums": {
-      "via": "org_author",
-      "collection": "forum"
+      "collection": "forum",
+      "via": "org_author"
+    },
+    "users_permissions_role": {
+      "plugin": "users-permissions",
+      "model": "role"
     }
   }
 }

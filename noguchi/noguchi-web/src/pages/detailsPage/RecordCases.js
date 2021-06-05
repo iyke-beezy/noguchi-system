@@ -9,8 +9,6 @@ import 'jspdf-autotable'
 import axios from 'axios'
 
 const doc = new jsPDF('l');
-let body =[['Nima', [1.0056,-2.660567], 7526, '7%'],['Botwe', '1.0056,-2.660567', 7526, '8%'],['Asamankese', '1.0056,-2.660567', 7526, '17%']]
-
 
 const RecordCard=(props)=>{
   console.log(props.disease)
@@ -149,11 +147,10 @@ useEffect(() => {
   const { Search } = Input;
   const { Option } = Select;
   const onSearch = value => {
+    console.log(value)
     setSelectedDisease(1)
     setFilteredCommunities(communities.filter(community=>community.Community===value))
-    setFilteredCountries(countries.filter(country=>country.continent.name==='AFRICA'))
-    setSelectedCountry(979)
-    setSelectedContinent(1)
+
   };
   function handleChange(value) {
     console.log(`selected ${value}`);
@@ -164,11 +161,13 @@ useEffect(() => {
   }
   const handleCountry=(value)=>{
     setSelectedCountry(value)
-    let country=countries.filter(country=>country.name===value)
+    let country=countries.filter(country=>country.id===value)
       let rejiin=country[0]?.regions
-      
+
       let id=rejiin.map(rej=>rej.id)
      let dis=districts.filter(district=>id.includes(district.region.id))
+     
+     console.log('districts:',rejiin)
      if(dis[0]?.communities.length>0){
      setFilteredCommunities(dis[0]?.communities) 
     }else{
@@ -178,10 +177,9 @@ useEffect(() => {
     }
   
   const onContinentChange=(value)=>{
-
     setSelectedContinent(value)
-    setFilteredCountries(countries.filter(country=>country.continent.name===value));
-    console.log(filteredCountries);
+    setFilteredCountries(countries.filter(country=>country.continent.id===value));
+    console.log(countries.filter(country=>country.continent.id===value));
     setFilteredCommunities([])
     setSelectedCountry('');
     /* if (results.length>0){
@@ -282,8 +280,9 @@ useEffect(() => {
            <Row style={{padding:30}}>
 
               {
+                
                 filteredCommunities.length>0?
-                communities.map((community,index)=><Col key={index} xs={24} md={6}><RecordCard key={index} disease={selectedDisease} data={community}/></Col>)
+                filteredCommunities.map((community,index)=><Col key={index} xs={24} md={6}><RecordCard key={index} disease={selectedDisease} data={community}/></Col>)
                 
                 :
                 <Col xs={24}>
