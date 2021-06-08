@@ -8,6 +8,8 @@ import Banner from "../../components/banner";
 import ForumCard from "../../components/forumCard";
 import ForumList from "../../components/forumList";
 import MainHeader from "../../components/mainHeader";
+import { createForum } from "../../functions";
+import firebase from '../../api'
 
 const {TextArea} =Input;
 
@@ -15,6 +17,7 @@ const { TabPane } = Tabs;
 const {Option}=Select;
 
 const OtherProfile=()=>{
+
     let me=JSON.parse(localStorage.getItem('currentUser'))
     const [title,setTitle]=useState('');
     const [description,setDescription]=useState('');
@@ -23,55 +26,24 @@ const OtherProfile=()=>{
     const [community,setCommunity]=useState('');
     const [diseases,setDiseases]=useState('')
     const [communities,setCommunities]=useState('');
-    useEffect(() => {
-        async function fetchDiseases(){
-          await axios.get('http://localhost:1337/diseases')
-          .then(
-            res =>{
-              if(res.data){
-                setDiseases(res.data)
-            }} )
-          .catch((error) => {
-            console.log(error);
-          })
-  
-        }
-        fetchDiseases();
-          
-      },[]);
-      useEffect(() => {
-        async function fetchCommunities(){
-          await axios.get('http://localhost:1337/communities')
-          .then(
-            res =>{
-              if(res.data){
-                setCommunities(res.data)
-            }} )
-          .catch((error) => {
-            console.log(error);
-          })
-  
-        }
-        fetchCommunities();
-          
-      },[]);
 
-      const createForum=()=>{
-          console.log(
-              disease,community,description,title,content
+    useEffect(() => {
+      firebase.firestore().collection('diseases').onSnapshot(
+        snapshot=>{
+          let allDiseases=[]
+          snapshot.docs.map(
+            d=>{
+              allDiseases.push(d.data())
+            }
           )
-        axios.post('http://localhost:1337/forums',{ author: me.id,  title:title, description: description ,content:content,disease:disease,community:community} )
-          .then(
-            res =>{
-              if(res.data){
-                console.log(res.data)
-            }}
-      
-          
-          )
-          .catch((error) => {
-            console.log(error);
-          })
+          setDiseases(allDiseases)
+        }
+      )
+    }, [])
+   
+      const create=()=>{
+        let params={disease,community,description,title,content}
+        createForum(params)
       }
 
     const [disability,setDisability]=useState(true);
@@ -124,19 +96,14 @@ const OtherProfile=()=>{
                             <Button onClick={()=>window.location.href='/cases'}>Explore Cases</Button>
                         </div>
                     </TabPane>
-                    <TabPane tab="Trending Forums" key="1">
-                        <div style={{height:'48vh'}} className='adminProfiles'>
-                        <ForumList/>
-                        </div>
-                    </TabPane>
                     <TabPane tab="Create A Forum" key="2">
-                    <div style={{display:'flex',flexDirection:'column'}}>
+                    <div style={{display:'flex',flexDirection:'column',width:'100%'}}>
                     <div className='adminProfiles' style={{height:'43vh',overflowY:'scroll'}}>
                         <div style={{display:'flex',flexDirection:'column',alignItems:'flex-start',justifyContent:'space-around'}}>
                             <h1 style={{color:'lightslategray',margin:8}}>
                                 NEW FORUM
                             </h1>
-                            <Form layout='vertical' onFinish={createForum}>
+                            <Form  onFinish={create}>
                                 
                                 <Form.Item
                                 label="Forum Title"
@@ -144,6 +111,7 @@ const OtherProfile=()=>{
                                 rules={[{ required: true, message: 'Please input Forum Title!' }]}
                                 >
                                     <Input
+                                   
                                     type='text'
                                     value={title}
                                     onChange={(e)=>setTitle(e.target.value)}
@@ -184,7 +152,7 @@ const OtherProfile=()=>{
                                 
                                 {
                                     diseases?
-                                        diseases.map((dis,index)=><Radio.Button key={index} value={dis.id} style={{margin:2}}>{dis.name}</Radio.Button>)
+                                        diseases.map((dis,index)=><Radio.Button key={index} value={dis.disease} style={{margin:2}}>{dis.disease}</Radio.Button>)
                                     :
                                     null
                                 }
@@ -216,11 +184,7 @@ const OtherProfile=()=>{
                         </div>
                                     </div>
                     </TabPane>
-                    <TabPane tab="My Forums" key="3">
-                    <div className='adminProfiles' style={{height:'48vh',overflowY:'scroll'}}>
-                        <ForumList user={me.id}/>
-                        </div>
-                    </TabPane>
+                    
                     </Tabs>
                 </Card>
                 

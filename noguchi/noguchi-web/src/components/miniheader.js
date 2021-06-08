@@ -12,7 +12,7 @@ export const MiniMiniHeader=(props)=>{
           if(localStorage.getItem('current_user')){
             window.location.href='/profile'
           }else if(localStorage.getItem('currentUser')){
-            window.location.href='/other'
+            window.location.href='/userprofile'
           }else if(localStorage.getItem('org_admin')){
             window.location.href='/orgadmin'
           }

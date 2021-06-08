@@ -14,7 +14,7 @@ export const userSignUp=(email,password,name)=>{
             userID:firebase.auth().currentUser.uid,
             name:name,
         }).then(
-            ()=>window.location.href='/other'
+            ()=>window.location.href='/userprofile'
 
         )
     }).catch((error)=>{
@@ -45,7 +45,7 @@ export const UserLogin= async (email,password)=>{
         if(result){
             message.success('Successfully Logged In')
             localStorage.setItem('currentUser',JSON.stringify(firebase.auth().currentUser))
-            window.location.href='/other'
+            window.location.href='/userprofile'
         }
         else{
             message.error('Wrong Credentials')
@@ -89,3 +89,19 @@ export const OrgLogin=(email,password)=>{
 
     })
 }
+
+
+// Create A Forum
+
+export const createForum=(params)=>{
+    firebase.firestore().collection('forums').add({
+        author:params.author,
+        community:params.community,
+        content:params.content,
+        description:params.description,
+        disease:params.disease,
+        replies:[],
+        title:params.title,
+    })
+}
+

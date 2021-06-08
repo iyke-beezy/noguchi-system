@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import OrgForm from '../../components/form';
-import SignUpCard from '../../components/signUpCard';
+import { OrgSignUpCard } from '../../components/signUpCard';
 import './styles.css'
 
 const OrgLogin =()=>{
@@ -12,7 +12,7 @@ const OrgLogin =()=>{
                     login?
                     <OrgForm onClick={() =>{setLogin(false)}}/> 
                     :
-                    <SignUpCard onClick={() =>{setLogin(true)}}/> 
+                    <OrgSignUpCard onClick={() =>{setLogin(true)}}/> 
                 }
                 
                               
