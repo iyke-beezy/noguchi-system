@@ -17,8 +17,8 @@ import  '../../components/components.css';
 import ForumList from '../../components/forumList';
 import MainHeader from '../../components/mainHeader';
 import { Switch, Route, useRouteMatch,Link } from 'react-router-dom';
-import { createForum } from '../../utils/functions';
-import firebase from '../../utils/api'
+import { createForum } from '../../functions';
+import firebase from '../../api'
 
 <<<<<<< HEAD
 const { Option } = Select

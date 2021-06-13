@@ -3,6 +3,7 @@ import {Row,Col,Button,Form,Input,Select,Space} from 'antd'
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import {Get,Post} from '../../utils/api'
 =======
 import {Post} from '../../api'
@@ -10,6 +11,9 @@ import {Post} from '../../api'
 =======
 import {Post} from '../../api'
 >>>>>>> parent of 5b2abbb (reverted)
+=======
+import {Get,Post} from '../../api'
+>>>>>>> parent of a7f87c5 (doing things)
 export const DiseaseForm = () =>{
 
       const postdiseases = async(body) =>{
