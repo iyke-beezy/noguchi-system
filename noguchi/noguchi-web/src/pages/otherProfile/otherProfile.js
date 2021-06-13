@@ -6,8 +6,8 @@ import axios from 'axios'
 import Headers from "../../components/header";
 import ForumList from "../../components/forumList";
 import MainHeader from "../../components/mainHeader";
-import { createForum } from "../../functions";
-import firebase from '../../api'
+import { createForum } from "../../utils/functions";
+import firebase from '../../utils/api'
 
 const {TextArea} =Input;
 
