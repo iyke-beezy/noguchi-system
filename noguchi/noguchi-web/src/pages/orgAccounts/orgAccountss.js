@@ -1,8 +1,7 @@
-import React,{useState} from 'react';
-import { Button, Card, Tabs,Layout,Form,Space,Input,Result} from 'antd';
+import React,{useEffect, useState} from 'react';
+import { Button, Card, Tabs,Row,Col,Divider,Modal ,Layout,Form,Space,Input,Result} from 'antd';
 import FormInput from '../../components/input'
 import  '../../components/components.css';
-<<<<<<< HEAD
 import { UserOutlined,CloseOutlined } from "@ant-design/icons";
 import Avatar from 'antd/lib/avatar/avatar';
 // import TagBox from '../../components/tagBox';
@@ -18,13 +17,6 @@ import Avatar from 'antd/lib/avatar/avatar';
 // const loginStyle={
 //     backgroundColor:"red"
 // }
-=======
-import axios from 'axios'
-import qs from 'qs';
-import MainHeader from '../../components/mainHeader';
-const style = { background: '#0092ff', padding: '8px 0',height:'180px', marginBottom:'10px',
-color:'white',display:'flex',flexDirection:'Column',alignItems:'flex-start',fontSize:'15px' };
->>>>>>> parent of 5b2abbb (reverted)
 
 
 // const Box=(props)=>{
@@ -109,7 +101,6 @@ color:'white',display:'flex',flexDirection:'Column',alignItems:'flex-start',font
 //        </>     
 //         }
        
-<<<<<<< HEAD
 //         </>
 //     );
 // }
@@ -119,15 +110,6 @@ color:'white',display:'flex',flexDirection:'Column',alignItems:'flex-start',font
 //     const [username,setUsername]=useState('')
 //     const [password,setPassword]=useState('')
 //     const {Header}=Layout;
-=======
-        </>
-    );
-}
-const OrgAccountss=()=> {
-    const [username,setUsername]=useState('')
-    const [password,setPassword]=useState('')
-    const {Header}=Layout;
->>>>>>> parent of 5b2abbb (reverted)
 
 //     const selectedOrg=localStorage.getItem('selectedOrg');
 //     let selectedAdmin=selectedOrg?.org_admin;

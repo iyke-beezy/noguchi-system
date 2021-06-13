@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState } from "react";
 import { Input, Card, Space, Button, Avatar, Select, Form } from 'antd';
 import "antd/dist/antd.css";
@@ -20,56 +19,6 @@ const SignUpCard = ({ onClick, ...props }) => {
   //User Form Submission
   const handleUserSubmit = (e) => {
     userSignUp(email, password, username)
-=======
-import React, {useState} from "react";
-import { Input, Card, Button , Form} from 'antd';
-import "antd/dist/antd.css";
-import './components.css'
-import {UserOutlined,LockOutlined,MailOutlined} from '@ant-design/icons';
-
-import axios from 'axios'
-
-const SignUpCard =({onClick,...props})=>{
-  const [fullname,setFullname]=useState('');
-const [username,setUsername]=useState('');
-const [email,setEmail]=useState('');
-const [password,setPassword]=useState('');
-const [key,setKey]=useState('');
-const [loginType,setLoginType]=useState('other');
-
-const handleSubmit=(e)=>{
-    e.preventDefault();
-    const org = {
-      fullName: fullname,
-      username: username,
-      password: password,
-    }
-
-    axios.post('http://localhost:5002/auth/signUp', org)
-      .then(
-        res =>{
-          if(res.data){
-            console.log(res.data)
-        }}
-
-      
-      )
-      .catch((error) => {
-        console.log(error);
-      })
-  ;
-
-    
-}
-const handleSubmit2=(e)=>{
- /* console.log([username,password,email]) */
-
-  axios.post('http://localhost:1337/users', 
-  {
-    username: username,
-    email:email,
-    password: password
->>>>>>> parent of 5b2abbb (reverted)
   }
 
   return (

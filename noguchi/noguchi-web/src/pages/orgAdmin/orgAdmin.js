@@ -1,12 +1,17 @@
 import React, {useState} from 'react';
-
+import { useTheme } from '@material-ui/core/styles';
 import { Button, Card, Input, Modal, Select, Tabs ,Avatar,Layout, Empty,Form,Result} from 'antd';
-import { Plot } from '../../controls/legend/legend';
+import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
+import Legend, { Plot } from '../../controls/legend/legend';
+import {EditFilled ,UserOutlined,ExportOutlined,UserAddOutlined} from '@ant-design/icons';
 import MainHeader from '../../components/mainHeader';
+import {Request} from '../request/request'
+import {Survey} from '../survey/survey'
 import Axios from 'axios';
 
 const {TabPane}=Tabs;
 const {Option}=Select;
+const {Header}=Layout;
 
 const Box=(props)=>{
     const [modalState,setModalState]=useState(false);
@@ -61,14 +66,35 @@ const Box=(props)=>{
         </>
     );
 }
+const Activity=()=>{
+    return(
+        <div style={{height:220,border:'1px solid #adadad',margin:20}}>
 
+        </div>
+    );
+}
 
 
 const OrgAdminPage =()=>{
-    
+    function createData(time, amount) {
+        return { time, amount };
+      }
+      
+  /*     const data = [
+        createData('00:00', 0),
+        createData('03:00', 300),
+        createData('06:00', 600),
+        createData('09:00', 800),
+        createData('12:00', 1500),
+        createData('15:00', 2000),
+        createData('18:00', 2400),
+        createData('21:00', 2400),
+        createData('24:00', undefined),
+      ] */
     
     const [username,setUsername]=useState('')
     const [password,setPassword]=useState('')
+    const theme = useTheme();
     const selectedOrg=JSON.parse(localStorage.getItem('selectedOrg'))[0];
     let selectedAccounts=selectedOrg.org_users
 

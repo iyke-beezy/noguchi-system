@@ -3,7 +3,7 @@ import axios from 'axios'
 import {Button,Modal,message} from 'antd';
 import FormInput from './input'
 const MyCard=({ ...props})=>{
-
+    const colorCode='#adff2f50';
     const [showModal,setShowModal] = useState(false);
     const [reply,setReply] = useState('');
     let normalUser=JSON.parse(localStorage.getItem('currentUser'))

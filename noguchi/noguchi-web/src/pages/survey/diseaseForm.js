@@ -1,12 +1,25 @@
 import React from 'react'
 import {Row,Col,Button,Form,Input,Select,Space} from 'antd'
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-<<<<<<< HEAD
 import {Get,Post} from '../../utils/api'
-=======
-import {Post} from '../../api'
->>>>>>> parent of 5b2abbb (reverted)
 export const DiseaseForm = () =>{
+
+    const formItemLayout = {
+        labelCol: {
+          xs: { span: 24 },
+          sm: { span: 4 },
+        },
+        wrapperCol: {
+          xs: { span: 24 },
+          sm: { span: 20 },
+        },
+      };
+      const formItemLayoutWithOutLabel = {
+        wrapperCol: {
+          xs: { span: 24, offset: 0 },
+          sm: { span: 20, offset: 4 },
+        },
+      };
 
       const postdiseases = async(body) =>{
         var url = "diseases";
@@ -29,7 +42,12 @@ export const DiseaseForm = () =>{
       };
     
 
-      
+      const { Option } = Select;
+
+
+        function handleChange(value) {
+        console.log(`selected ${value}`);
+        }
 
 
     return(

@@ -1,8 +1,8 @@
-import React from "react";
-import {  Button, Popover ,Avatar} from 'antd';
+import React, {useState} from "react";
+import { Input, Card, Button, Popover ,Avatar, Divider} from 'antd';
 import "antd/dist/antd.css";
 import './components.css';
-import {UserOutlined,ExportOutlined} from '@ant-design/icons';
+import {EditFilled ,UserOutlined,ExportOutlined} from '@ant-design/icons';
 
 
 export const MiniMiniHeader=(props)=>{

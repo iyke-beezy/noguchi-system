@@ -7,7 +7,22 @@ import {Get,Post} from '../../utils/api'
 export const CommunityForm = () =>{
    const [districts,setDistricts] = useState([])
    const [count,setCount] = useState(0)
-    
+    const formItemLayout = {
+        labelCol: {
+          xs: { span: 24 },
+          sm: { span: 4 },
+        },
+        wrapperCol: {
+          xs: { span: 24 },
+          sm: { span: 20 },
+        },
+      };
+      const formItemLayoutWithOutLabel = {
+        wrapperCol: {
+          xs: { span: 24, offset: 0 },
+          sm: { span: 20, offset: 4 },
+        },
+      };
 
       const postcommunities = async(body) =>{
         var url = "communities";
@@ -36,7 +51,9 @@ export const CommunityForm = () =>{
       const { Option } = Select;
 
 
-        
+        function handleChange(value) {
+        console.log(`selected ${value}`);
+        }
 
         const getDistrict = async() =>{
           var url = "districts";
