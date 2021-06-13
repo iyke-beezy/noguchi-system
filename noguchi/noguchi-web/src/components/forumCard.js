@@ -3,14 +3,11 @@ import {Button} from 'antd';
 
 const ForumCard=({onClick,data,onPress,...props})=>{
 <<<<<<< HEAD
-<<<<<<< HEAD
     const colorCode='#adff2f50';
     // const whenClicked=()=>{
     //     onClick();
     //     localStorage.setItem('clicked',data.id)
 =======
-=======
->>>>>>> parent of 5b2abbb (reverted)
     const whenClicked=()=>{
         onClick();
         localStorage.setItem('clicked',data.id)

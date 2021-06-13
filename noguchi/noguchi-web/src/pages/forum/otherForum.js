@@ -10,9 +10,6 @@ import { Button, Card, Tabs,Form,Col,Row, Result,Input,Radio,Select } from 'antd
 
 import  '../../components/components.css';
 
-<<<<<<< HEAD
->>>>>>> parent of 5b2abbb (reverted)
-=======
 >>>>>>> parent of 5b2abbb (reverted)
 import ForumList from '../../components/forumList';
 import MainHeader from '../../components/mainHeader';

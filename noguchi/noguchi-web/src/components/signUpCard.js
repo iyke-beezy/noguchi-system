@@ -1,5 +1,4 @@
 <<<<<<< HEAD
-<<<<<<< HEAD
 import React, { useState } from "react";
 import { Input, Card, Space, Button, Avatar, Select, Form } from 'antd';
 import "antd/dist/antd.css";
@@ -29,15 +28,6 @@ import './components.css'
 import {UserOutlined,LockOutlined,MailOutlined} from '@ant-design/icons';
 
 import axios from 'axios'
-=======
-import React, {useState} from "react";
-import { Input, Card, Button , Form} from 'antd';
-import "antd/dist/antd.css";
-import './components.css'
-import {UserOutlined,LockOutlined,MailOutlined} from '@ant-design/icons';
-
-import axios from 'axios'
->>>>>>> parent of 5b2abbb (reverted)
 
 const SignUpCard =({onClick,...props})=>{
   const [fullname,setFullname]=useState('');
