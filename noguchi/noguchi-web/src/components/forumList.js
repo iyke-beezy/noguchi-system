@@ -4,7 +4,7 @@ import {MyCard, MyReplies} from './card';
 import { Button, Empty } from 'antd';
 import {ArrowLeftOutlined} from '@ant-design/icons';
 import axios from 'axios';
-import firebase from '../api';
+import firebase from '../utils/api';
 
 const ForumList =(props)=>{
     const [forums,setForums]=useState([])

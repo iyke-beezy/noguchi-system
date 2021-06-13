@@ -6,7 +6,7 @@ import { UserOutlined, LockOutlined, KeyOutlined, MailOutlined } from '@ant-desi
 import { Link } from "react-router-dom";
 import { IconButton } from "@material-ui/core";
 import axios from 'axios'
-import { orgSignUp, userSignUp } from "../functions";
+import { orgSignUp, userSignUp } from "../utils/functions";
 const { Option } = Select;
 const SignUpCard = ({ onClick, ...props }) => {
 

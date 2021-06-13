@@ -5,8 +5,8 @@ import ForumCard from '../../components/forumCard';
 import ForumList from '../../components/forumList';
 import MainHeader from '../../components/mainHeader';
 import { Switch, Route, useRouteMatch,Link } from 'react-router-dom';
-import { createForum } from '../../functions';
-import firebase from '../../api'
+import { createForum } from '../../utils/functions';
+import firebase from '../../utils/api'
 
 const { Option } = Select
 const { TextArea } = Input

@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import {Row,Col,Button,Form,Input,Select,Space} from 'antd'
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import {Get,Post} from '../../api'
+import {Get,Post} from '../../utils/api'
 
 
 export const SurveyForm = () =>{
