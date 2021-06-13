@@ -1,9 +1,7 @@
-import React, {useState} from "react";
-import { Input, Card, Space, Button ,Avatar} from 'antd';
+import React from "react";
+import { Input} from 'antd';
 import "antd/dist/antd.css";
 import './components.css'
-import {UserOutlined,LockOutlined,KeyOutlined} from '@ant-design/icons';
-import { Link } from "react-router-dom";
 import PropTypes from 'prop-types'
 
 
@@ -33,7 +31,7 @@ const FormInput = ({
           onChange={onChange}
           value={value}
           className={className}
-          style={error=='' ? {border:'1-x solid black'}: {border: 'solid 1px red'}}
+          style={error==='' ? {border:'1-x solid black'}: {border: 'solid 1px red'}}
         />
         { error && <p>{ error }</p>}
       </React.Fragment>

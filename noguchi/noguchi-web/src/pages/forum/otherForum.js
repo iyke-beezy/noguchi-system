@@ -1,18 +1,75 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import { Button, Card, Tabs, Form, Col, Row, Result, Input, Radio, Select,Empty } from 'antd';
 import '../../components/components.css';
 import ForumCard from '../../components/forumCard';
+=======
+import React,{useState,useEffect} from 'react';
+import axios from 'axios'
+import { Button, Card, Tabs,Form,Col,Row, Result,Input,Radio,Select } from 'antd';
+
+import  '../../components/components.css';
+
+>>>>>>> parent of 5b2abbb (reverted)
 import ForumList from '../../components/forumList';
 import MainHeader from '../../components/mainHeader';
 import { Switch, Route, useRouteMatch,Link } from 'react-router-dom';
 import { createForum } from '../../utils/functions';
 import firebase from '../../utils/api'
 
+<<<<<<< HEAD
 const { Option } = Select
 const { TextArea } = Input
 const OtherForum = () => {
   const [showDetails, setShowDetails] = useState(false);
   const [firebaseForums, setFirebaseForums] = useState([])
+=======
+const {Option}=Select
+const {TextArea}=Input
+const OtherForum =()=>{
+    const {TabPane} = Tabs;
+    let me=JSON.parse(localStorage.getItem('currentUser'))
+    let otherMe=JSON.parse(localStorage.getItem('current_user'))
+    const [title,setTitle]=useState('');
+    const [description,setDescription]=useState('');
+    const [content,setContent]=useState('');
+    const [disease,setDisease]=useState('')
+    const [community,setCommunity]=useState('');
+    const [diseases,setDiseases]=useState('')
+    const [communities,setCommunities]=useState('');
+    useEffect(() => {
+        async function fetchDiseases(){
+          await axios.get('http://localhost:1337/diseases')
+          .then(
+            res =>{
+              if(res.data){
+                setDiseases(res.data)
+            }} )
+          .catch((error) => {
+            console.log(error);
+          })
+  
+        }
+        fetchDiseases();
+          
+      },[]);
+      useEffect(() => {
+        async function fetchCommunities(){
+          await axios.get('http://localhost:1337/communities')
+          .then(
+            res =>{
+              if(res.data){
+                setCommunities(res.data)
+            }} )
+          .catch((error) => {
+            console.log(error);
+          })
+  
+        }
+        fetchCommunities();
+          
+      },[]);
+>>>>>>> parent of 5b2abbb (reverted)
 
   const image = require('../../assets/whiteGhana.png')
   const { TabPane } = Tabs;

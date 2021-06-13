@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
 import { List, Drawer, Button, Divider, Row, Col, Switch, message } from "antd";
 import {} from "@ant-design/icons";
@@ -13,6 +14,16 @@ const data = [
 export const Request = () => {
   const [filteredSurveys, setFilteredSurveys] = useState([]);
   const [surveys, setSurveys] = useState([]);
+=======
+import React, { useEffect, useState } from 'react'
+import { List, Drawer,Button, Divider,Row,Col, Switch, message } from 'antd';
+import {} from '@ant-design/icons';
+import Axios from 'axios';
+
+export const Request =()=>{
+  const [filteredSurveys,setFilteredSurveys]=useState([])
+  const [surveys,setSurveys]=useState([])
+>>>>>>> parent of 5b2abbb (reverted)
   useEffect(() => {
     async function fetchSurveys() {
       await Axios.get("http://localhost:1337/surveys")

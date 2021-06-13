@@ -1,9 +1,6 @@
-import { Layout,Card,Table, Tag, Space,Col,Row,Input,Select, Empty, Divider,Spin, Button } from 'antd';
-import {renderToString} from 'react-dom/server'
+import { Layout,Card,Col,Row,Input,Select, Empty, Divider, Button } from 'antd';
 import React,{useState,useEffect} from 'react';
-import ForumList from '../../components/forumList';
 import MainHeader from '../../components/mainHeader';
-import { Plot,Plot2 } from '../../controls/legend/legend';
 import { jsPDF } from "jspdf";
 import 'jspdf-autotable'
 import axios from 'axios'
@@ -15,7 +12,7 @@ const RecordCard=(props)=>{
   console.log(props.data.surveys)
   let savey;
   if(props.disease){
-    savey=props.data.surveys.filter(survey=>survey.disease==props.disease)
+    savey=props.data.surveys.filter(survey=>survey.disease===props.disease)
   }else{
     savey=props.data.surveys
   }
@@ -152,9 +149,7 @@ useEffect(() => {
     setFilteredCommunities(communities.filter(community=>community.Community===value))
 
   };
-  function handleChange(value) {
-    console.log(`selected ${value}`);
-  }
+  
   const handleDisease=(value)=>{
     setSelectedDisease(value)
     console.log(value)

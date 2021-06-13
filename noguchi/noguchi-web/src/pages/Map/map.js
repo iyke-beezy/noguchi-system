@@ -3,10 +3,9 @@ import L from 'leaflet';
 import {useMap, MapContainer, Marker,TileLayer,Popup} from 'react-leaflet';
 /* import Boundary from '../../controls/boundary/boundary';
  */import 'leaflet/dist/leaflet.css';
-import { Paper} from '@material-ui/core'
-import Choropleth from 'react-leaflet-choropleth'
+
 import africa from './../../controls/boundary/africa.geo.json'
-import axios from 'axios'
+
 
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
@@ -47,22 +46,6 @@ export class Mapp extends React.Component {
       
     render() {
       console.log(this.props.markers)
-      const style = {
-        fillColor: '#F28F3B',
-        weight: 2,
-        opacity: 1,
-        color: 'white',
-        dashArray: '3',
-        fillOpacity: 0.5
-    };
-    const changeCenter=()=>{
-      this.setState(() => ({
-        lat:51.505, 
-        
-        lng:-0.09
-      }));
-      console.log(this.state.lat,this.state.lng)
-    }
       
     let showingFilter=this.props.markers.map(marker=>marker.answers.filter( answer=>answer.question.Keyword==='Population'||answer.question.Keyword==='Schistosomiasis Prevalence'||answer.question.Keyword==='Schistosomiasis Control Approaches'||answer.question.Keyword==='Stakeholders and Activities'))
 

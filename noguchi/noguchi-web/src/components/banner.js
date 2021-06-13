@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import { Input, Card, Space, Button ,Avatar} from 'antd';
+import React from "react";
+import {Button } from 'antd';
 import "antd/dist/antd.css";
 import './components.css'
 
